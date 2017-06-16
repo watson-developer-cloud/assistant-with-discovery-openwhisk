@@ -21,4 +21,5 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
     
 <li>Create an API that uses your sequence</li>
 <ol><li>Navigate to the <a href="https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south">API Management</a> page on OpenWhisk.</li></ol> 
+
 ![Create new API]( pictures/Create_API.png?raw=true )
