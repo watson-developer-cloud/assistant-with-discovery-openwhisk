@@ -26,6 +26,6 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 <li>Name your API and supply a base path.</li>
 
-![Name API and base path}( pictures/API_info?raw=true )
+![Name API and base path]( pictures/API_info?raw=true )
 
 <li>Click "Create operation"</li>
