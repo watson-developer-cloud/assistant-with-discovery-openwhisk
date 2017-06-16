@@ -1,0 +1,5 @@
+{
+    "username": "<your Conversation service username>",
+    "password": "<your Conversation service password>",
+    "workspace_id": "<your workspace id for your Conversation demo instance>"
+}
