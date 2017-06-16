@@ -35,3 +35,6 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 <li>Make a path for your operation, change the HTTP verb to POST, and select your sequence as the action</li>
 
 ![Operation form]( pictures/Create_Operation_Form.png?raw=true )
+
+<li>Activate the slider next to "Require applications to autheticate via API key"</li>
+<li>
