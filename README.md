@@ -29,3 +29,6 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 ![Name API and base path]( pictures/API_info.png?raw=true )
 
 <li>Click "Create operation"</li>
+
+![Create operation]( pictures/Create_operation.png?raw=true )
+
