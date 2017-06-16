@@ -15,7 +15,7 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
     wsk action create conversation actions/conversation.js --web true
     wsk action create discovery actions/discovery.js --web true
 
-<li>Edit the [actions/conversationParams.json]( /actions/conversationParams.json ) and [actions/discoveryParams.json]( /actions/discoveryParams.json ) to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).</li>
+<li>Edit the <a href="actions/conversationParams.json">actions/conversationParams.json</a> and <a href="actions/discoveryParams.json">actions/discoveryParams.json</a> to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).</li>
 
     {
     "username": "<your Conversation service username>",
