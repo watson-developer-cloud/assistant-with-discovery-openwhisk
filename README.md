@@ -34,6 +34,11 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
     }
 ```
 
+<li>Use these documents to create default parameters from the command line: </li>
+
+    wsk action update conversation --param-file action/conversationParams.json
+    wsk action update discovery --param-file action/discoveryParams.json
+
 <li>Create a sequence using the two actions:</li>
 
     wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
