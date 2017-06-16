@@ -17,18 +17,22 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 <li>Edit the <a href="actions/conversationParams.json">actions/conversationParams.json</a> and <a href="actions/discoveryParams.json">actions/discoveryParams.json</a> to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).</li>
 
+```javascript
     {
     "username": "<your Conversation service username>",
     "password": "<your Conversation service password>",
     "workspace_id": "<your workspace id for your Conversation demo instance>"
     }
+```
 
+```javascript
     {
     "username": "<your Discovery service username>",
     "password": "<your Discovery service password>",
     "workspace_id": "<your workspace id for your Discovery demo instance>",
     "collection_id": "<your environment id for your Discovery demo instance>"
     }
+```
 
 <li>Create a sequence using the two actions:</li>
 
