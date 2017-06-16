@@ -32,3 +32,6 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 ![Create operation]( pictures/Create_operation.png?raw=true )
 
+<li>Make a path for your operation, change the HTTP verb to POST, and select your sequence as the action</li>
+
+![Operation form]( pictures/Create_Operation_form.png?raw=true )
