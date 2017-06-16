@@ -20,6 +20,12 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
     wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
     
 <li>Create an API that uses your sequence</li>
-<ol><li>Navigate to the <a href="https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south">API Management</a> page on OpenWhisk.</li></ol> 
+<ol><li>Navigate to the <a href="https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south">API Management</a> page on OpenWhisk.</li>
 
 ![Create new API]( pictures/Create_API.png?raw=true )
+
+<li>Name your API and supply a base path.</li>
+
+![Name API and base path}( pictures/API_info?raw=true )
+
+<li>Click "Create operation"</li>
