@@ -5,7 +5,7 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 <p>Built with IBM Bluemix. You will need:
 <ul><li>an IBM Bluemix account. <a href="https://console.bluemix.net/?cm_mmc=GitHubReadMe">Sign up</a> here.</li>
-<li>Node.js</li>
+<li>Node.js</li></ul>
 </p>
 
 ### Setting up the OpenWhisk Backend
