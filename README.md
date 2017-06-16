@@ -14,7 +14,22 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
     
     wsk action create conversation actions/conversation.js --web true
     wsk action create discovery actions/discovery.js --web true
-    
+
+<li>Edit the [actions/conversationParams.json](actions/conversationParams.json) and [actions/discoveryParams.json](discoveryParams.json) to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).</li>
+
+    {
+    "username": "<your Conversation service username>",
+    "password": "<your Conversation service password>",
+    "workspace_id": "<your workspace id for your Conversation demo instance>"
+    }
+
+    {
+    "username": "<your Discovery service username>",
+    "password": "<your Discovery service password>",
+    "workspace_id": "<your workspace id for your Discovery demo instance>",
+    "collection_id": "<your environment id for your Discovery demo instance>"
+    }
+
 <li>Create a sequence using the two actions:</li>
 
     wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
