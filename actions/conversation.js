@@ -1,15 +1,29 @@
+/**
+  *
+  * Format and send request to Watson Conversation service
+  *
+  * @param {object} params - the parameters.
+  * @param {string} params.username - default parameter, must be set. The username for Conversation service.
+  * @param {string} params.password - default parameter, must be set. The password for Conversation service.
+  * @param {string} params.workspace_id - default parameter, must be set. The workspace_id for Conversation service.
+  * @param {string} params.input - input text to be sent to Conversation service.
+  * @param {string} params.context - context to be sent with input to Converastion service.
+  *
+  * @return {object} the JSON of Conversation's response.
+  *
+  */
 function main(params) {
     return new Promise(function(resolve, reject){
         var watson = require('watson-developer-cloud');
         var conversation = watson.conversation({
-            username: "0e18737d-f26f-46bd-94f5-5f50c3ecd1eb",
-            password: "5AqHqjFoIvhX",
+            username: params.username,
+            password: params.password,
             version: "v1",
             version_date: "2017-05-26"
         });
         
         conversation.message({
-            workspace_id: '56d367c2-4d47-4654-9de9-863733f46053',
+            workspace_id: params.workspace_id,
             input: params.input,
             context: params.context,
         }, function(err, response) {
