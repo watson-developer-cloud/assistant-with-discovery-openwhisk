@@ -1,17 +1,33 @@
+/**
+  *
+  * Format and send request to Watson Discovery service if marked as necessary.
+  *
+  * @param {object} params - the parameters.
+  * @param {string} params.username - default parameter, must be set. The username for Discovery service.
+  * @param {string} params.password - default parameter, must be set. The password for Discovery service.
+  * @param {string} params.environment_id - default parameter, must be set. The environment_id for Discovery service.
+  * @param {string} params.collection_id - default parameter, must be set. The collection_id for Discovery service
+  * @param {string} params.input - input text to be sent to Discovery service.
+  * @param {string} params.context - context to be sent with input to Discovery service.
+  *
+  * @return {object} the JSON of Discovery's response, or the original JSON if discovery was not called.
+  *
+  */
 function main(params) {
 	return new Promise(function (resolve, reject) {
 	    
+	    //Make Discovery request only if Conversation output includes a "call discovery" property
 	    if(params.output.hasOwnProperty("action") && params.output.action.hasOwnProperty("call_discovery")) {
             var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
             
             var discovery = new DiscoveryV1({
-                username: 'a6c31267-0df9-4eee-b241-36ca88d086bf',
-                password: 'xvVClL4c4UjU',
+                username: params.username,
+                password: params.password,
                 version_date: '2016-12-01'
             });
             
-            discovery.query({environment_id: 'efe07e7a-790d-4604-8761-aed0d2f42a56',
-            collection_id: '3cf3558e-9bbe-40e1-9da4-a487a5d36ff0',
+            discovery.query({environment_id: params.environment_id,
+            collection_id: params.collection_id,
             query: params.input.text
             }, function(err, data) {
                 if (err) {
