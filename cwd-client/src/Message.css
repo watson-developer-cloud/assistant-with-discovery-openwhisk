@@ -1,0 +1,32 @@
+p {
+    margin: 0.3125rem;
+    padding: 0.25rem;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: Helvetica Neue for IBM, Helvetica Neue, Helvetica, Arial, sans-serif;
+}
+
+.message-inner {
+    font-size: 1rem;
+    letter-spacing: 0.015rem;
+    line-height: 1.3125rem;
+    width: auto;
+}
+
+.from-user {
+    text-align: right;
+}
+
+.from-watson {
+    text-align: left;
+}
+
+div {
+    word-wrap: break-word;
+    line-height: 1.25rem;
+}
+

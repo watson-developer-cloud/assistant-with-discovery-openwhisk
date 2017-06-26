@@ -1,0 +1,2 @@
+'use strict';Object.defineProperty(exports,"__esModule",{value:true});exports.default=Pane;var _react=require('react');var _react2=_interopRequireDefault(_react);function _interopRequireDefault(obj){return obj&&obj.__esModule?obj:{default:obj};}function Pane(props){return _react2.default.createElement('div',{'data-id':props.label},props.children);}Pane.propTypes={label:_react.PropTypes.string.isRequired,children:_react.PropTypes.oneOfType([_react.PropTypes.array,_react.PropTypes.element]).isRequired};module.exports=exports['default'];
+//# sourceMappingURL=Pane.js.map

@@ -1,0 +1,1 @@
+{"version":3,"sources":["Sizes.js"],"names":[],"mappings":"sEAAA;gBACe,CACb,UADa,CAEb,SAFa,CAGb,OAHa,CAIb,QAJa,CAKb,OALa,CAMb,SANa,CAOb,UAPa,C","file":"Sizes.js","sourcesContent":["// Container sizes\nexport default [\n  'xx-small',\n  'x-small',\n  'small',\n  'medium',\n  'large',\n  'x-large',\n  'xx-large',\n];\n"]}
