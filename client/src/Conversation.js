@@ -78,7 +78,6 @@ class Conversation extends Component {
     }
 
     render() {
-        const text = this.state.text;
         const messages = this.state.messageList.map(function(msg, index) {
             const isUser = (msg.source === 'user') ? true : false;
             return <Message key={index} isUser={isUser} text={msg.message} />;
