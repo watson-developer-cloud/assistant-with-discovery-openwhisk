@@ -3,6 +3,7 @@ import './Conversation.css';
 import { InputWithButton } from 'watson-react-components';
 import MessageWindow from './MessageWindow.js';
 import Message from './Message.js';
+import env from './env.js';
 
 class Conversation extends Component {
     constructor(props) {
@@ -31,13 +32,13 @@ class Conversation extends Component {
     }
 
     sendToWatson(message) {
-        return fetch('https://service.us.apiconnect.ibmcloud.com/gws/apigateway/api/f921a967734af393449f8a0f77ea0c0b49c4d0bc0e6ef9fad81c6320516b9f07/cwd/submit',
+        return fetch(env.API_URL,
             {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'X-IBM-CLIENT-ID': '5343042c-5e4b-4da6-b19d-4ae885a9dcc5'
+                    'X-IBM-CLIENT-ID': env.API_SECRET
                 },
                 body: JSON.stringify({
                     input: {
