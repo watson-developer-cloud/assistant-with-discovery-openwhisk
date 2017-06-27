@@ -19,25 +19,26 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 <li>Edit <a href="actions/conversationParams.json">actions/conversationParams.json</a> and <a href="actions/discoveryParams.json">actions/discoveryParams.json</a> to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).</li>
 
-```json
+```javascript
 {
-    "username": "<your Conversation service username>",
-    "password": "<your Conversation service password>",
-    "workspace_id": "<your workspace id for your Conversation demo instance>"
+  "username": "<your Conversation service username>",
+  "password": "<your Conversation service password>",
+  "workspace_id": "<your workspace id for your Conversation demo instance>"
 }
 ```
 
-```json
+```javascript
 {
-    "username": "<your Discovery service username>",
-    "password": "<your Discovery service password>",
-    "workspace_id": "<your workspace id for your Discovery demo instance>",
-    "collection_id": "<your environment id for your Discovery demo instance>"
+  "username": "<your Discovery service username>",
+  "password": "<your Discovery service password>",
+  "workspace_id": "<your workspace id for your Discovery demo instance>",
+  "collection_id": "<your environment id for your Discovery demo instance>"
 }
 ```
 
 <li>Use these documents to create default parameters from the command line: </li>
 
+    
     npm run defaults
     //which will run a script containing the following:
     //wsk action update conversation --param-file action/conversationParams.json
