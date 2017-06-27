@@ -46,19 +46,19 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 <li>Create an API that uses your sequence</li>
 <ol><li>Navigate to the <a href="https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south">API Management</a> page on OpenWhisk.</li>
 
-![Create new API]( pictures/Create_API.png?raw=true )
+![Create new API]( README_pictures/Create_API.png?raw=true )
 
 <li>Name your API and supply a base path.</li>
 
-![Name API and base path]( pictures/API_info.png?raw=true )
+![Name API and base path]( README_pictures/API_info.png?raw=true )
 
 <li>Click "Create operation"</li>
 
-![Create operation]( pictures/Create_operation.png?raw=true )
+![Create operation]( README_pictures/Create_operation.png?raw=true )
 
 <li>Make a path for your operation, change the HTTP verb to POST, and select your sequence as the action</li>
 
-![Operation form]( pictures/Create_Operation_Form.png?raw=true )
+![Operation form]( README_pictures/Create_Operation_Form.png?raw=true )
 
 <li>Activate the slider next to "Require applications to autheticate via API key"</li>
 <li>
