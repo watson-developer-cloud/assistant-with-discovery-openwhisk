@@ -12,40 +12,40 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 <ol><li>Install the Openwhisk <a href="https://console.bluemix.net/openwhisk/learn/cli">Command Line Interface</a></li>
 <li>Add the two actions to OpenWhisk</li>
     
-    npm actions
+    npm run actions
     //which will run a script containing:
     //wsk action create conversation actions/conversation.js --web true
     //wsk action create discovery actions/discovery.js --web true
 
 <li>Edit <a href="actions/conversationParams.json">actions/conversationParams.json</a> and <a href="actions/discoveryParams.json">actions/discoveryParams.json</a> to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).</li>
 
-```javascript
-    {
+```json
+{
     "username": "<your Conversation service username>",
     "password": "<your Conversation service password>",
     "workspace_id": "<your workspace id for your Conversation demo instance>"
-    }
+}
 ```
 
-```javascript
-    {
+```json
+{
     "username": "<your Discovery service username>",
     "password": "<your Discovery service password>",
     "workspace_id": "<your workspace id for your Discovery demo instance>",
     "collection_id": "<your environment id for your Discovery demo instance>"
-    }
+}
 ```
 
 <li>Use these documents to create default parameters from the command line: </li>
 
-    npm defaults
+    npm run defaults
     //which will run a script containing the following:
     //wsk action update conversation --param-file action/conversationParams.json
     //wsk action update discovery --param-file action/discoveryParams.json
 
 <li>Create a sequence using the two actions:</li>
 
-    npm sequence
+    npm run sequence
     //which will run a script containing the following:
     //wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
     
