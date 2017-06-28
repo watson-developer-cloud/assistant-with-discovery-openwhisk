@@ -38,7 +38,7 @@ class Conversation extends Component {
                 headers: {
                     'Content-Type': 'application/json',
                     'Accept': 'application/json',
-                    'X-IBM-CLIENT-ID': env.API_SECRET
+                    'X-IBM-CLIENT-ID': env.API_KEY
                 },
                 body: JSON.stringify({
                     input: {
