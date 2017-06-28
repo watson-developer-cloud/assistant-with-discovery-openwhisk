@@ -68,4 +68,16 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 ![Operation form]( README_pictures/Create_Operation_Form.png?raw=true )
 
 <li>Activate the slider next to "Require applications to autheticate via API key"</li>
-<li>
+<li>Ensure that the slider next to "Enable CORS so that browser-based applications..." is also activated</li>
+<li>Click "Save & expose"</li>
+<li>Navigate to the "Sharing" tab on the left-hand side</li>
+
+![Sharing tab]( README_pictures/Sharing-tab.png?raw=true )
+
+<li>Under "Sharing Outside of Bluemix Organization", click "Create API Key"</li>
+
+![Create API key]( README_pictures/Create_API_key.png?raw=true )
+
+<li>Give your key a name, and copy the API Key to a note</li>
+
+![Key naming]( README_pictures/Key_naming.pngraw=true )
