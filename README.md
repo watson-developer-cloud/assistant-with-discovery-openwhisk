@@ -72,7 +72,7 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 <li>Click "Save & expose"</li>
 <li>Navigate to the "Sharing" tab on the left-hand side</li>
 
-![Sharing tab]( README_pictures/Sharing-tab.png?raw=true )
+![Sharing tab]( README_pictures/Sharing_tab.png?raw=true )
 
 <li>Under "Sharing Outside of Bluemix Organization", click "Create API Key"</li>
 
@@ -80,4 +80,4 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 <li>Give your key a name, and copy the API Key to a note</li>
 
-![Key naming]( README_pictures/Key_naming.pngraw=true )
+![Key naming]( README_pictures/Key_naming.png?raw=true )
