@@ -81,3 +81,8 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 <li>Give your key a name, and copy the API Key to a note</li>
 
 ![Key naming]( README_pictures/Key_naming.png?raw=true )
+
+<li>Navigate to the "Summary" tab on the left-hand side</li>
+<li>Copy the link under "Route" to a note, and add "/submit" or the name of the path associated with your POST action to the end of the URL.</li>
+
+![Route_link]( README_pictures/Route_link.png?raw=true )
