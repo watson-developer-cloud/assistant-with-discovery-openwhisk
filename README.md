@@ -89,7 +89,7 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 </ol>
 <li>Link your API to your React App:</li>
-Copy the text below into a file named ```env.js```, and save it in the ```src``` folder.
+Copy the text below into a file named `env.js`, and save it in the `src` folder.
 
 ```javascript
 export default {
