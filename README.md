@@ -86,3 +86,15 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 <li>Copy the link under "Route" to a note, and add "/submit" or the name of the path associated with your POST action to the end of the URL.</li>
 
 ![Route_link]( README_pictures/Route_link.png?raw=true )
+
+</ol>
+<li>Link your API to your React App:</li>
+
+Copy the text below into a file named `env.js` , and save it in the `src` folder.
+
+```javascript
+export default {
+  API_URL: <Your API URL that you saved>,
+  API_KEY: <The API Key that you saved>
+}
+```
