@@ -1,28 +1,23 @@
+html {
+    height: 100%;
+}
+
 .App {
-    position: fixed;
+    position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    box-sizing: border-box;
-    max-height: 100%;
-    max-width: 100%;
-    display: -webkit-flex;
-    display: flex;
-    flex-direction: column;
-    -ms-flex-direction: column;
+    max-height: 100vh;
+    max-width: 100vw;
 }
 
 #footer-container {
-    margin-top: auto;
-    width: 100%
+    width: 100%;
+    position: absolute;
+    top: 80%;
 }
 
-#conversation-container {
-    position: relative;
-    height: 100%;
-}
-
-div .from-user {
-    color: white !important;
+#header {
+    margin: 5vh;
 }

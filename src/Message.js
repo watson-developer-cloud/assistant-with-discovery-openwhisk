@@ -6,7 +6,7 @@ import { Colors } from 'watson-react-components';
 const Message =({ isUser, text }) => 
     <div className={`message ${isUser ? 'from-user' : 'from-watson'}`}>
         <div className="message-inner">
-            <p style={isUser ? {"background-color": Colors.purple_40} : {}}>{text}</p>
+            <p style={isUser ? {backgroundColor: Colors.purple_40} : {}}>{text}</p>
         </div>
     </div>
 

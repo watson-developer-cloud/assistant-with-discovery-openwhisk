@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import './Conversation.css';
 import { InputWithButton } from 'watson-react-components';
-import MessageWindow from './MessageWindow.js';
 import Message from './Message.js';
+import DiscoveryResult from './DiscoveryResult.js';
+import JsonWindow from './JsonWindow.js';
 import env from './env.js';
 
 class Conversation extends Component {
@@ -15,7 +16,8 @@ class Conversation extends Component {
         this.addMessageToList = this.addMessageToList.bind(this);
         this.state = { messageList: [],
                         text: "",
-                        context: {}};
+                        context: {},
+        };
         this.sendToWatson("");
     }
 
@@ -32,6 +34,13 @@ class Conversation extends Component {
     }
 
     sendToWatson(message) {
+        const reqJson = JSON.stringify({
+            input: {
+                text: message
+            },
+            context: this.state.context
+        });
+        this.setState({ reqJson: reqJson });
         return fetch(env.API_URL,
             {
                 method: 'POST',
@@ -40,12 +49,7 @@ class Conversation extends Component {
                     'Accept': 'application/json',
                     'X-IBM-CLIENT-ID': env.API_KEY
                 },
-                body: JSON.stringify({
-                    input: {
-                        text: message
-                    },
-                    context: this.state.context
-                })
+                body: reqJson
             }
         ).then((response) => response.json())
         .then((responseJson) => {
@@ -55,12 +59,13 @@ class Conversation extends Component {
 
     handleWatsonOutput(json) {
         this.setState({
-            context: json.context
+            context: json.context,
+            resJson: JSON.stringify(json)
         })
         if (json.output.hasOwnProperty("discoveryResults")) {
             const resultArr = json.output.discoveryResults;
             resultArr.map(function(result) {
-                this.addMessageToList(result.bodySnippet, 'watson');
+                this.addDiscoveryToList(result);
             }.bind(this));
         } else {
             const text = json.output.text.filter(text => text).join('\n');
@@ -71,28 +76,37 @@ class Conversation extends Component {
     }
 
     addMessageToList(message, source) {
-         if (message !== "") {
+        if (message !== "") {
             this.setState({
                 messageList: [ ...this.state.messageList, {message: message, source: source}]
             });
         }
     }
 
+    addDiscoveryToList(discoveryResult) {
+        this.setState({
+            messageList: [ ...this.state.messageList, {result: discoveryResult, source: 'discovery'}]
+        });
+    }
+
     render() {
         const messages = this.state.messageList.map(function(msg, index) {
-            const isUser = (msg.source === 'user') ? true : false;
-            return <Message key={index} isUser={isUser} text={msg.message} />;
+            if (msg.source === 'user') {
+                return <Message key={index} isUser={true} text={msg.message} />;
+            } else if (msg.source === 'watson') {
+                return <Message key={index} isUser={false} text={msg.message} />;
+            } else {
+                return <DiscoveryResult key={index} result={msg.result} />;
+            }
         })
         return (
             <div id="conversation-container">
-                <div>
-                    <MessageWindow>
-                        {messages}
-                    </MessageWindow>
+                <JsonWindow reqJson={this.state.reqJson} resJson={this.state.resJson} />
+                <div id="message-container">
+                    {messages}
                 </div>
                 <div id="input-container">
                     <InputWithButton
-                        id="user-input"
                         placeholder={"Say something to Watson"}
                         onInput={this.handleChange}
                         onSubmit={this.handleSubmit}
