@@ -1,0 +1,8 @@
+.DS_Store
+node_modules
+public
+README_pictures
+src
+.gitignore
+CODE_OF_CONDUCT.md
+README.md

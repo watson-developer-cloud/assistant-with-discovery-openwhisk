@@ -9,9 +9,6 @@ class App extends Component {
       <div id="App">
         <h1 id="header">Conversation with Discovery - Using OpenWhisk</h1>
         <Conversation />
-        <div id="footer-container">
-          <Footer />
-        </div>
       </div>
     );
   }

@@ -20,5 +20,9 @@
     "defaults": "wsk action update conversation --param-file action /conversationParams.json && wsk action update discovery --param-file action /discoveryParams.json",
     "sequence": "wsk action create conversation-with-discovery-sequence --sequence conversation,discovery"
   },
-  "homepage": "./public/index.html"
+  "engines" : { 
+    "node" : ">=7.0",
+    "npm" : ">=5.0" 
+  },
+  "homepage": "/"
 }

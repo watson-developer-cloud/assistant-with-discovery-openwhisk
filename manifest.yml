@@ -1,0 +1,4 @@
+---
+name: conversation-with-discovery-openwhisk-01
+memory: 128M
+buildpack: staticfile_buildpack
