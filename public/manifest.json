@@ -1,6 +1,6 @@
 {
-  "short_name": "CWD App",
-  "name": "Conversation with Discovery (using OpenWhisk)",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",

@@ -1,0 +1,76 @@
+$from-watson-color: rgb(175, 110, 232);
+$from-user-color: rgb(224, 224, 224);
+$intent-color: rgb(119, 118, 119);
+$date-color: rgb(119, 118, 119);
+$edge-offset: 0.5rem;
+$far-edge-offset: 2*$edge-offset;
+$intent-offset: 1rem;
+$date-offset: 1rem;
+
+.conversation {
+
+    &__messages {
+        min-height: 80vh;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    &__input {
+        width: 100%;
+    }
+
+}
+
+.message {
+    &--from-watson {
+        text-align: left;
+        margin-left: $edge-offset;
+        margin-right: $far-edge-offset;
+
+        .message__content {
+            background-color: $from-watson-color;
+            color: #fff;
+        }
+
+        .message__intent {
+            margin-left: $intent-offset;
+        }
+
+        .message__date {
+            margin-left: $date-offset;
+        }
+    }
+
+    &--from-user {
+        text-align: right;
+        margin-right: $edge-offset;
+        margin-left: $far-edge-offset;
+
+        .message__content {
+            margin-left: auto;
+            margin-right: 0;
+            background-color: $from-user-color;
+        }
+
+        .message__date {
+            margin-right: $date-offset;
+        }
+    }
+
+    &__intent {
+        color: $intent-color
+    }
+
+    &__content {
+        width: fit-content;
+        padding: 0.75rem;
+        border-radius: 1rem;
+        margin-top: 0.1rem;
+    }
+
+    &__date {
+        color: $date-color;
+        margin-top: 0.1rem;
+    }
+
+}

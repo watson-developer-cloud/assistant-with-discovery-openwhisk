@@ -1,15 +1,43 @@
-#input-container {
-    top: 80%;
-    width: 50%;
-}
+.conversation__messages {
+  min-height: 80vh;
+  max-height: 80vh;
+  overflow-y: auto; }
 
-#conversation-container {
-    position: absolute;
-    height: 80%;
-    width: 100%;
-}
+.conversation__input {
+  width: 100%; }
 
-#message-container {
-    height: 60%;
-    overflow-y: auto;
-}
+.message--from-watson {
+  text-align: left;
+  margin-left: 0.5rem;
+  margin-right: 1rem; }
+  .message--from-watson .message__content {
+    background-color: #af6ee8;
+    color: #fff; }
+  .message--from-watson .message__intent {
+    margin-left: 1rem; }
+  .message--from-watson .message__date {
+    margin-left: 1rem; }
+
+.message--from-user {
+  text-align: right;
+  margin-right: 0.5rem;
+  margin-left: 1rem; }
+  .message--from-user .message__content {
+    margin-left: auto;
+    margin-right: 0;
+    background-color: #e0e0e0; }
+  .message--from-user .message__date {
+    margin-right: 1rem; }
+
+.message__intent {
+  color: #777677; }
+
+.message__content {
+  width: fit-content;
+  padding: 0.75rem;
+  border-radius: 1rem;
+  margin-top: 0.1rem; }
+
+.message__date {
+  color: #777677;
+  margin-top: 0.1rem; }

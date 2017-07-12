@@ -373,7 +373,8 @@ strong,
 p,
 .base--p {
   font-size: 1rem;
-  font-weight: 400;}
+  font-weight: 400;
+  color: #121212; }
 
 .base--p_light {
   color: #777677; }
@@ -1162,7 +1163,8 @@ code[class*="language-"] ::selection {
   text-transform: uppercase; }
 
 .base--p {
-  font-weight: 400;}
+  font-weight: 400;
+  color: #121212; }
 
 .base--input, .base--select {
   max-width: 30rem; }
