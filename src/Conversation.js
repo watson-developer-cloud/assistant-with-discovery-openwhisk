@@ -10,6 +10,10 @@ function Conversation(props) {
             <div key={index} className={msgObj.isUser ? "message message--from-user" : "message message--from-watson"}>
                 {msgObj.intent ? <div className="message__intent">{msgObj.intent}</div> : false}
                 <div className="message__content">{msgObj.content}</div>
+                <div className="message__tail">
+                    <div className="message__tail__background"></div>
+                    <div className="message__tail__foreground"></div>
+                </div>
                 {msgObj.date ? <div className="message__date">{formattedTime}</div> : false}
             </div>
         );
@@ -17,6 +21,7 @@ function Conversation(props) {
 
     return(
         <div className="conversation">
+            {props.appIntro ? <p className="conversation__intro">{props.appIntro}</p> : false}
             <div className="conversation__messages">
                 {props.messageObjectList.map(makeMessage)}
             </div>
