@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Conversation from './Conversation.js';
-import env from './env.js'
+//import env from './env.js'
 
 class App extends Component {
     constructor(props) {
@@ -18,8 +18,8 @@ class App extends Component {
     }
 
     callWatson(message) {
-        const watsonApiUrl = env.API_URL;
-        const watsonApiKey = env.API_KEY;
+        const watsonApiUrl = process.env.API_URL;
+        const watsonApiKey = process.env.API_KEY;
         const requestJson = JSON.stringify({
             input: {
                 text: message
