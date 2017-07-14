@@ -84,7 +84,7 @@ class App extends Component {
         return(
             
             <Conversation submitHandler={this.handleSubmit} messageObjectList={this.state.messageObjectList} 
-                appIntro={"API_KEY:["+ process.env.REACT_APP_API_KEY +"]This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform."}/>
+                appIntro="This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform."/>
         );
     }
 }
