@@ -50,11 +50,15 @@ function main(params) {
                 }
                 
                 params.output.discoveryResults = discoveryResults;
-                conversation_with_data = params;
-                
+                conversationWithData = params;
+                delete conversationWithData.username;
+                delete conversationWithData.password;
                 return resolve(conversation_with_data);
             });
 	    } else {
+            let returnJson = params;
+            delete returnJson.username;
+            delete returnJson.password;
 	        return resolve(params);
 	    }
     });
