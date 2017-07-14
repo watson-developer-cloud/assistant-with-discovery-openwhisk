@@ -18,8 +18,8 @@ class App extends Component {
     }
 
     callWatson(message) {
-        const watsonApiUrl = process.env.API_URL;
-        const watsonApiKey = process.env.API_KEY;
+        const watsonApiUrl = process.env.RAECT_APP_API_URL;
+        const watsonApiKey = process.env.REACT_APP_API_KEY;
         const requestJson = JSON.stringify({
             input: {
                 text: message
@@ -84,7 +84,7 @@ class App extends Component {
         return(
             
             <Conversation submitHandler={this.handleSubmit} messageObjectList={this.state.messageObjectList} 
-                appIntro={"API_KEY:["+ process.env.API_KEY +"]This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform."}/>
+                appIntro={"API_KEY:["+ process.env.REACT_APP_API_KEY +"]This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform."}/>
         );
     }
 }
