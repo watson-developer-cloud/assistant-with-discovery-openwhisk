@@ -19,7 +19,6 @@ class App extends Component {
 
     callWatson(message) {
         const watsonApiUrl = process.env.REACT_APP_API_URL;
-        const watsonApiKey = process.env.REACT_APP_API_KEY;
         const requestJson = JSON.stringify({
             input: {
                 text: message
@@ -31,8 +30,7 @@ class App extends Component {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-                    'Accept': 'application/json',
-                    'X-IBM-CLIENT-ID': watsonApiKey
+                    'Accept': 'application/json'
                 },
                 body: requestJson
             }
