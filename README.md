@@ -31,7 +31,7 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 {
   "username": "<your Discovery service username>",
   "password": "<your Discovery service password>",
-  "workspace_id": "<your workspace id for your Discovery demo instance>",
+  "environment_id": "<your workspace id for your Discovery demo instance>",
   "collection_id": "<your environment id for your Discovery demo instance>"
 }
 ```
