@@ -46,16 +46,17 @@ class App extends Component {
     handleResponse(responseJson) {
         const outputMessage = responseJson.output.text.filter(text => text).join('\n');
         const outputIntent = responseJson.intents[0] ? responseJson.intents[0]["intent"] : "";
-        const outputDate = responseJson.date;
+        const outputDate = responseJson.date.toLocaleTimeString();
         const outputContext = responseJson.context;
         this.setState({
             context: outputContext
         });
         const msgObj = {
-            isUser: false,
-            intent: outputIntent,
-            content: outputMessage,
-            date: outputDate
+            position: "left",
+            label: outputIntent,
+            message: outputMessage,
+            date: outputDate,
+            hasTail: true
         };
         this.addMessage(msgObj);
     }
@@ -69,11 +70,12 @@ class App extends Component {
     handleSubmit(e) {
         const inputMessage = e.target.value;
         const inputDate = new Date();
+        const formattedDate = inputDate.toLocaleTimeString();
         const msgObj = {
-            isUser: true,
-            intent: false,
-            content: inputMessage,
-            date: inputDate
+            position: "right",
+            message: inputMessage,
+            date: formattedDate,
+            hasTail: true
         };
         this.addMessage(msgObj);
         e.target.value = "";
@@ -82,9 +84,15 @@ class App extends Component {
 
     render() {
         return(
-            
-            <Conversation submitHandler={this.handleSubmit} messageObjectList={this.state.messageObjectList} 
-                appIntro="This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform."/>
+            <div className="app-wrapper">
+                <p className="conversation__intro">
+                    This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform.
+                </p>
+                <Conversation
+                    onSubmit={this.handleSubmit}
+                    messageObjectList={this.state.messageObjectList}
+                />
+            </div>
         );
     }
 }

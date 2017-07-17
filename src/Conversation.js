@@ -1,33 +1,46 @@
 import React from 'react';
 import './Conversation.css';
 import { InputWithButton } from 'watson-react-components';
+import Message from './Message.js'
 
 function Conversation(props) {
 
     function makeMessage(msgObj, index) {
-        const formattedTime = msgObj.date.toLocaleTimeString();
         return(
-            <div key={index} className={msgObj.isUser ? "message message--from-user" : "message message--from-watson"}>
-                {msgObj.intent ? <div className="message__intent">{msgObj.intent}</div> : false}
-                <div className="message__content">{msgObj.content}</div>
-                <div className="message__tail">
-                    <div className="message__tail__background"></div>
-                    <div className="message__tail__foreground"></div>
-                </div>
-                {msgObj.date ? <div className="message__date">{formattedTime}</div> : false}
-            </div>
+            <Message key={index} position={msgObj.position || false} label={msgObj.label || false} date={msgObj.date || false} message={msgObj.message} hasTail={msgObj.hasTail || false}/>
         );
     }
 
     return(
         <div className="conversation">
-            {props.appIntro ? <p className="conversation__intro">{props.appIntro}</p> : false}
             <div className="conversation__messages">
-                {props.messageObjectList.map(makeMessage)}
+                <div>
+                    {props.messageObjectList.map(makeMessage)}
+                </div>
             </div>
-            <InputWithButton className="conversation__input" onSubmit={props.submitHandler} placeholder="Say something to Watson."/>
+            <div className="conversation__input-container">
+                <InputWithButton className="conversation__input" onSubmit={props.onSubmit} placeholder="Say something to Watson."/>
+            </div>
         </div>
     );
 }
 
 export default Conversation;
+
+// Conversation
+/**
+ * + conversationData: arr(obj) // specify schema
+ * + onSubmit: func
+ * + showLoading: bool
+ * 
+ * autoscroll conversation
+ */
+
+// Chat Bubble
+/**
+ * + position: enum(left, right)
+ * + label: string
+ * + date: string
+ * + message: string
+ * + hasTail: bool
+ */

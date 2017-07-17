@@ -1,1 +1,30 @@
+$app-intro-color: rgb(199, 199, 199);
 
+
+html, body {
+    height: 100%;
+}
+
+#root {
+    margin: 0;
+    height: 100%;
+}
+
+.app-wrapper {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+}
+
+.conversation {
+    flex: 1;
+
+    &__intro {
+        text-align: center;
+        color: $app-intro-color;
+    }
+}

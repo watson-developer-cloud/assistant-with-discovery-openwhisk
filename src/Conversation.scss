@@ -1,143 +1,34 @@
-$from-watson-color: rgb(175, 110, 232);
-$from-user-color: rgb(224, 224, 224);
-$intent-color: rgb(0, 180, 160);
-$date-color: rgb(119, 118, 119);
-$app-intro-color: rgb(199, 199, 199);
-$edge-offset: 0.5rem;
-$far-edge-offset: 2*$edge-offset;
-$intent-offset: 1rem;
-$date-offset: 1rem;
-$radius: 1rem;
-$tail-radius: 0.5rem;
+$inner-padding: 1rem;
 
 .conversation {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    align-content: stretch;
+    padding: $inner-padding;
+    width: 100%;
+
+    &__inner {
+        display: flex;
+        align-items: stretch;
+        align-content: stretch;
+        flex-direction: column;
+        justify-content: flex-start;
+        width: 100%;
+        height: auto;
+    }
 
     &__messages {
-        min-height: 80vh;
-        max-height: 80vh;
         overflow-y: auto;
+        flex: 1;
+    }
+
+    &__input-container {
+        width: 100%;
     }
 
     &__input {
         width: 100%;
     }
-
-    &__intro {
-        text-align: center;
-        color: $app-intro-color;
-    }
-
-}
-
-.message {
-
-    position: relative;
-
-    &--from-watson {
-        text-align: left;
-        margin-left: $edge-offset;
-        margin-right: $far-edge-offset;
-
-        .message__content {
-            background-color: $from-watson-color;
-            color: #fff;
-            border-radius: $radius $radius $radius 0;
-        }
-
-        .message__intent {
-            margin-left: $intent-offset;
-        }
-
-        .message__date {
-            margin-left: $date-offset;
-        }
-
-        .message__tail {
-
-            &__background {
-                background-color: $from-watson-color;
-            }
-
-            &__foreground {
-                border-top-left-radius: 1rem;
-            }
-        }
-
-        
-    }
-
-    &--from-user {
-        text-align: right;
-        margin-right: $edge-offset;
-        margin-left: $far-edge-offset;
-
-        .message__content {
-            margin-left: auto;
-            margin-right: 0;
-            background-color: $from-user-color;
-            border-radius: $radius $radius 0 $radius;
-        }
-
-        .message__date {
-            margin-right: $date-offset;
-        }
-
-        .message__tail {
-            right: 0;
-
-            &__background {
-                background-color: $from-user-color;
-            }
-
-            &__foreground {
-                border-top-right-radius: 1rem;
-            }
-        }
-    }
-
-    &__intent {
-        color: $intent-color
-    }
-
-    &__content {
-        width: fit-content;
-        padding: 0.6rem;
-        margin-top: 0.1rem;
-    }
-
-    &__date {
-        color: $date-color;
-        margin-top: 0.1rem;
-        font-size: 0.75rem;
-    }
-
-    &__tail {
-        margin: 0;
-        height: 1rem;
-        width: 1rem;
-        max-width: 1rem;
-        position: absolute;
-
-        &__background {
-            height: inherit;
-            width: inherit;
-            margin: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: -1;
-        }
-        
-        &__foreground {
-            height: inherit;
-            width: inherit;
-            margin: 0;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
-            background-color: #fff;
-        }
-    }
-
 }
