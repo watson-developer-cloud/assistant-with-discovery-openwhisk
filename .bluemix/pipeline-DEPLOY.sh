@@ -37,7 +37,7 @@ cf create-service conversation free conversation-for-demo
 cf create-service-key conversation-for-demo for-demo
 cd .bluemix
 
-CONVERSATION_CREDENTIALS=`cf service-key converstaion-for-demo for-demo | tail -n +2`
+CONVERSATION_CREDENTIALS=`cf service-key conversation-for-demo for-demo | tail -n +2`
 export CONVERSATION_USERNAME=`echo $CONVERSATION_CREDENTIALS | jq -r .username`
 export CONVERSATION_PASSWORD=`echo $CONVERSATION_CREDENTIALS | jq -r .password`
 CONVERSATION_WORKSPACE=`cat workspace.json`
