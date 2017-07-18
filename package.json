@@ -19,6 +19,9 @@
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "actions": "wsk action create conversation actions/conversation.js --web true && wsk action create discovery actions/discovery.js --web true",
+    "defaults": "wsk action update conversation --param-file actions/conversationParams.json && wsk action update discovery --param-file actions/discoveryParams.json",
+    "sequence": "wsk action create conversation-with-discovery-sequence --sequence conversation,discovery"
   }
 }
