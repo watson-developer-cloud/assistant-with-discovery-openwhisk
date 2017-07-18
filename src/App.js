@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
 import Conversation from './Conversation.js';
-//import env from './env.js'
 
 class App extends Component {
     constructor(props) {
