@@ -31,6 +31,7 @@ function main(params) {
             query: params.input.text
             }, function(err, data) {
                 if (err) {
+                    console.log("There was a Discovery error");
                     return reject(err);
                 }
                 
@@ -50,10 +51,10 @@ function main(params) {
                 }
                 
                 params.output.discoveryResults = discoveryResults;
-                conversationWithData = params;
+                var conversationWithData = params;
                 delete conversationWithData.username;
                 delete conversationWithData.password;
-                return resolve(conversation_with_data);
+                return resolve(conversationWithData);
             });
 	    } else {
             let returnJson = params;
