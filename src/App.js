@@ -10,7 +10,8 @@ class App extends Component {
         this.state = {
             context: {},
         // A Message Object consists of a message[, intent, date, isUser]
-            messageObjectList: []
+            messageObjectList: [],
+            discoveryNumber: 0
         };
 
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -35,7 +36,6 @@ class App extends Component {
                 body: requestJson
             }
         ).then((response) => {
-            console.log(!response.ok);
             if(!response.ok) {
                 throw response;
             }
@@ -96,11 +96,13 @@ class App extends Component {
 
     formatDiscovery(resultArr) {
         resultArr.map(function(result, index) {
-            const formattedResult = <DiscoveryResult key={"d" + index} title={result.title} preview={result.bodySnippet} link={result.sourceUrl} linkText={"See full manual entry"} />;
-            console.log(formattedResult);
+            const formattedResult = <DiscoveryResult key={"d" + this.state.discoveryNumber + index} title={result.title} preview={result.bodySnippet} link={result.sourceUrl} linkText={"See full manual entry"} />;
             this.addMessage({ message: formattedResult });
         }.bind(this))
         
+        this.setState({
+            discoveryNumber: this.state.discoveryNumber + 1
+        });
         return(true);
     }
 
