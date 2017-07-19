@@ -1,0 +1,30 @@
+$result-background-color: rgb(242, 242, 242);
+$result-title-color: rgb(86, 47, 114);
+$result-preview-color: rgb(86, 47, 114);
+$result-link-color: rgb(186, 143, 247);
+$result-border-color: rgb(86, 47, 114);
+
+.result {
+    background-color: $result-background-color;
+    padding: 1rem;
+    width: 50%;
+    border: 1px solid $result-border-color;
+
+    &__title {
+        color: $result-title-color;
+        font-weight: bold;
+    }
+
+    &__preview {
+        color: $result-preview-color;
+    }
+
+    &__link {
+        color: $result-link-color;
+    }
+}
+
+.result + .result {
+    margin-top: 0rem;
+    border-top: none;
+}

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import Conversation from './Conversation.js';
+import DiscoveryResult from './DiscoveryResult.js';
 
 class App extends Component {
     constructor(props) {
@@ -33,29 +34,43 @@ class App extends Component {
                 },
                 body: requestJson
             }
-        ).then((response) => response.json())
+        ).then((response) => {
+            console.log(!response.ok);
+            if(!response.ok) {
+                throw response;
+            }
+            return(response.json());
+        })
         .then((responseJson) => {
             responseJson.date = new Date();
             this.handleResponse(responseJson);
-        });
+        }).catch(function(error) {
+            console.log(error);
+        })
     }
 
     handleResponse(responseJson) {
-        const outputMessage = responseJson.output.text.filter(text => text).join('\n');
-        const outputIntent = responseJson.intents[0] ? responseJson.intents[0]["intent"] : "";
-        const outputDate = responseJson.date.toLocaleTimeString();
-        const outputContext = responseJson.context;
-        this.setState({
-            context: outputContext
-        });
-        const msgObj = {
-            position: "left",
-            label: outputIntent,
-            message: outputMessage,
-            date: outputDate,
-            hasTail: true
-        };
-        this.addMessage(msgObj);
+        if(responseJson.hasOwnProperty("output") && responseJson.output.hasOwnProperty("action") && responseJson.output.action.hasOwnProperty("call_discovery")) {
+            this.addMessage( { label: "Discovery Result:", message: "Great question. Here's what I found:", date: (new Date()).toLocaleTimeString, hasTail: true});
+            this.formatDiscovery(responseJson.output.discoveryResults);
+            
+        } else {
+            const outputMessage = responseJson.output.text.filter(text => text).join('\n');
+            const outputIntent = responseJson.intents[0] ? responseJson.intents[0]["intent"] : "";
+            const outputDate = responseJson.date.toLocaleTimeString();
+            const outputContext = responseJson.context;
+            this.setState({
+                context: outputContext
+            });
+            const msgObj = {
+                position: "left",
+                label: outputIntent,
+                message: outputMessage,
+                date: outputDate,
+                hasTail: true
+            };
+            this.addMessage(msgObj);
+        }
     }
 
     addMessage(msgObj) {
@@ -78,6 +93,17 @@ class App extends Component {
         e.target.value = "";
         this.callWatson(inputMessage);
     }
+
+    formatDiscovery(resultArr) {
+        resultArr.map(function(result, index) {
+            const formattedResult = <DiscoveryResult key={"d" + index} title={result.title} preview={result.bodySnippet} link={result.sourceUrl} linkText={"See full manual entry"} />;
+            console.log(formattedResult);
+            this.addMessage({ message: formattedResult });
+        }.bind(this))
+        
+        return(true);
+    }
+
 
     render() {
         return(
