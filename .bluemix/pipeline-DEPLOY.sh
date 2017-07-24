@@ -46,7 +46,7 @@ CONVERSATION_WORKSPACE_ENTITIES=`echo $CONVERSATION_WORKSPACE | jq -r .entities`
 CONVERSATION_WORKSPACE_DIALOG_NODES=`echo $CONVERSATION_WORKSPACE | jq -r .dialog_nodes`
 export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X POST \
 -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
--d "{\"name\":\"Sample\",\"intents\":$CONVERSATION_WORKSPACE_INTENTS,\"entities\":$CONVERSATION_WORKSPACE_ENTITIES,\"language\":\"en\",\"description\":\"The sample car training for the demo\",\"dialog_nodes\":$CONVERSATION_WORKSPACE_DIALOG_NODES}" \
+-d @./workspace.json \
 "https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" | jq -r .workspace_id`
 
 # Create Discovery service
