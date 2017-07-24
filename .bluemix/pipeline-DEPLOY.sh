@@ -42,8 +42,11 @@ export CONVERSATION_USERNAME=`echo $CONVERSATION_CREDENTIALS | jq -r .username`
 export CONVERSATION_PASSWORD=`echo $CONVERSATION_CREDENTIALS | jq -r .password`
 export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X POST \
 -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
--d "@workspace.json" \
+-d "@workspace_blank.json" \
 "https://gateway-s.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" -v | jq -r .workspace_id`
+
+# Train Conversation Service
+curl -H "Content-Type: application/json" -X POST -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD -d @workspace.json "https://gateway-s.watsonplatform.net/conversation/api/v1/workspaces/$CONVERSATION_WORKSPACE_ID?version=2017-05-26" -v
 
 # Create Discovery service
 figlet -f small 'Discovery'

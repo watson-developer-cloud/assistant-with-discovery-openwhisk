@@ -1,0 +1,9 @@
+{
+	"name": "Car_Dashboard_New",
+	"intents": [],
+	"entities": [],
+	"language": "en",
+	"description": "Cognitive Car Dashboard Workspace",
+	"dialog_nodes": [],
+	"counterexamples": []
+}
