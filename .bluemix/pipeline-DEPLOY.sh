@@ -35,12 +35,12 @@ figlet 'Services'
 figlet -f small 'Conversation'
 cf create-service conversation free conversation-for-demo
 cf create-service-key conversation-for-demo for-demo
-cd .bluemix
 
+set -x
 CONVERSATION_CREDENTIALS=`cf service-key conversation-for-demo for-demo | tail -n +2`
 export CONVERSATION_USERNAME=`echo $CONVERSATION_CREDENTIALS | jq -r .username`
 export CONVERSATION_PASSWORD=`echo $CONVERSATION_CREDENTIALS | jq -r .password`
-CONVERSATION_WORKSPACE=`cat workspace.json`
+CONVERSATION_WORKSPACE=`cat ./.bluemix/workspace.json`
 CONVERSATION_WORKSPACE_INTENTS=`echo $CONVERSATION_WORKSPACE | jq -r .intents`
 CONVERSATION_WORKSPACE_ENTITIES=`echo $CONVERSATION_WORKSPACE | jq -r .entities`
 CONVERSATION_WORKSPACE_DIALOG_NODES=`echo $CONVERSATION_WORKSPACE | jq -r .dialog_nodes`
@@ -51,7 +51,7 @@ export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X PO
 
 # Create Discovery service
 figlet -f small 'Discovery'
-cf create-service discovery free discovery-for-demo
+cf create-service discovery lite discovery-for-demo
 cf create-service-key discovery-for-demo for-demo-2
 
 DISCOVERY_CREDENTIALS=`cf service-key discovery-for-demo for-demo-2 | tail -n +2`
@@ -60,7 +60,7 @@ export DISCOVERY_PASSWORD=`echo $DISCOVERY_CREDENTIALS | jq -r .password`
 export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -d '{ "name": "demoEnvironment", "description": "The environment made for the demo", "size": 1 }' \
-"https://gateway.watsonplatform/net/discovery/api/v1/environments?version=2017-06-25" | jq -r .environment_id`
+"https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-06-25" -v | jq -r .environment_id`
 export DISCOVERY_COLLECTION_ID=`curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -H "Content-Type: application/json" \
@@ -69,7 +69,7 @@ export DISCOVERY_COLLECTION_ID=`curl -X POST \
 # Train Discovery with the manual
 curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
--F file=@manualdocs.zip \
+-F file=@./.bluemix/manualdocs.zip \
 "https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-06-25"
 cd ..
 
