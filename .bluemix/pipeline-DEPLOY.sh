@@ -43,7 +43,7 @@ export CONVERSATION_PASSWORD=`echo $CONVERSATION_CREDENTIALS | jq -r .password`
 export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X POST \
 -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
 -d @./.bluemix/workspace.json \
-"https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" -v | jq -r .workspace_id`
+"https://gateway-s.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" -v | jq -r .workspace_id`
 
 # Create Discovery service
 figlet -f small 'Discovery'
@@ -54,7 +54,7 @@ DISCOVERY_CREDENTIALS=`cf service-key discovery-for-demo for-demo-2 | tail -n +2
 export DISCOVERY_USERNAME=`echo $DISCOVERY_CREDENTIALS | jq -r .username`
 export DISCOVERY_PASSWORD=`echo $DISCOVERY_CREDENTIALS | jq -r .password`
 export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
--u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
+-u "$DISCOVERY_USERNAME":"$DISCOVERY_PASSWORD" \
 -d '{ "name": "demoEnvironment", "description": "The environment made for the demo", "size": 1 }' \
 "https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-06-25" -v | jq -r .environment_id`
 export DISCOVERY_COLLECTION_ID=`curl -X POST \
