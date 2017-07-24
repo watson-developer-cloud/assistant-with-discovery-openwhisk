@@ -51,7 +51,7 @@ class App extends Component {
 
     handleResponse(responseJson) {
         if(responseJson.hasOwnProperty("output") && responseJson.output.hasOwnProperty("action") && responseJson.output.action.hasOwnProperty("call_discovery")) {
-            this.addMessage( { label: "Discovery Result:", message: "Great question. Here's what I found:", date: (new Date()).toLocaleTimeString, hasTail: true});
+            this.addMessage( { label: "Discovery Result:", message: "Great question. Here's what I found:", date: (new Date()).toLocaleTimeString});
             this.formatDiscovery(responseJson.output.discoveryResults);
             
         } else {
