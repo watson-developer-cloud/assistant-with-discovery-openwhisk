@@ -43,7 +43,7 @@ export CONVERSATION_PASSWORD=`echo $CONVERSATION_CREDENTIALS | jq -r .password`
 export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X POST \
 -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
 -d @./.bluemix/workspace.json \
-"https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" | jq -r .workspace_id`
+"https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" -v | jq -r .workspace_id`
 
 # Create Discovery service
 figlet -f small 'Discovery'
