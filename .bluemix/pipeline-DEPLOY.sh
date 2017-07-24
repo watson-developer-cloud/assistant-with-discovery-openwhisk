@@ -40,13 +40,9 @@ set -x
 CONVERSATION_CREDENTIALS=`cf service-key conversation-for-demo for-demo | tail -n +2`
 export CONVERSATION_USERNAME=`echo $CONVERSATION_CREDENTIALS | jq -r .username`
 export CONVERSATION_PASSWORD=`echo $CONVERSATION_CREDENTIALS | jq -r .password`
-CONVERSATION_WORKSPACE=`cat ./.bluemix/workspace.json`
-CONVERSATION_WORKSPACE_INTENTS=`echo $CONVERSATION_WORKSPACE | jq -r .intents`
-CONVERSATION_WORKSPACE_ENTITIES=`echo $CONVERSATION_WORKSPACE | jq -r .entities`
-CONVERSATION_WORKSPACE_DIALOG_NODES=`echo $CONVERSATION_WORKSPACE | jq -r .dialog_nodes`
 export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X POST \
 -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
--d @./workspace.json \
+-d @./.bluemix/workspace.json \
 "https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" | jq -r .workspace_id`
 
 # Create Discovery service
@@ -71,7 +67,6 @@ curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -F file=@./.bluemix/manualdocs.zip \
 "https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-06-25"
-cd ..
 
 ###############################################
 # OpenWhisk Artifacts
