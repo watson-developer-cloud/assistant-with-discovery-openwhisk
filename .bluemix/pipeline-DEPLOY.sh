@@ -79,7 +79,7 @@ export DISCOVERY_COLLECTION_ID=`curl -X POST \
 unzip manualdocs.zip
 
 # Loop through all documents in manual folder,
-MANUAL_FILES=/manualdocs/*
+MANUAL_FILES=/manualdocs/*.json
 for file in $MANUAL_FILES
 do
   curl -X POST \
