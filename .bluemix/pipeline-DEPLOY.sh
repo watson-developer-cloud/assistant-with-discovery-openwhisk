@@ -70,14 +70,14 @@ export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
 # Create Discovery configuration
 DISCOVERY_CONFIGURATION_ID=`curl -X GET \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
-"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/configurations?version=2017-07-19" | jq .configurations | jq .[0] | jq -r .configuration_id`
+"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/configurations?version=2017-07-19" -v | jq .configurations | jq .[0] | jq -r .configuration_id`
 
 # Create Discovery collection
 export DISCOVERY_COLLECTION_ID=`curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -H "Content-Type: application/json" \
 -d "{ \"name\": \"demoCollection\", \"description\": \"The collection made for the demo\", \"configuration_id\": \"$DISCOVERY_CONFIGURATION_ID\" }" \
-"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections?version=2017-07-19" | jq -r .collection_id`
+"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections?version=2017-07-19" -v | jq -r .collection_id`
 
 # Loop through all documents in manual folder,
 MANUAL_FILES="manualdocs/*"
@@ -88,7 +88,7 @@ do
   -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
   -H "Content-Type: application/json" \
   -F "file=@$file" \
-  "https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-07-19"
+  "https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-07-19" -v
 done
 
 ###############################################
