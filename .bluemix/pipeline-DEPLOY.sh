@@ -80,20 +80,15 @@ unzip manualdocs.zip
 
 # Loop through all documents in manual folder,
 MANUAL_FILES="manualdocs/*"
-for file in ls $MANUAL_FILES
+for file in $MANUAL_FILES
 do
+  #Train Discovery with the manual
   curl -X POST \
   -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
   -H "Content-Type: application/json" \
   -F file="@$file" \
-  "https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-07-19"
+  "https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2016-12-01"
 done
-
-# Train Discovery with the manual
-curl -X POST \
--u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
--F file=@./.bluemix/manualdocs.zip \
-"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2016-12-01"
 
 ###############################################
 # OpenWhisk Artifacts
