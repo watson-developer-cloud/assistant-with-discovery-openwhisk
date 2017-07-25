@@ -6,7 +6,6 @@
 
 echo 'Installing dependencies...'
 sudo apt-get -qq update 1>/dev/null
-sudo apt-get -qq install unzip 1>/dev/null
 sudo apt-get -qq install jq 1>/dev/null
 sudo apt-get -qq install figlet 1>/dev/null
 
@@ -74,9 +73,6 @@ export DISCOVERY_COLLECTION_ID=`curl -X POST \
 -H "Content-Type: application/json" \
 -d '{ "name": "demoCollection", "description": "The collection made for the demo" }' \
 "https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections?version=2016-12-01" | jq -r .collection_id`
-
-# Unzip the car manual documents
-unzip manualdocs.zip
 
 # Loop through all documents in manual folder,
 MANUAL_FILES="manualdocs/*"
