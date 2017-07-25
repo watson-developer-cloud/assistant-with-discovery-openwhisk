@@ -59,17 +59,17 @@ export DISCOVERY_PASSWORD=`echo $DISCOVERY_CREDENTIALS | jq -r .password`
 export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
 -u "$DISCOVERY_USERNAME":"$DISCOVERY_PASSWORD" \
 -d '{ "name": "demoEnvironment", "description": "The environment made for the demo", "size": 1 }' \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-06-25" -v | jq -r .environment_id`
+"https://gateway-s.watsonplatform.net/discovery/api/v1/environments?version=2017-06-25" -v | jq -r .environment_id`
 export DISCOVERY_COLLECTION_ID=`curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -H "Content-Type: application/json" \
 -d '{ "name": "demoCollection", "description": "The collection made for the demo" }' \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections?version=2017-06-25" | jq -r .collection_id`
+"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections?version=2017-06-25" | jq -r .collection_id`
 # Train Discovery with the manual
 curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -F file=@./.bluemix/manualdocs.zip \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-06-25"
+"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-06-25"
 
 ###############################################
 # OpenWhisk Artifacts
