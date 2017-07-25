@@ -46,26 +46,47 @@ export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X PO
 "https://gateway-s.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" -v | jq -r .workspace_id`
 
 # Train Conversation Service
-curl -H "Content-Type: application/json" -X POST -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD -d @workspace.json "https://gateway-s.watsonplatform.net/conversation/api/v1/workspaces/$CONVERSATION_WORKSPACE_ID?version=2017-05-26" -v
+curl -H "Content-Type: application/json" \
+-X POST -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
+-d @workspace.json "https://gateway-s.watsonplatform.net/conversation/api/v1/workspaces/$CONVERSATION_WORKSPACE_ID?version=2017-05-26" -v
 
 # Create Discovery service
 figlet -f small 'Discovery'
 cf create-service discovery lite discovery-for-demo
 cf create-service-key discovery-for-demo for-demo-2
 
+# Create service credentials
 DISCOVERY_CREDENTIALS=`cf service-key discovery-for-demo for-demo-2 | tail -n +2`
 export DISCOVERY_USERNAME=`echo $DISCOVERY_CREDENTIALS | jq -r .username`
 export DISCOVERY_PASSWORD=`echo $DISCOVERY_CREDENTIALS | jq -r .password`
+
+# Create Discovery environment
 export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -H "Content-Type: application/json" \
 -d '{ "name": "demoEnvironment", "description": "The environment made for the demo" }' \
 "https://gateway-s.watsonplatform.net/discovery/api/v1/environments?version=2016-12-01" -v | jq -r .environment_id`
+
+# Create Discovery collection
 export DISCOVERY_COLLECTION_ID=`curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -H "Content-Type: application/json" \
 -d '{ "name": "demoCollection", "description": "The collection made for the demo" }' \
 "https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections?version=2016-12-01" | jq -r .collection_id`
+
+# Unzip the car manual documents
+tar -xvf manualdocs.zip
+
+# Loop through all documents in manual folder,
+MANUAL_FILES=/manualdocs/*
+for file in $MANUAL_FILES
+do
+  curl -X POST \
+  -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
+  -H "Content-Type: application/json" \
+  -F file="@$file" \
+  "https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-07-19"
+
 # Train Discovery with the manual
 curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
