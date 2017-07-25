@@ -70,7 +70,7 @@ export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
 # Create Discovery configuration
 DISCOVERY_CONFIGURATION_ID=`curl -X GET \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
-"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/configurations?version=2017-07-19" | jq -r .configurations.[0].configuration_id`
+"https://gateway-s.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/configurations?version=2017-07-19" | jq .configurations | .[0] | -r .configuration_id`
 
 # Create Discovery collection
 export DISCOVERY_COLLECTION_ID=`curl -X POST \
