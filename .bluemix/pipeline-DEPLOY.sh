@@ -57,7 +57,8 @@ DISCOVERY_CREDENTIALS=`cf service-key discovery-for-demo for-demo-2 | tail -n +2
 export DISCOVERY_USERNAME=`echo $DISCOVERY_CREDENTIALS | jq -r .username`
 export DISCOVERY_PASSWORD=`echo $DISCOVERY_CREDENTIALS | jq -r .password`
 export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
--u "$DISCOVERY_USERNAME":"$DISCOVERY_PASSWORD" \
+-u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
+-H "Content-Type: application/json" \
 -d '{ "name": "demoEnvironment", "description": "The environment made for the demo", "size": 1 }' \
 "https://gateway-s.watsonplatform.net/discovery/api/v1/environments?version=2017-06-25" -v | jq -r .environment_id`
 export DISCOVERY_COLLECTION_ID=`curl -X POST \
