@@ -73,7 +73,7 @@ DISCOVERY_CONFIGURATION_ID=`curl -X GET \
 "https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/configurations?version=2017-07-19" -v | jq .configurations | jq .[0] | jq -r .configuration_id`
 
 # Create Discovery collection
-export DISCOVERY_COLLECTION_ID=`sleep 30s; curl -X POST \
+export DISCOVERY_COLLECTION_ID=`sleep 60s; curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -H "Content-Type: application/json" \
 -d "{ \"name\": \"demoCollection\", \"description\": \"The collection made for the demo\", \"configuration_id\": \"$DISCOVERY_CONFIGURATION_ID\" }" \
