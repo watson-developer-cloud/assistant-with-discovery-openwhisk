@@ -64,7 +64,7 @@ export DISCOVERY_PASSWORD=`echo $DISCOVERY_CREDENTIALS | jq -r .password`
 export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
 -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
 -H "Content-Type: application/json" \
--d '{ "name": "demoEnvironment", "description": "The environment made for the demo", "size": 1 }' \
+-d '{ "name": "demoEnvironment", "description": "The environment made for the demo", "size": 0 }' \
 "https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-07-19" -v | jq -r .environment_id`
 
 # Create Discovery configuration
