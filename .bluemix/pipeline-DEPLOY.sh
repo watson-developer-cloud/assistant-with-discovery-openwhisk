@@ -111,7 +111,7 @@ SPACE_UUID=`echo $OPENWHISK_KEYS | jq -r '.namespaces[] | select(.name == "'$CF_
 OPENWHISK_AUTH=$SPACE_UUID:$SPACE_KEY
 
 # Configure the OpenWhisk CLI
-wsk property set --apihost $OPENWHISK_API_HOST --auth "${OPENWHISK_AUTH}"
+wsk property set --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH
 
 # To enable the creation of API in Bluemix, inject the CF token in the wsk properties
 echo "APIGW_ACCESS_TOKEN=$CF_ACCESS_TOKEN" >> ~/.wskprops
