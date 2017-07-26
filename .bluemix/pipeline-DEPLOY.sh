@@ -114,7 +114,7 @@ OPENWHISK_AUTH=$SPACE_UUID:$SPACE_KEY
 wsk property set --apihost $OPENWHISK_API_HOST --auth "${OPENWHISK_AUTH}"
 
 # To enable the creation of API in Bluemix, inject the CF token in the wsk properties
-echo "APIGW_ACCESS_TOKEN=${CF_ACCESS_TOKEN}" >> ~/.wskprops
+echo "APIGW_ACCESS_TOKEN=$CF_ACCESS_TOKEN" >> ~/.wskprops
 
 # Create OpenWhisk Actions
 echo 'Creating OpenWhisk Actions...'
