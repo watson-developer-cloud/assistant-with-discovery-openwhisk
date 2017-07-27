@@ -1,15 +1,18 @@
 # Conversation with Discovery - OpenWhisk
 Like https://github.com/watson-developer-cloud/conversation-with-discovery but with an OpenWhisk backend.
 
-## Deploy in Bluemix
+## Requirements
+<ul><li>IBM Bluemix account. <a href="https://console.bluemix.net/?cm_mmc=GitHubReadMe">Sign up</a> for Bluemix, or use an existing account.</li>
+<li>Node.js >= 7.9.0</li></ul>
+
+## Deploy Conversation with Discovery - OpenWhisk automatically in Bluemix
+<p>With just a few steps, you can get this demo application up to the cloud and running in your own Bluemix account.</p>
+<ol><li><b>Ensure your organization has enough quota for one web application using 128MB of memory and 2 services</b></li>
+<li>Click the button below to start the Bluemix DevOps wizard:
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/devops/setup/deploy?repository=https://github.com/chris-anchez/conversation-with-discovery-openwhisk)
+</li></ol>
 
-## Deploy Conversation with Discovery - OpenWhisk Locally
-
-<p>Built with IBM Bluemix. You will need:
-<ul><li>an IBM Bluemix account. <a href="https://console.bluemix.net/?cm_mmc=GitHubReadMe">Sign up</a> here.</li>
-<li>Node.js</li></ul>
-</p>
+## Running Conversation with Discovery - OpenWhisk Locally
 
 ### Setting up the OpenWhisk Backend
 <ol><li>Install the Openwhisk <a href="https://console.bluemix.net/openwhisk/learn/cli">Command Line Interface</a></li>
