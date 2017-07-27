@@ -9,7 +9,9 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 <p>With just a few steps, you can get this demo application up to the cloud and running in your own Bluemix account.</p>
 <ol><li><b>Ensure your organization has enough quota for one web application using 128MB of memory and 2 services</b></li>
 <li>Click the button below to start the Bluemix DevOps wizard:
+
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/devops/setup/deploy?repository=https://github.com/chris-anchez/conversation-with-discovery-openwhisk)
+
 </li></ol>
 
 ## Running Conversation with Discovery - OpenWhisk Locally
