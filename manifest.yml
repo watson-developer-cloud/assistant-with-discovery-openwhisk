@@ -1,4 +1,19 @@
 ---
-name: conversation-with-discovery-openwhisk-01
-memory: 128M
-buildpack: staticfile_buildpack
+declared-services:
+  conversation-for-demo:
+    label: conversation
+    plan: free
+  discovery-for-demo:
+    label: discovery
+    plan: free
+applications:
+- path: .
+  memory: 128M
+  instances: 1
+  domain: mybluemix.net
+  name: conversation-with-discovery-openwhisk
+  buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
+  disk_quota: 1024M
+  services:
+  - conversation-for-demo
+  - discovery-for-demo
