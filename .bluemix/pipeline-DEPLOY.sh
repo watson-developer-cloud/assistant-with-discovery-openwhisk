@@ -115,7 +115,6 @@ wsk property set --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH
 
 # To enable the creation of API in Bluemix, inject the CF token in the wsk properties
 echo "APIGW_ACCESS_TOKEN=${CF_ACCESS_TOKEN}" >> ~/.wskprops
-echo `cat ~/.wskprops`
 
 # Create OpenWhisk Actions
 echo 'Creating OpenWhisk Actions...'
@@ -136,3 +135,6 @@ wsk api create /conversation-with-discovery /submit POST $PACKAGE/conversation-w
 API_URL=`wsk api get /conversation-with-discovery -f | jq -r .gwApiUrl`
 API_URL+="/submit"
 export REACT_APP_API_URL=$API_URL
+
+touch .env
+echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env
