@@ -10,6 +10,10 @@
     "watson-react-components": "^0.6.9"
   },
   "devDependencies": {
+    "eslint": "^4.3.0",
+    "eslint-plugin-react": "^7.1.0",
+    "mocha": "^3.4.2",
+    "nock": "^9.0.14",
     "react-scripts": "1.0.10"
   },
   "scripts": {
@@ -18,10 +22,12 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "test": "mocha tests/**/*",
     "eject": "react-scripts eject",
     "actions": "wsk action create conversation actions/conversation.js --web true && wsk action create discovery actions/discovery.js --web true",
     "defaults": "wsk action update conversation --param-file actions/conversationParams.json && wsk action update discovery --param-file actions/discoveryParams.json",
-    "sequence": "wsk action create conversation-with-discovery-sequence --sequence conversation,discovery"
+    "sequence": "wsk action create conversation-with-discovery-sequence --sequence conversation,discovery",
+    "lint": "eslint .",
+    "autofix": "eslint . --fix"
   }
 }

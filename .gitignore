@@ -9,7 +9,12 @@
 
 # misc
 .DS_Store
+
+# environment
 .env
 
-#zip
+# unzipped folder
 /manualdocs
+
+# compiled CSS
+/src/*.css
