@@ -2,7 +2,7 @@
 Like https://github.com/watson-developer-cloud/conversation-with-discovery but with an OpenWhisk backend.
 
 ## Deploy in Bluemix
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://github.com/chris-anchez/conversation-with-discovery-openwhisk)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/devops/setup/deploy?repository=https://github.com/chris-anchez/conversation-with-discovery-openwhisk)
 
 ## Deploy Conversation with Discovery - OpenWhisk Locally
 
