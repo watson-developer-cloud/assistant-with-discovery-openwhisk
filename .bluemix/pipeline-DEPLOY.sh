@@ -129,7 +129,7 @@ wsk action update $PACKAGE/conversation --param username $CONVERSATION_USERNAME 
 wsk action update $PACKAGE/discovery --param username $DISCOVERY_USERNAME --param password $DISCOVERY_PASSWORD --param environment_id $DISCOVERY_ENVIRONMENT_ID --param collection_id $DISCOVERY_COLLECTION_ID
 
 echo 'Creating OpenWhisk Sequence...'
-wsk action create $PACKAGE/conversation-with-discovery --sequence $PACKAGE/conversation,$PACKAGE/discovery
+wsk action create $PACKAGE/conversation-with-discovery --sequence $PACKAGE/conversation,$PACKAGE/discovery --web true
 
 echo 'Creating OpenWhisk API...'
 wsk api create /conversation-with-discovery /submit POST $PACKAGE/conversation-with-discovery --response-type json
