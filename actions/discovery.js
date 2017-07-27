@@ -14,53 +14,54 @@
   *
   */
 function main(params) {
-	return new Promise(function (resolve, reject) {
-	    
-	    //Make Discovery request only if Conversation output includes a "call discovery" property
-	    if(params.output.hasOwnProperty("action") && params.output.action.hasOwnProperty("call_discovery")) {
-            var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+  return new Promise(function (resolve, reject) {
+
+    //Make Discovery request only if Conversation output includes a "call discovery" property
+    if(params.output.hasOwnProperty('action') && params.output.action.hasOwnProperty('call_discovery')) {
+      var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
             
-            var discovery = new DiscoveryV1({
-                username: params.username,
-                password: params.password,
-                version_date: '2016-12-01'
-            });
+      var discovery = new DiscoveryV1({
+        username: params.username,
+        password: params.password,
+        version_date: '2016-12-01'
+      });
             
-            discovery.query({environment_id: params.environment_id,
-            collection_id: params.collection_id,
-            query: params.input.text
-            }, function(err, data) {
-                if (err) {
-                    console.log("There was a Discovery error");
-                    return reject(err);
-                }
+      discovery.query({environment_id: params.environment_id,
+        collection_id: params.collection_id,
+        query: params.input.text
+      }, function(err, data) {
+        if (err) {
+          return reject(err);
+        }
                 
-                var i = 0;
-                var discoveryResults = [];
-                while (data.results[i] && i < 3 ) {
-                    body = data.results[i].contentHtml;
-                    discoveryResults[i] = {
-                        body: body,
-                        bodySnippet: (body.length < 144 ? body : (body.substring(0,144) + "...")).replace(/<\/?[a-zA-Z]+>/g, ""),
-                        confidence: data.results[i].score,
-                        id: data.results[i].id,
-                        sourceUrl: data.results[i].sourceUrl,
-                        title: data.results[i].title
-                    }
-                    i++;
-                }
+        var i = 0;
+        var discoveryResults = [];
+        while (data.results[i] && i < 3 ) {
+          let body = data.results[i].contentHtml;
+          discoveryResults[i] = {
+            body: body,
+            bodySnippet: (body.length < 144 ? body : (body.substring(0,144) + '...')).replace(/<\/?[a-zA-Z]+>/g, ''),
+            confidence: data.results[i].score,
+            id: data.results[i].id,
+            sourceUrl: data.results[i].sourceUrl,
+            title: data.results[i].title
+          };
+          i++;
+        }
                 
-                params.output.discoveryResults = discoveryResults;
-                var conversationWithData = params;
-                delete conversationWithData.username;
-                delete conversationWithData.password;
-                return resolve(conversationWithData);
-            });
-	    } else {
-            let returnJson = params;
-            delete returnJson.username;
-            delete returnJson.password;
-	        return resolve(params);
-	    }
-    });
+        params.output.discoveryResults = discoveryResults;
+        var conversationWithData = params;
+        delete conversationWithData.username;
+        delete conversationWithData.password;
+        return resolve(conversationWithData);
+      });
+    } else {
+      let returnJson = params;
+      delete returnJson.username;
+      delete returnJson.password;
+      return resolve(params);
+    }
+  });
 }
+
+export default main;

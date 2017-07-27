@@ -13,24 +13,26 @@
   *
   */
 function main(params) {
-    return new Promise(function(resolve, reject){
-        var watson = require('watson-developer-cloud');
-        var conversation = watson.conversation({
-            username: params.username,
-            password: params.password,
-            version: "v1",
-            version_date: "2017-05-26"
-        });
+  return new Promise(function(resolve, reject){
+    var watson = require('watson-developer-cloud');
+    var conversation = watson.conversation({
+      username: params.username,
+      password: params.password,
+      version: 'v1',
+      version_date: '2017-05-26'
+    });
         
-        conversation.message({
-            workspace_id: params.workspace_id,
-            input: params.input,
-            context: params.context,
-        }, function(err, response) {
-            if (err) {
-                return reject(err);
-            }
-            return resolve(response);
-        });
-    })
+    conversation.message({
+      workspace_id: params.workspace_id,
+      input: params.input,
+      context: params.context,
+    }, function(err, response) {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(response);
+    });
+  });
 }
+
+export default main;
