@@ -71,39 +71,24 @@ With just a few steps, you can get this demo application up to the cloud and run
     
 6. Create an API that uses your sequence
     1. Navigate to the [API Management](https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south) page on OpenWhisk.
-
 ![Create new API]( README_pictures/Create_API.png?raw=true )
-
     2. Name your API and supply a base path.
-
 ![Name API and base path]( README_pictures/API_info.png?raw=true )
-
     3. Click "Create operation"
-
 ![Create operation]( README_pictures/Create_operation.png?raw=true )
-
     4. Make a path for your operation, change the HTTP verb to POST, and select your sequence as the action
-
 ![Operation form]( README_pictures/Create_Operation_Form.png?raw=true )
-
     5. Activate the slider next to "Require applications to autheticate via API key"
     6. Ensure that the slider next to "Enable CORS so that browser-based applications..." is also activated
     7. Click "Save & expose"
     8. Navigate to the "Sharing" tab on the left-hand side
-
 ![Sharing tab]( README_pictures/Sharing_tab.png?raw=true )
-
     9. Under "Sharing Outside of Bluemix Organization", click "Create API Key"
-
 ![Create API key]( README_pictures/Create_API_key.png?raw=true )
-
     10. Give your key a name, and copy the API Key to a note
-
 ![Key naming]( README_pictures/Key_naming.png?raw=true )
-
     11. Navigate to the "Summary" tab on the left-hand side
     12. Copy the link under "Route" to a note, and add "/submit" or the name of the path associated with your POST action to the end of the URL.
-
 ![Route_link]( README_pictures/Route_link.png?raw=true )
 
 7. Link your API to your React App:
