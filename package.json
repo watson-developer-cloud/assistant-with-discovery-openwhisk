@@ -14,7 +14,8 @@
     "eslint-plugin-react": "^7.1.0",
     "mocha": "^3.4.2",
     "nock": "^9.0.14",
-    "react-scripts": "1.0.10"
+    "react-scripts": "1.0.10",
+    "watson-developer-cloud": "^2.37.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",
