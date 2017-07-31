@@ -10,7 +10,7 @@ With just a few steps, you can get this demo application up to the cloud and run
 1. **Ensure your organization has enough quota for one web application using 128MB of memory and 2 services**
 2. Click the button below to start the Bluemix DevOps wizard:
 
-[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/devops/setup/deploy?repository=https://github.com/chris-anchez/conversation-with-discovery-openwhisk)
+[![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/devops/setup/deploy?repository=https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk)
 
 3. Click Tool Integrations. Decide Whether you want to fork/clone the GitHub repository. If you decide to Clone, set a name for your GitHub repository.
 4. Click the **Delivery Pipeline** box.
