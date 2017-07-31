@@ -12,7 +12,16 @@ Like https://github.com/watson-developer-cloud/conversation-with-discovery but w
 
 [![Deploy to Bluemix](https://bluemix.net/deploy/button.png)](https://bluemix.net/devops/setup/deploy?repository=https://github.com/chris-anchez/conversation-with-discovery-openwhisk)
 
-</li></ol>
+</li>
+<li>Click Tool Integrations. Decide Whether you want to fork/clone the GitHub repository. If you decide to Clone, set a name for your GitHub repository.</li>
+<li>Click the <b>Delivery Pipeline</b> box.</li>
+<li>Choose a unique name for the application, or keep the one generated.</li>
+<li>Choose "US South" for your region.</li>
+<li>Make sure your "organization" and "space" do not contain spaces.</li>
+<li>Click <b>Deploy</b>.</li>
+<li>Click <b>Delivery Pipeline</b> to watch your build. (This may take over ~10 minutes)</li>
+<li>Return to the Toolchain page once your build completes</li>
+<li>Click <b>View App</b></li></ol>
 
 ## Running Conversation with Discovery - OpenWhisk Locally
 
