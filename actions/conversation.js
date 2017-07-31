@@ -35,4 +35,4 @@ function main(params) {
   });
 }
 
-export default main;
+module.exports.main = main;
