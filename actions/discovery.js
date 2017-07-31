@@ -13,13 +13,22 @@
   * @return {object} the JSON of Discovery's response, or the original JSON if discovery was not called.
   *
   */
+const assert = require('assert');
+const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+
 function main(params) {
   return new Promise(function (resolve, reject) {
+    assert(params, 'params cannot be null');
+    assert(params.username, 'params.username cannot be null');
+    assert(params.password, 'params.password cannot be null');
+    assert(params.environment_id, 'params.environment_id cannot be null');
+    assert(params.collection_id, 'params.collection_id cannot be null');
+    assert(params.input, 'params.input cannot be null');
+    assert(params.context, 'params.context cannot be null');
 
     //Make Discovery request only if Conversation output includes a "call discovery" property
     if(params.output.hasOwnProperty('action') && params.output.action.hasOwnProperty('call_discovery')) {
-      var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
-            
+
       var discovery = new DiscoveryV1({
         username: params.username,
         password: params.password,

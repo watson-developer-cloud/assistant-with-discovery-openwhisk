@@ -12,9 +12,18 @@
   * @return {object} the JSON of Conversation's response.
   *
   */
+const assert = require('assert');
+const watson = require('watson-developer-cloud');
+
 function main(params) {
   return new Promise(function(resolve, reject){
-    var watson = require('watson-developer-cloud');
+    assert(params, 'params cannot be null');
+    assert(params.username, 'params.username cannot be null');
+    assert(params.password, 'params.password cannot be null');
+    assert(params.workspace_id, 'params.workspace_id cannot be null');
+    assert(params.input, 'params.input cannot be null');
+    assert(params.context, 'params.context cannot be null');
+
     var conversation = watson.conversation({
       username: params.username,
       password: params.password,
