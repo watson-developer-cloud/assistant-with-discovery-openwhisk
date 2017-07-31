@@ -33,21 +33,3 @@ function Conversation(props) {
 }
 
 export default Conversation;
-
-// Conversation
-/**
- * + conversationData: arr(obj) // specify schema
- * + onSubmit: func
- * + showLoading: bool
- * 
- * autoscroll conversation
- */
-
-// Chat Bubble
-/**
- * + position: enum(left, right)
- * + label: string
- * + date: string
- * + message: string
- * + hasTail: bool
- */
