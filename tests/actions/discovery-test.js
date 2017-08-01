@@ -29,7 +29,7 @@ describe('[action] Discovery', function() {
     it('should throw error if credentials are missing', function() {
         const params = {
             input: 'fake input',
-            context: {},
+            output: {},
             environment_id: environment_id,
             collection_id: collection_id
         };
@@ -43,15 +43,34 @@ describe('[action] Discovery', function() {
     it('should call Discovery when the parameters are right', function() {
         const params = {
             input: 'fake input',
-            context: {},
-            output: {"action": {"call_discovery": ""}},
+            output: {'action': {'call_discovery': ''}},
             username: 'foo',
             password: 'bar',
             environment_id: environment_id,
             collection_id: collection_id
         };
-        return action.main(params).then(function() {
-            assert(true);
+        return action.main(params).then(function(response) {
+            assert(response.output.hasOwnProperty("discoveryResults"));
         }).catch(assert.ifError);
-    })
+    });
+
+    it('should do nothing to the input if call_discovery is not present', function() {
+        const params = {
+            input: 'fake input',
+            context: {},
+            output: {'text': 'hello'},
+            username: 'foo',
+            password: 'bar',
+            environment_id: environment_id,
+            collection_id: collection_id
+        };
+        let expected = JSON.parse(JSON.stringify(params));
+        delete expected.username;
+        delete expected.password;
+        delete expected.environment_id;
+        delete expected.collection_id;
+        return action.main(params).then(function(output) {
+            assert(JSON.stringify(output) === JSON.stringify(expected));
+        }).catch(assert.ifError);
+    });
 });

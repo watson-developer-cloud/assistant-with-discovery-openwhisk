@@ -8,7 +8,7 @@
   * @param {string} params.environment_id - default parameter, must be set. The environment_id for Discovery service.
   * @param {string} params.collection_id - default parameter, must be set. The collection_id for Discovery service
   * @param {string} params.input - input text to be sent to Discovery service.
-  * @param {string} params.context - context to be sent with input to Discovery service.
+  * @param {string} params.output - the output of the Conversation service results
   *
   * @return {object} the JSON of Discovery's response, or the original JSON if discovery was not called.
   *
@@ -24,7 +24,7 @@ function main(params) {
     assert(params.environment_id, 'params.environment_id cannot be null');
     assert(params.collection_id, 'params.collection_id cannot be null');
     assert(params.input, 'params.input cannot be null');
-    assert(params.context, 'params.context cannot be null');
+    assert(params.output, 'params.output cannot be null');
 
     //Make Discovery request only if Conversation output includes a "call discovery" property
     if(params.output.hasOwnProperty('action') && params.output.action.hasOwnProperty('call_discovery')) {
@@ -66,6 +66,8 @@ function main(params) {
       });
     } else {
       let returnJson = params;
+      delete returnJson.environment_id;
+      delete returnJson.collection_id;
       delete returnJson.username;
       delete returnJson.password;
       return resolve(params);
