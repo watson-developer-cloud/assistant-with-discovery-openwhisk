@@ -1,8 +1,16 @@
 # Conversation with Discovery - OpenWhisk
-Like https://github.com/watson-developer-cloud/conversation-with-discovery but with an OpenWhisk backend.
+
+[![Build Status](https://travis-ci.org/watson-developer-cloud/conversation-with-discovery-openwhisk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/conversation-with-discovery-openwhisk)
+
+This application shows the capabilities of Watson Conversation and Discovery services to work together to find answers on a given query. In this sample app, the user is chatting with a virtual car dashboard, giving it commands in plain English such as "Turn on the wipers," "Play me some music," or "Let's find some food." If the user makes a request and Conversation is not confident in its answer (e.g. "How do I check my tire pressure?"), Discovery will search the car manual and return the most relevant results, if relevant materials exist.
+
+This demo is a reworking of [a previous one](https://github.com/watson-developer-cloud/conversation-with-discovery) but with an OpenWhisk back-end and React front-end. OpenWhisk is IBM's "serverless" offering, allowing users to upload functions to the cloud, call them via REST API, and pay only by the millisecond of usage.
+
+## Table of Contents
+
 
 ## Requirements
-* IBM Bluemix account. <a href="https://console.bluemix.net/?cm_mmc=GitHubReadMe">Sign up</a> for Bluemix, or use an existing account.
+* IBM Bluemix account. [Sign up](https://console.bluemix.net/?cm_mmc=GitHubReadMe)Sign up</a> for Bluemix, or use an existing account.
 * Node.js >= 7.9.0
 
 ## Deploy Conversation with Discovery - OpenWhisk automatically in Bluemix
@@ -28,10 +36,12 @@ With just a few steps, you can get this demo application up to the cloud and run
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli)
 2. Add the two actions to OpenWhisk
     
+```
     npm run actions
     //which will run a script containing:
     //wsk action create conversation actions/conversation.js --web true
     //wsk action create discovery actions/discovery.js --web true
+```
 
 3. Edit [actions/conversationParams.json](actions/conversationParams.json) and [actions/discoveryParams.json](actions/discoveryParams.json) to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).
 
