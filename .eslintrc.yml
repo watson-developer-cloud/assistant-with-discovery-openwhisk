@@ -13,6 +13,7 @@ plugins:
   - react
 rules:
   no-console: 1
+  no-unused-vars: 0
   indent:
     - error
     - 2
