@@ -53,6 +53,21 @@ curl -H "Content-Type: application/json" \
 # Create Discovery service
 figlet -f small 'Discovery'
 cf create-service discovery free discovery-for-demo
+ready="false"
+while [ $ready != "true" ];
+do
+  status=`cf service $serviceInstanceName`
+  if [ `echo $status | grep "create succeeded" | wc -l` == "1" ]; then
+    ready="true"
+    echo "Service Instance is ready."
+  else
+    echo "Waiting until service is ready ..."
+    echo "Current State:"
+    echo $status
+    echo --------------------------------------
+    sleep 2
+  fi
+done
 cf create-service-key discovery-for-demo for-demo-2
 
 # Create service credentials
