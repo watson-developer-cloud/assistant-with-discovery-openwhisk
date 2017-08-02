@@ -52,7 +52,7 @@ curl -H "Content-Type: application/json" \
 
 # Create Discovery service
 figlet -f small 'Discovery'
-cf create-service discovery free discovery-for-demo
+cf create-service discovery lite discovery-for-demo
 ready="false"
 while [ $ready != "true" ];
 do
