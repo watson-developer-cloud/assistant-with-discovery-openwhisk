@@ -10,8 +10,11 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
 * [How it Works](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#how-it-works)
 * [Requirements](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#requirements)
 * [Deploy Automatically to Bluemix](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#deploy-automatically-to-bluemix)
-* [Deploy Manually to Bluemix](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#deploy-manually-to-bluemix)
+* [Run Locally](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#run-locally)
+  * [Getting Started](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#getting-started)
   * [Setting up Conversation and Discovery Services](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-conversation-and-discovery-services)
+    * [Training Conversation](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#training-conversation)
+    * [Training Discovery](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#training-discovery)
   * [Setting up the OpenWhisk Back-end](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-the-openwhisk-back-end)
     * [Configuring the API](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#configuring-the-api)
   * [Setting up the React Front-end](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-the-react-front-end)
@@ -41,55 +44,132 @@ With just a few steps, you can get this demo application up to the cloud and run
 10. Return to the Toolchain page once your build completes
 11. Click **View App**
 
-## Deploy Manually to Bluemix
+## Run Locally
+
+### Getting Started
+1. If you don't already have a Bluemix account, you can sign up [here](https://console.bluemix.net/?cm_mmc=GitHubReadMe)
+2. Clone (or fork) this repository, and go to the new directory
+```bash
+git clone https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk.git
+cd conversation-with-discovery-openwhisk
+```
+3. Download and install the [Cloud-Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html). This will be used to set up your Watson Services in Bluemix.
+4. Connect the CLI to Bluemix by running the following:
+```bash
+cf api https://api.ng.bluemix.net
+cf login
+```
+5. Follow the prompts for logging in to Bluemix. You may have to use single sign-on (SSO).
 
 ### Setting up Conversation and Discovery Services
+1. Create an instance of Watson Conversation, here named `conversation-for-demo`.
+```bash
+cf create-service conversation free conversation-for-demo
+```
+2. Create a service key for your Conversation instance, here called `my-key`.
+```bash
+cf create-service-key conversation-for-demo my-key
+```
+3. Retrieve the `username` and `password` for your Conversation instance. Save these in a note.
+```bash
+cf service-key conversation-for-demo my-key
+```
+4. Do the same for Discovery. Note the plan name is `lite`.
+```bash
+cf create-service discovery lite discovery-for-demo
+```
+> You may have to wait until Bluemix is done creating your service instance before running the other two commands. Check on the status of your service by running `cf service discovery-for-demo` and checking for a `Status` of `create succeeded`.
+
+Here we called the instance `discovery-for-demo` and the key `my-other-key`. Save the `username` and `password` in a note.
+```bash
+cf create-service-key discovery-for-demo my-other-key
+cf service-key discovery-for-demo my-other-key
+```
+
+#### Training Conversation
+1. Create a new Conversation workspace using your Conversation username and password (not your Bluemix password) from the previous steps. Make sure you are in the root directory of your repository. Save the `workspace_id` in a note.
+```bash
+curl -H "Content-Type: application/json" -X POST \
+-u <CONVERSATION_USERNAME>:<CONVERSATION_PASSWORD> \
+-d "@workspace_blank.json" \
+"https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26"
+```
+2. Train your workspace with the data provided. Substitute in your Conversation workspace_id.
+```bash
+curl -H "Content-Type: application/json" -X POST \
+-u <CONVERSATION_USERNAME>:<CONVERSATION_PASSWORD> \
+-d "@workspace.json" \
+"https://gateway.watsonplatform.net/conversation/api/v1/workspaces/<CONVERSATION_WORKSPACE_ID>?version=2017-05-26"
+```
+
+#### Training Discovery
+1. Create a new Discovery environment by using your Discovery username and password (not your Bluemix credentials or your Conversation credentials). Save the `environment_id` in a note.
+```bash
+curl -H "Content-Type: application/json" -X POST \
+-u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
+-d '{ "name": "demoEnvironment", "description": "from Conversation with Discovery - OpenWhisk", "size": 0}' \
+"https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-07-19"
+```
+2. Get the configuration for your environment. Here, we are just using the default configuration. Substitute your `environment_id` from the last step. Save the `configuration_id` in a note.
+```bash
+curl -X GET \
+-u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
+"https://gateway.watsonplatform.net/discovery/api/v1/environments/<ENVIRONMENT_ID>/configurations?version=2017-07-19"
+```
+> Your environment might still be configuring, so wait about a minute before continuing.
+
+3. Create a new collection by using your Discovery username, password, configuration\_id, and environment\_id.
+```bash
+curl -X POST -H "Content-Type: application/json" \
+-u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
+-d '{ "name": "demoCollection", "description": "from Conversation with Discovery - OpenWhisk", "configuration_id": "<CONFIGURATION_ID>" }" \
+"https://gateway.watsonplatform.net/discovery/api/v1/environments/<ENVIRONMENT_ID>/collections?version=2017-07-19"
+```
+4. From the root directory of your repository, unzip the manual training documents.
+```bash
+unzip manualdocs.zip
+```
+5. There are >200 files, so use a for-loop to send them to Watson. Substitute your Discovery username, password, environment\_id, and collection\_id.
+```bash
+for file in "manualdocs/*"
+do
+  curl -X POST -u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
+  -F "file=@$file" \
+  "https://gateway.watsonplatform.net/discovery/api/v1/environments/<ENVIRONMENT_ID>/collections/<COLLECTION_ID>/documents?version=2017-07-19"
+done
+```
 
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli)
 2. Add the two actions to OpenWhisk
-    
+```bash
+    wsk action create conversation actions/conversation.js --web true
+    wsk action create discovery actions/discovery.js --web true
 ```
-    npm run actions
-    //which will run a script containing:
-    //wsk action create conversation actions/conversation.js --web true
-    //wsk action create discovery actions/discovery.js --web true
-```
-
-3. Edit [actions/conversationParams.json](actions/conversationParams.json) and [actions/discoveryParams.json](actions/discoveryParams.json) to include your usernames, passwords, environment_id's and collection_id for the Conversation and Discovery services (found in Bluemix).
-
+3. Edit [actions/conversationParams.json](actions/conversationParams.json) and [actions/discoveryParams.json](actions/discoveryParams.json) to include your usernames, passwords, workspace\_id, environment\_id and collection\_id for the Conversation and Discovery services.
 ```json
 {
-  "username": "<your Conversation service username>",
-  "password": "<your Conversation service password>",
-  "workspace_id": "<your workspace id for your Conversation demo instance>"
+  "username": "<CONVERSATION_USERNAME>",
+  "password": "<CONVERSASTION_PASSWORD",
+  "workspace_id": "<WORKSPACE_ID>"
 }
 ```
-
 ```json
 {
-  "username": "<your Discovery service username>",
-  "password": "<your Discovery service password>",
-  "environment_id": "<your workspace id for your Discovery demo instance>",
-  "collection_id": "<your environment id for your Discovery demo instance>"
+  "username": "<DISCOVERY_USERNAME>",
+  "password": "<DISCOVERY_PASSWORD",
+  "environment_id": "<ENVIRONMENT_ID>",
+  "collection_id": "<COLLECTION_ID"
 }
 ```
-
 4. Use these documents to create default parameters from the command line:
-
-```    
-    npm run defaults
-    //which will run a script containing the following:
-    //wsk action update conversation --param-file action/conversationParams.json
-    //wsk action update discovery --param-file action/discoveryParams.json
+```bash  
+    wsk action update conversation --param-file action/conversationParams.json
+    wsk action update discovery --param-file action/discoveryParams.json
 ```
-
 5. Create a sequence using the two actions:
-
-```
-    npm run sequence
-    //which will run a script containing the following:
-    //wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
+```bash
+    wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
 ```
     
 #### Configuring the API
@@ -126,10 +206,11 @@ With just a few steps, you can get this demo application up to the cloud and run
 ![Route_link]( README_pictures/Route_link.png?raw=true )
 
 13. Link your API to your React App:  
-Copy the text below into a file named `.env` , and save it in the base folder.
-```bash
-REACT_APP_API_URL: <Your API URL that you saved>
+Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your API URL.
 ```
+REACT_APP_API_URL="<Your API URL>"
+```
+> We have to add REACT\_APP\_ to the name of the environment variable so React will substitute in the value during the build.
 
 ### Setting up the React Front-end
 
