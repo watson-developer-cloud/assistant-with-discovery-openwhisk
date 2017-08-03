@@ -7,13 +7,22 @@ This application shows the capabilities of Watson Conversation and Discovery ser
 This demo is a reworking of [a previous one](https://github.com/watson-developer-cloud/conversation-with-discovery) but with an OpenWhisk back-end and React front-end. OpenWhisk is IBM's "serverless" offering, allowing users to upload functions to the cloud, call them via REST API, and pay only by the millisecond of usage.
 
 ## Table of Contents
-
+* [How it works](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#how-it-works)
+* [Requirements](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#requirements)
+* [Deploy Automatically to Bluemix](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#deploy-automatically-to-bluemix)
+* [Deploy Manually to Bluemix](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#deploy-manually-to-bluemix)
+  * [Setting up Conversation and Discovery Services](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-conversation-and-discovery-services)
+  * [Setting up the OpenWhisk Back-end](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-the-openwhisk-back---end)
+    * [Configuring the API](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#configuring-the-api)
+  * [Setting up the React Front-end](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-the-react-front---end)
+  * [Running the App](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#running-the-app)
+* [Contributing](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#contributing)
 
 ## Requirements
-* IBM Bluemix account. [Sign up](https://console.bluemix.net/?cm_mmc=GitHubReadMe)Sign up</a> for Bluemix, or use an existing account.
+* IBM Bluemix account. [Sign up](https://console.bluemix.net/?cm_mmc=GitHubReadMe) for Bluemix, or use an existing account.
 * Node.js >= 7.9.0
 
-## Deploy Conversation with Discovery - OpenWhisk automatically in Bluemix
+## Deploy Automatically to Bluemix
 With just a few steps, you can get this demo application up to the cloud and running in your own Bluemix account.
 1. **Ensure your organization has enough quota for one web application using 128MB of memory and 2 services**
 2. Click the button below to start the Bluemix DevOps wizard:
@@ -30,7 +39,9 @@ With just a few steps, you can get this demo application up to the cloud and run
 10. Return to the Toolchain page once your build completes
 11. Click **View App**
 
-## Running Conversation with Discovery - OpenWhisk Locally
+## Deploy Manually to Bluemix
+
+### Setting up Conversation and Discovery Services
 
 ### Setting up the OpenWhisk Backend
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli)
@@ -79,32 +90,47 @@ With just a few steps, you can get this demo application up to the cloud and run
     //wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
 ```
     
-6. Create an API that uses your sequence
-    1. Navigate to the [API Management](https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south) page on OpenWhisk.
+#### Configuring the API
+1. Navigate to the [API Management](https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south) page on OpenWhisk.  
 ![Create new API]( README_pictures/Create_API.png?raw=true )
-    2. Name your API and supply a base path.
+
+2. Name your API and supply a base path.  
 ![Name API and base path]( README_pictures/API_info.png?raw=true )
-    3. Click "Create operation"
+
+3. Click "Create operation"  
 ![Create operation]( README_pictures/Create_operation.png?raw=true )
-    4. Make a path for your operation, change the HTTP verb to POST, and select your sequence as the action
+
+4. Make a path for your operation, change the HTTP verb to POST, and select your sequence as the action  
 ![Operation form]( README_pictures/Create_Operation_Form.png?raw=true )
-    5. Activate the slider next to "Require applications to autheticate via API key"
-    6. Ensure that the slider next to "Enable CORS so that browser-based applications..." is also activated
-    7. Click "Save & expose"
-    8. Navigate to the "Sharing" tab on the left-hand side
+
+5. Activate the slider next to "Require applications to autheticate via API key"
+
+6. Ensure that the slider next to "Enable CORS so that browser-based applications..." is also activated
+
+7. Click "Save & expose"
+
+8. Navigate to the "Sharing" tab on the left-hand side  
 ![Sharing tab]( README_pictures/Sharing_tab.png?raw=true )
-    9. Under "Sharing Outside of Bluemix Organization", click "Create API Key"
+
+9. Under "Sharing Outside of Bluemix Organization", click "Create API Key"  
 ![Create API key]( README_pictures/Create_API_key.png?raw=true )
-    10. Give your key a name, and copy the API Key to a note
+
+10. Give your key a name, and copy the API Key to a note  
 ![Key naming]( README_pictures/Key_naming.png?raw=true )
-    11. Navigate to the "Summary" tab on the left-hand side
-    12. Copy the link under "Route" to a note, and add "/submit" or the name of the path associated with your POST action to the end of the URL.
+
+11. Navigate to the "Summary" tab on the left-hand side
+
+12. Copy the link under "Route" to a note, and add "/submit" or the name of the path associated with your POST action to the end of the URL.  
 ![Route_link]( README_pictures/Route_link.png?raw=true )
 
-7. Link your API to your React App:
-
+13. Link your API to your React App:  
 Copy the text below into a file named `.env` , and save it in the base folder.
-
 ```bash
-API_URL: <Your API URL that you saved>
+REACT_APP_API_URL: <Your API URL that you saved>
 ```
+
+### Setting up the React Front-end
+
+### Running the App
+
+## Contributing
