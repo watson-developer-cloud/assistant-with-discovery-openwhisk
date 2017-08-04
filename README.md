@@ -232,3 +232,4 @@ npm start
 ```
 
 ## Contributing
+See [CONTRIBUTING](CONTRIBUTING.md).
