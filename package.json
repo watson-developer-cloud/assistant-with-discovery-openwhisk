@@ -13,6 +13,7 @@
     "codecov": "^2.2.0",
     "eslint": "^4.3.0",
     "eslint-plugin-react": "^7.1.0",
+    "istanbul": "^0.4.5",
     "mocha": "^3.4.2",
     "nock": "^9.0.14",
     "react-scripts": "1.0.10",
@@ -24,13 +25,13 @@
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
     "build": "npm run build-css && react-scripts build",
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha tests/**/* -- -R -spec",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha tests/**/* -- -R spec",
     "eject": "react-scripts eject",
     "actions": "wsk action create conversation actions/conversation.js --web true && wsk action create discovery actions/discovery.js --web true",
     "defaults": "wsk action update conversation --param-file actions/conversationParams.json && wsk action update discovery --param-file actions/discoveryParams.json",
     "sequence": "wsk action create conversation-with-discovery-sequence --sequence conversation,discovery",
     "lint": "eslint .",
     "autofix": "eslint . --fix",
-    "codecov": "npm un test && ./node_modules/.bin/codecov"
+    "codecov": "npm run test && ./node_modules/.bin/codecov"
   }
 }
