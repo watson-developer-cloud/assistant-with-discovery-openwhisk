@@ -43,6 +43,7 @@ With just a few steps, you can get this demo application up to the cloud and run
 9. Click **Delivery Pipeline** to watch your build. (This may take over ~10 minutes)
 10. Return to the Toolchain page once your build completes
 11. Click **View App**
+> :warning: The 'Deploy to Bluemix' button is meant to be run **once** on your account. If you would like to redeploy the pipeline script, or rebuild the entire app, you should delete your Conversation and Discovery service instances, and the OpenWhisk package that the script creates.
 
 ## Run Locally
 
@@ -78,7 +79,7 @@ cf service-key conversation-for-demo my-key
 ```bash
 cf create-service discovery lite discovery-for-demo
 ```
-> You may have to wait until Bluemix is done creating your service instance before running the other two commands. Check on the status of your service by running `cf service discovery-for-demo` and checking for a `Status` of `create succeeded`.
+> :warning: You may have to wait until Bluemix is done creating your service instance before running the other two commands. Check on the status of your service by running `cf service discovery-for-demo` and checking for a `Status` of `create succeeded`.
 
 Here we called the instance `discovery-for-demo` and the key `my-other-key`. Save the `username` and `password` in a note.
 ```bash
