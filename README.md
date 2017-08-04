@@ -215,6 +215,18 @@ REACT_APP_API_URL="<Your API URL>"
 > We have to add REACT\_APP\_ to the name of the environment variable so React will substitute in the value during the build.
 
 ### Setting up the React Front-end
+1. In the root directory of your repository, install the project dependencies.
+```bash
+npm install
+```
+2. Create an optimized build of your project. During this stage, your environment variable will be inserted into App.js for use by your components.
+```bash
+npm run build
+```
+3. Serve your static files locally. You should see the project running in a new tab!
+```bash
+npm start
+```
 
 ### Running the App
 
