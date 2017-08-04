@@ -223,11 +223,11 @@ npm install
 ```bash
 npm run build
 ```
-3. Serve your static files locally. You should see the project running in a new tab!
+
+### Running the App
+All that's left is to serve your static files locally. You should see the project running in a new tab!
 ```bash
 npm start
 ```
-
-### Running the App
 
 ## Contributing
