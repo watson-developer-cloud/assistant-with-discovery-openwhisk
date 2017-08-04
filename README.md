@@ -233,3 +233,6 @@ npm start
 
 ## Contributing
 See [CONTRIBUTING](CONTRIBUTING.md).
+
+## License
+This sample code is licensed under Apache 2.0. Full license text is available in [LICENSE](LICENSE).
