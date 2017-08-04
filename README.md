@@ -172,7 +172,7 @@ done
 ```
 5. Create a sequence using the two actions:
 ```bash
-    wsk action create conversation-with-discovery-sequence --sequence conversation,discovery
+    wsk action create conversation-with-discovery-sequence --sequence conversation,discovery --web true
 ```
     
 #### Configuring the API
