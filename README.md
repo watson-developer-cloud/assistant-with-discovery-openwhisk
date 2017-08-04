@@ -131,7 +131,8 @@ unzip manualdocs.zip
 ```
 5. There are >200 files, so use a for-loop to send them to Watson. Substitute your Discovery username, password, environment\_id, and collection\_id.
 ```bash
-for file in "manualdocs/*"
+cd manualdocs
+for file in *.json
 do
   curl -X POST -u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
   -F "file=@$file" \
@@ -141,8 +142,9 @@ done
 
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli)
-2. Add the two actions to OpenWhisk
+2. Return to the home directory. Add the two actions to OpenWhisk
 ```bash
+    cd ..
     wsk action create conversation actions/conversation.js --web true
     wsk action create discovery actions/discovery.js --web true
 ```
