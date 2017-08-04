@@ -7,19 +7,19 @@ This application shows the capabilities of Watson Conversation and Discovery ser
 This demo is a reworking of [a previous one](https://github.com/watson-developer-cloud/conversation-with-discovery) but with an OpenWhisk back-end and React front-end. OpenWhisk is IBM's "serverless" offering, allowing users to upload functions to the cloud, call them via REST API, and pay only by the millisecond of usage.
 
 ## Table of Contents
-* [How it Works](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#how-it-works)
-* [Requirements](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#requirements)
-* [Deploy Automatically to Bluemix](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#deploy-automatically-to-bluemix)
-* [Run Locally](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#run-locally)
-  * [Getting Started](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#getting-started)
-  * [Setting up Conversation and Discovery Services](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-conversation-and-discovery-services)
-    * [Training Conversation](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#training-conversation)
-    * [Training Discovery](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#training-discovery)
-  * [Setting up the OpenWhisk Back-end](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-the-openwhisk-back-end)
-    * [Configuring the API](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#configuring-the-api)
-  * [Setting up the React Front-end](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#setting-up-the-react-front-end)
-  * [Running the App](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#running-the-app)
-* [Contributing](https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#contributing)
+* [How it Works](#how-it-works)
+* [Requirements](#requirements)
+* [Deploy Automatically to Bluemix](#deploy-automatically-to-bluemix)
+* [Run Locally](#run-locally)
+  * [Getting Started](#getting-started)
+  * [Setting up Conversation and Discovery Services](#setting-up-conversation-and-discovery-services)
+    * [Training Conversation](#training-conversation)
+    * [Training Discovery](#training-discovery)
+  * [Setting up the OpenWhisk Back-end](#setting-up-the-openwhisk-back-end)
+    * [Configuring the API](#configuring-the-api)
+  * [Setting up the React Front-end](#setting-up-the-react-front-end)
+  * [Running the App](#running-the-app)
+* [Contributing](#contributing)
 
 ## How it Works
 
