@@ -23,6 +23,15 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
 
 ## How it Works
 
+![Flow diagram](README_pictures/Flow_diagram.png?raw=true)
+
+Under the hood, there are two components to this app:
+* One is the front-end, which is simply static assets (HTML, CSS, and React). I wrote the CSS with Sass for cleaner, more maintainable source code.
+* The other is the OpenWhisk actions:
+  * When the user inputs text, the UI sends the current context and input to the OpenWhisk sequence. These are processed by the Conversation service and returned, with an output and new context. The results are sent to the next action.
+  * The Discovery action checks for a flag from the Conversation output, and if it is present takes the original input and queries the manual with it. If there is no flag, the Conversation results pass through the function unchanged. The Sequence returns the output and updated context back to the UI.
+
+
 ## Requirements
 * IBM Bluemix account. [Sign up](https://console.bluemix.net/?cm_mmc=GitHubReadMe) for Bluemix, or use an existing account.
 * Node.js >= 7.9.0
