@@ -58,6 +58,7 @@ With just a few steps, you can get this demo application up to the cloud and run
 
 ### Getting Started
 1. If you don't already have a Bluemix account, you can sign up [here](https://console.bluemix.net/?cm_mmc=GitHubReadMe)
+> Make sure you have at least 2 services available in your Bluemix account.
 2. Clone (or fork) this repository, and go to the new directory
 ```bash
 git clone https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk.git
