@@ -107,7 +107,7 @@ class App extends Component {
   }
 
   scrollToBottom() {
-    const element = document.getElementsByClassName("conversation__messages")[0];
+    const element = document.getElementsByClassName('conversation__messages')[0];
     element.scrollTop = element.scrollHeight;
   }
 
