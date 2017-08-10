@@ -106,6 +106,15 @@ class App extends Component {
     return(true);
   }
 
+  scrollToBottom() {
+    const element = document.getElementsByClassName("conversation__messages")[0];
+    element.scrollTop = element.scrollHeight;
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
 
   render() {
     return(
