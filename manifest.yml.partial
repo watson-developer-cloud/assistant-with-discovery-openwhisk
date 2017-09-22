@@ -1,14 +1,6 @@
----
-declared-services:
-  conversation-for-demo:
-    label: conversation
-    plan: free
-  discovery-for-demo:
-    label: discovery
-    plan: free
 applications:
 - path: .
-  memory: 128M
+  memory: 256M
   instances: 1
   domain: mybluemix.net
   name: conversation-with-discovery-openwhisk
