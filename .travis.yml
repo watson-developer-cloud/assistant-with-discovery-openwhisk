@@ -7,6 +7,10 @@ language: node_js
 node_js:
   - '5.5.0'
 
+cache:
+  directories:
+    - "node_modules"
+
 # Nothing special to install since we're just verifying compatibility of this repo with the
 # developer experience infrastructure.
 install: true
@@ -20,6 +24,8 @@ before_script:
 # Run a dry-run registration for pull requests, and a real registration for pushes.
 # register-starter.sh is smart!
 script:
+  - npm run lint
+  - npm run codecov
   - ./bmd-devops-pipeline/scripts/register-starter.sh $TRAVIS_BRANCH
 
 # Pull request builds and push builds only run when the target branch is one of these:
