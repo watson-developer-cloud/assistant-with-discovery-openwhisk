@@ -10,6 +10,7 @@ node_js:
 cache:
   directories:
     - "node_modules"
+    - "bmd-devops-pipeline"
 
 # Nothing special to install since we're just verifying compatibility of this repo with the
 # developer experience infrastructure.
