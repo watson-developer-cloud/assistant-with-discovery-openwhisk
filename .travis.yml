@@ -23,7 +23,10 @@ before_script:
   - ls ~/.ssh
   - openssl aes-256-cbc -K $encrypted_8fce584fd168_key -iv $encrypted_8fce584fd168_iv -in ".travis/github_deploy_key.enc" -out "custom-SSH-file" -d
   - cp custom-SSH-file ~/.ssh/
-  - chmod 600 "custom-SSH-file" && printf "%s\n" "Host github.ibm.com" "  IdentityFile custom-SSH-file" "  LogLevel ERROR" >> ~/.ssh/config
+  - chmod 600 "custom-SSH-file" && printf "%s\n" "Host github.ibm.com" "  IdentityFile custom-SSH-file" "  HostName github.ibm.com" "  LogLevel ERROR" >> ~/.ssh/config
+  - cat .git/config
+  - git config user.name "mamoon.raja"
+  - git config user.email "mamoon.raja@ibm.com"
   - git clone -b v1 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
 
 # Run a dry-run registration for pull requests, and a real registration for pushes.
