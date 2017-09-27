@@ -20,9 +20,17 @@ install: true
 # microservice (which itself validates against scaffolder, therefore Yeoman and SDKGen microservices).
 # It's the kitchen sink of validation!
 before_script:
-  - $(npm bin)/set-up-ssh --key "$encrypted_XXXXXXXXXXXX_key" \
-    --iv "$encrypted_XXXXXXXXXXXX_iv" \
-    --path-encrypted-key ".travis/github_deploy_key.enc"
+  - declare -r SSH_FILE="$(mktemp -u $HOME/.ssh/XXXXX)"
+  - openssl aes-256-cbc \
+         -K $encrypted_XXXXXXXXXXXX_key \
+         -iv $encrypted_XXXXXXXXXXXX_iv \
+         -in ".travis/github_deploy_key.enc" \
+         -out "$SSH_FILE" -d
+  - chmod 600 "$SSH_FILE" \
+         && printf "%s\n" \
+              "Host github.ibm.com" \
+              "  IdentityFile $SSH_FILE" \
+              "  LogLevel ERROR" >> ~/.ssh/config
   - git clone -b v1 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
 
 # Run a dry-run registration for pull requests, and a real registration for pushes.
