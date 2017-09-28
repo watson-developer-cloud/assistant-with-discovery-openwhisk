@@ -12,6 +12,9 @@ cache:
     - "node_modules"
     - "bmd-devops-pipeline"
 
+addons:
+  ssh_known_hosts: github.ibm.com
+
 # Nothing special to install since we're just verifying compatibility of this repo with the
 # developer experience infrastructure.
 install: true
@@ -26,7 +29,6 @@ before_script:
   - cat ~/.ssh/config
   - ls -l
   - ls -l ~/.ssh
-  - ssh-keyscan github.ibm.com ~/.ssh/known_hosts
   - git clone -b v1 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
 
 # Run a dry-run registration for pull requests, and a real registration for pushes.
