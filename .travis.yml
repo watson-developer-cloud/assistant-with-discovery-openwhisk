@@ -26,7 +26,8 @@ before_script:
   - cat ~/.ssh/config
   - ls -l
   - ls -l ~/.ssh
-  - yes | git clone -b v1 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
+  - ssh-keyscan github.ibm.com ~/.ssh/known_hosts
+  - git clone -b v1 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
 
 # Run a dry-run registration for pull requests, and a real registration for pushes.
 # register-starter.sh is smart!
