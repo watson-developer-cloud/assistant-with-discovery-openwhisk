@@ -24,6 +24,8 @@ before_script:
   - cp custom-SSH-file ~/.ssh/
   - chmod 600 "custom-SSH-file" && echo "Host github.ibm.com\n  User git\n  IdentityFile custom-SSH-file\n  HostName github.ibm.com\n  LogLevel ERROR\n\n" | cat - ~/.ssh/config > temp && mv temp ~/.ssh/config
   - cat ~/.ssh/config
+  - ls -l
+  - ls -l ~/.ssh
   - git clone -b v1 git@github.ibm.com:bluemix-mobile-services/bmd-devops-pipeline.git
 
 # Run a dry-run registration for pull requests, and a real registration for pushes.
