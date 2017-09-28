@@ -10,19 +10,18 @@
   "generators": {
     "node": [
       "generator-ibm-cloud-enablement",
-      "generator-usecase-enablement"
+      "generator-starterkit-content-downloader"
     ]
   },
   "generatorOptions": {
     "generator-ibm-cloud-enablement": {
-      "version": "0.0.89"
+      "version": "0.0.96"
     },
-    "generator-usecase-enablement": {
+    "generator-starterkit-content-downloader": {
       "registry": "https://npm-registry.whitewater.ibm.com",
       "scope": "@arf",
-      "version": "0.0.36"
-    }
-  },
+      "version": "0.0.5"
+    },
   "requiredCapabilities": [
     "conversation",
     "discovery"
