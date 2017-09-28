@@ -16,7 +16,8 @@ addons:
 
 # Nothing special to install since we're just verifying compatibility of this repo with the
 # developer experience infrastructure.
-install: true
+install:
+  - npm install
 
 # Clone the repository that has the smart script for validating this repo against the registry
 # microservice (which itself validates against scaffolder, therefore Yeoman and SDKGen microservices).
