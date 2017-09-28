@@ -10,7 +10,6 @@ node_js:
 cache:
   directories:
     - "node_modules"
-    - "bmd-devops-pipeline"
 
 addons:
   ssh_known_hosts: github.ibm.com
