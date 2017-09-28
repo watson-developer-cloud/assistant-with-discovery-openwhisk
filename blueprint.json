@@ -1,0 +1,39 @@
+{
+  "name": "Watson Serverless Conversation With Discovery",
+  "description": "This application shows the capabilities of Watson Conversation and Discovery services to work together to find answers on a given query.",
+  "thumbnailURL": "blueprint/thumbnail.svg",
+  "appIconURL": "blueprint/appicon.svg",
+  "previewURLs": ["http://conversation-with-discovery-openwhisk-01.mybluemix.net/"],
+  "demoURL": "http://conversation-with-discovery-openwhisk-01.mybluemix.net",
+  "type": "WEB",
+  "tags": ["watson"],
+  "generators": {
+    "node": [
+      "generator-ibm-cloud-enablement",
+      "generator-starterkit-content-downloader"
+    ]
+  },
+  "generatorOptions": {
+    "generator-ibm-cloud-enablement": {
+      "version": "0.0.96"
+    },
+    "generator-starterkit-content-downloader": {
+      "registry": "https://npm-registry.whitewater.ibm.com",
+      "scope": "@arf",
+      "version": "0.0.5"
+    }
+  },
+  "requiredCapabilities": [
+    "conversation",
+    "discovery"
+  ],
+  "requiredCapabilitiesURLs": {
+    "conversation": "https://www.ibm.com/watson/services/conversation/",
+    "discovery": "https://www.ibm.com/watson/services/discovery/"
+  },
+  "servicePlans": {
+    "conversation": "free",
+    "discovery": "free"
+  },
+  "email": "mamoon.raja@ibm.com"
+}
