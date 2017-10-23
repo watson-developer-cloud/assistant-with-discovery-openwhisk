@@ -9,18 +9,24 @@
   "tags": ["watson"],
   "generators": {
     "node": [
+      "generator-starterkit-content-downloader",
       "generator-ibm-cloud-enablement",
-      "generator-starterkit-content-downloader"
+      "generator-git-starterkit-credentials-builder"
     ]
   },
   "generatorOptions": {
     "generator-ibm-cloud-enablement": {
-      "version": "0.0.96"
+      "version": "0.0.x"
     },
     "generator-starterkit-content-downloader": {
       "registry": "https://npm-registry.whitewater.ibm.com",
       "scope": "@arf",
-      "version": "0.0.5"
+      "version": "0.0.x"
+    },
+    "generator-git-starterkit-credentials-builder": {
+      "registry": "https://npm-registry.whitewater.ibm.com",
+      "scope": "@arf",
+      "version": "0.0.x"
     }
   },
   "requiredCapabilities": [
