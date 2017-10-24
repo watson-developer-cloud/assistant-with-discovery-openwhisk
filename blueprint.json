@@ -10,14 +10,10 @@
   "generators": {
     "node": [
       "generator-starterkit-content-downloader",
-      "generator-ibm-cloud-enablement",
       "generator-git-starterkit-credentials-builder"
     ]
   },
   "generatorOptions": {
-    "generator-ibm-cloud-enablement": {
-      "version": "0.0.x"
-    },
     "generator-starterkit-content-downloader": {
       "registry": "https://npm-registry.whitewater.ibm.com",
       "scope": "@arf",
