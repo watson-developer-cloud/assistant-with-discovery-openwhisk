@@ -197,7 +197,7 @@ done
 5. Link your API to your React App:  
 Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your Web Action URL.
 ```
-REACT_APP_API_URL="<Your API URL>"
+REACT_APP_API_URL="<Your Web Action URL>"
 ```
 > We have to add REACT\_APP\_ to the name of the environment variable so React will substitute in the value during the build.
 
