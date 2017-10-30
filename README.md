@@ -16,7 +16,6 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
     * [Training Conversation](#training-conversation)
     * [Training Discovery](#training-discovery)
   * [Setting up the OpenWhisk Back-end](#setting-up-the-openwhisk-back-end)
-    * [Configuring the API](#configuring-the-api)
   * [Setting up the React Front-end](#setting-up-the-react-front-end)
   * [Running the App](#running-the-app)
 * [Contributing](#contributing)
