@@ -177,8 +177,8 @@ done
 ```
 4. Use these documents to create default parameters from the command line:
 ```bash  
-    wsk action update conversation --param-file action/conversationParams.json
-    wsk action update discovery --param-file action/discoveryParams.json
+    wsk action update conversation --param-file actions/conversationParams.json
+    wsk action update discovery --param-file actions/discoveryParams.json
 ```
 5. Create a sequence using the two actions:
 ```bash
@@ -186,40 +186,16 @@ done
 ```
     
 #### Configuring the API
-1. Navigate to the [API Management](https://console.bluemix.net/openwhisk/apimanagement?env_id=ibm:yp:us-south) page on OpenWhisk.  
-![Create new API]( README_pictures/Create_API.png?raw=true )
+1. Navigate to the [Manage Actions](https://console.bluemix.net/openwhisk/manage/actions?env_id=ibm:yp:us-south) page on OpenWhisk.  
 
-2. Name your API and supply a base path.  
-![Name API and base path]( README_pictures/API_info.png?raw=true )
+2. Click on your sequence that you just created (conversation-with-discovery-sequence)
 
-3. Click "Create operation"  
-![Create operation]( README_pictures/Create_operation.png?raw=true )
+3. Navigate to Additional Details
 
-4. Make a path for your operation, change the HTTP verb to POST, and select your sequence as the action  
-![Operation form]( README_pictures/Create_Operation_Form.png?raw=true )
+4. Make sure the checkbox for 'Enable as Web Action' is checked. Copy the Web Action URL  
 
-5. Activate the slider next to "Require applications to autheticate via API key"
-
-6. Ensure that the slider next to "Enable CORS so that browser-based applications..." is also activated
-
-7. Click "Save & expose"
-
-8. Navigate to the "Sharing" tab on the left-hand side  
-![Sharing tab]( README_pictures/Sharing_tab.png?raw=true )
-
-9. Under "Sharing Outside of Bluemix Organization", click "Create API Key"  
-![Create API key]( README_pictures/Create_API_key.png?raw=true )
-
-10. Give your key a name, and copy the API Key to a note  
-![Key naming]( README_pictures/Key_naming.png?raw=true )
-
-11. Navigate to the "Summary" tab on the left-hand side
-
-12. Copy the link under "Route" to a note, and add "/submit" or the name of the path associated with your POST action to the end of the URL.  
-![Route_link]( README_pictures/Route_link.png?raw=true )
-
-13. Link your API to your React App:  
-Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your API URL.
+5. Link your API to your React App:  
+Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your Web Action URL.
 ```
 REACT_APP_API_URL="<Your API URL>"
 ```

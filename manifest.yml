@@ -1,11 +1,4 @@
 ---
-declared-services:
-  conversation-for-demo:
-    label: conversation
-    plan: free
-  discovery-for-demo:
-    label: discovery
-    plan: free
 applications:
 - path: .
   memory: 128M
