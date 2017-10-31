@@ -71,6 +71,8 @@ cf login
 
 ### Setting up Conversation and Discovery Services
 
+1. If you downloaded code from Watson Console and already have `credentials.json` file, then go to step 3, otherwise follow the next step.
+
 1. [Create Watson Services](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery), and copy credentials from Project View page and paste them in `credentials.json` file.
 
 1. Create a .env file in the root directory by copying the sample `.env.example` file using the following command:
