@@ -16,7 +16,6 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
     * [Training Conversation](#training-conversation)
     * [Training Discovery](#training-discovery)
   * [Setting up the OpenWhisk Back-end](#setting-up-the-openwhisk-back-end)
-    * [Configuring the API](#configuring-the-api)
   * [Setting up the React Front-end](#setting-up-the-react-front-end)
   * [Running the App](#running-the-app)
 * [Contributing](#contributing)
@@ -184,20 +183,14 @@ done
 ```bash
     wsk action create conversation-with-discovery-sequence --sequence conversation,discovery --web true
 ```
-    
-#### Configuring the API
-1. Navigate to the [Manage Actions](https://console.bluemix.net/openwhisk/manage/actions?env_id=ibm:yp:us-south) page on OpenWhisk.  
-
-2. Click on your sequence that you just created (conversation-with-discovery-sequence)
-
-3. Navigate to Additional Details
-
-4. Make sure the checkbox for 'Enable as Web Action' is checked. Copy the Web Action URL  
-
-5. Link your API to your React App:  
-Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your Web Action URL.
+6. Retrieve the URL for the action you just created and copy the result:
+```bash
+    wsk action get conversation-with-discovery-sequence --url
 ```
-REACT_APP_API_URL="<Your API URL>"
+7. Link your API to your React App:  
+Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your Web Action URL you just retrieved, adding ".json" at the end.
+```
+REACT_APP_API_URL="<Your Web Action URL>.json"
 ```
 > We have to add REACT\_APP\_ to the name of the environment variable so React will substitute in the value during the build.
 

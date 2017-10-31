@@ -44,12 +44,11 @@ wsk action update $PACKAGE/conversation --param username $CONVERSATION_USERNAME 
 wsk action update $PACKAGE/discovery --param username $DISCOVERY_USERNAME --param password $DISCOVERY_PASSWORD --param environment_id $DISCOVERY_ENVIRONMENT_ID --param collection_id $DISCOVERY_COLLECTION_ID
 
 echo 'Creating OpenWhisk Sequence...'
-wsk action create $PACKAGE/conversation-with-discovery --sequence $PACKAGE/conversation,$PACKAGE/discovery --web true
+wsk action create $PACKAGE/conversation-with-discovery-sequence --sequence $PACKAGE/conversation,$PACKAGE/discovery --web true
 
-echo 'Creating OpenWhisk API...'
-wsk api create /conversation-with-discovery /submit POST $PACKAGE/conversation-with-discovery --response-type json
-API_URL=`wsk api get /conversation-with-discovery -f | jq -r .gwApiUrl`
-API_URL+="/submit"
+echo 'Connecting OpenWhisk WebAction...'
+API_URL=`wsk action get $PACKAGE/conversation-with-discovery-sequence --url`
+API_URL+=".json"
 export REACT_APP_API_URL=$API_URL
 
 touch .env
