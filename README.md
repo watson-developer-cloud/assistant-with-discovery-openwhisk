@@ -75,7 +75,7 @@ cf login
 
 1. [Create Watson Services](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery), and copy credentials from Project View page and paste them in `credentials.json` file.
 
-1. Create a .env file in the root directory by copying the sample `.env.example` file using the following command:
+1. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
 
 ``` bash
   cp .env.example .env
