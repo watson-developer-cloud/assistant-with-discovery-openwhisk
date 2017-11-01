@@ -14,12 +14,12 @@
     ]
   },
   "generatorOptions": {
-    "generator-starterkit-content-downloader": {
+    "generator-git-starterkit-credentials-builder": {
       "registry": "https://npm-registry.whitewater.ibm.com",
       "scope": "@arf",
       "version": "0.0.x"
     },
-    "generator-git-starterkit-credentials-builder": {
+    "generator-starterkit-content-downloader": {
       "registry": "https://npm-registry.whitewater.ibm.com",
       "scope": "@arf",
       "version": "0.0.x"
