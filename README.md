@@ -69,19 +69,32 @@ cf login
 ```
 5. Follow the prompts for logging in to Bluemix. You may have to use single sign-on (SSO).
 
+6. In the root directory of your repository, install the project dependencies.
+```bash
+npm install
+```
+
 ### Setting up Conversation and Discovery Services
 
-1. If you downloaded code from Watson Console and already have `credentials.json` file, then go to step 3, otherwise follow the next step.
+1. If you downloaded code from Watson Console and already have `credentials.json` file, then go to step 4, otherwise follow the next step.
 
-1. [Create Watson Services](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery), and copy credentials from Project View page and paste them in `credentials.json` file.
+2. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery
 
-1. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
+3. Create a new credentials.json file by copying the provided template
+
+``` bash
+  cp credentials-template.json credentials.json
+```
+
+3. In the Watson Console navigate to Projects, click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
+
+4. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
 
 ``` bash
   cp .env.example .env
 ```
 
-1. Run following commands to train Conversation and Discovery services:
+5. Run following commands to train Conversation and Discovery services:
 
 ``` bash
   unzip ./training/manualdocs.zip
@@ -90,54 +103,16 @@ cf login
 
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli)
-2. Return to the home directory. Add the two actions to OpenWhisk
-```bash
-    cd ..
-    wsk action create conversation actions/conversation.js --web true
-    wsk action create discovery actions/discovery.js --web true
-```
-3. Edit [actions/conversationParams.json](actions/conversationParams.json) and [actions/discoveryParams.json](actions/discoveryParams.json) to include your usernames, passwords, workspace\_id, environment\_id and collection\_id for the Conversation and Discovery services.
-```json
-{
-  "username": "<CONVERSATION_USERNAME>",
-  "password": "<CONVERSASTION_PASSWORD",
-  "workspace_id": "<WORKSPACE_ID>"
-}
-```
-```json
-{
-  "username": "<DISCOVERY_USERNAME>",
-  "password": "<DISCOVERY_PASSWORD",
-  "environment_id": "<ENVIRONMENT_ID>",
-  "collection_id": "<COLLECTION_ID"
-}
-```
-4. Use these documents to create default parameters from the command line:
-```bash  
-    wsk action update conversation --param-file actions/conversationParams.json
-    wsk action update discovery --param-file actions/discoveryParams.json
-```
-5. Create a sequence using the two actions:
-```bash
-    wsk action create conversation-with-discovery-sequence --sequence conversation,discovery --web true
-```
-6. Retrieve the URL for the action you just created and copy the result:
-```bash
-    wsk action get conversation-with-discovery-sequence --url
-```
-7. Link your API to your React App:  
-Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your Web Action URL you just retrieved, adding ".json" at the end.
-```
-REACT_APP_API_URL="<Your Web Action URL>.json"
-```
-> We have to add REACT\_APP\_ to the name of the environment variable so React will substitute in the value during the build.
 
-### Setting up the React Front-end
-1. In the root directory of your repository, install the project dependencies.
+2. Install [jq](https://stedolan.github.io/jq/download/) as a dependency.
+
+3. Run the provided shell script `create-ow.sh` to create your OpenWhisk actions & sequence. The syntax to do so may vary by system, but for example:
+
 ```bash
-npm install
+   sh create-ow.sh
 ```
-2. Create an optimized build of your project. During this stage, your environment variable will be inserted into App.js for use by your components.
+### Setting up the React Front-end
+Create an optimized build of your project. During this stage, your environment variable will be inserted into App.js for use by your components.
 ```bash
 npm run build
 ```

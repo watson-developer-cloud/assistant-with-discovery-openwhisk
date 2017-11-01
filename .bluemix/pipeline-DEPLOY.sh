@@ -51,5 +51,4 @@ API_URL=`wsk action get $PACKAGE/conversation-with-discovery-sequence --url`
 API_URL+=".json"
 export REACT_APP_API_URL=$API_URL
 
-touch .env
 echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env
