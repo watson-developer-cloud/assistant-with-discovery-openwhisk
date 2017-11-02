@@ -1,36 +1,51 @@
 #!/bin/bash
 
+###############################################
+# Install dependencies
+###############################################
+
+echo 'Installing dependencies...'
+sudo apt-get -qq update 1>/dev/null
+sudo apt-get -qq install jq 1>/dev/null
+
+echo 'Installing nvm (Node.js Version Manager)...'
+npm config delete prefix
+curl -o- https://raw.githubusercontent.com/creationix/nvm/v0.31.2/install.sh | bash > /dev/null 2>&1
+. ~/.nvm/nvm.sh
+
+echo 'Installing Node.js 7.9.0...'
+nvm install 7.9.0 1>/dev/null
+npm install --progress false --loglevel error 1>/dev/null
+
+echo 'Installing OpenWhisk CLI...'
 mkdir ~/wsk
 curl https://openwhisk.ng.bluemix.net/cli/go/download/linux/amd64/wsk > ~/wsk/wsk
 chmod +x ~/wsk/wsk
 export PATH=$PATH:~/wsk
 
+################################################
+# Train Services
+################################################
+
+cp .env.example .env
+
+# Retrieve Conversation Credentials
+export CONVERSATION_USERNAME=`jq .conversation[].credentials.username credentials.json`
+export CONVERSATION_PASSWORD=`jq .conversation[].credentials.password credentials.json`
+
+# Retrieve Discovery Credentials
+export DISCOVERY_USERNAME=`jq .discovery[].credentials.username credentials.json`
+export DISCOVERY_PASSWORD=`jq .discovery[].credentials.password credentials.json`
+
+echo 'Unzipping training documents...'
+unzip ./training/manualdocs.zip
+echo 'Training services...'
+npm run train
+
 
 ###############################################
 # OpenWhisk Artifacts
 ###############################################
-figlet 'OpenWhisk'
-
-# Retrieve the OpenWhisk authorization key
-CF_ACCESS_TOKEN=`cat ~/.cf/config.json | jq -r .AccessToken | awk '{print $2}'`
-
-# Docker image should be set by the pipeline, use a default if not set
-if [ -z "$OPENWHISK_API_HOST" ]; then
-  echo 'OPENWHISK_API_HOST was not set in the pipeline. Using default value.'
-  export OPENWHISK_API_HOST=openwhisk.ng.bluemix.net
-fi
-OPENWHISK_KEYS=`curl -XPOST -k -d "{ \"accessToken\" : \"$CF_ACCESS_TOKEN\", \"refreshToken\" : \"$CF_ACCESS_TOKEN\" }" \
-  -H 'Content-Type:application/json' https://$OPENWHISK_API_HOST/bluemix/v2/authenticate`
-
-SPACE_KEY=`echo $OPENWHISK_KEYS | jq -r '.namespaces[] | select(.name == "'$CF_ORG'_'$CF_SPACE'") | .key'`
-SPACE_UUID=`echo $OPENWHISK_KEYS | jq -r '.namespaces[] | select(.name == "'$CF_ORG'_'$CF_SPACE'") | .uuid'`
-OPENWHISK_AUTH=$SPACE_UUID:$SPACE_KEY
-
-# Configure the OpenWhisk CLI
-wsk property set --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH
-
-# To enable the creation of API in Bluemix, inject the CF token in the wsk properties
-echo "APIGW_ACCESS_TOKEN=${CF_ACCESS_TOKEN}" >> ~/.wskprops
 
 # Create OpenWhisk Actions
 echo 'Creating OpenWhisk Actions...'
@@ -47,8 +62,10 @@ echo 'Creating OpenWhisk Sequence...'
 wsk action create $PACKAGE/conversation-with-discovery-sequence --sequence $PACKAGE/conversation,$PACKAGE/discovery --web true
 
 echo 'Connecting OpenWhisk WebAction...'
-API_URL=`wsk action get $PACKAGE/conversation-with-discovery-sequence --url`
+API_URL=`bx wsk action get $PACKAGE/conversation-with-discovery-sequence --url | sed -n '2p'`;
 API_URL+=".json"
 export REACT_APP_API_URL=$API_URL
 
-echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env
+# Write API Url to .env file
+head -n 4 .env | cat >> .env_tmp; mv .env_tmp .env
+echo "REACT_APP_API_URL=$API_URL" >> .env
