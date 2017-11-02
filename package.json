@@ -3,23 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "async": "^2.5.0",
+    "dotenv": "^4.0.0",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
+    "path": "^0.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "replace": "^0.3.0",
     "watson-react-components": "^0.6.9"
   },
   "devDependencies": {
-    "codecov": "^2.2.0",
+    "codecov": "^2.3.1",
     "eslint": "^4.3.0",
     "eslint-plugin-react": "^7.1.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.4.2",
+    "mocha": "^3.5.3",
     "nock": "^9.0.14",
     "react-scripts": "1.0.10",
-    "watson-developer-cloud": "^2.37.0"
+    "watson-developer-cloud": "^2.41.1"
   },
   "scripts": {
+    "train": "node train-conversation.js && node train-discovery.js",
     "build-css": "node-sass-chokidar src/ -o src/",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
     "start-js": "react-scripts start",

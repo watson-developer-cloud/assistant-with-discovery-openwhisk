@@ -13,8 +13,6 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
 * [Run Locally](#run-locally)
   * [Getting Started](#getting-started)
   * [Setting up Conversation and Discovery Services](#setting-up-conversation-and-discovery-services)
-    * [Training Conversation](#training-conversation)
-    * [Training Discovery](#training-discovery)
   * [Setting up the OpenWhisk Back-end](#setting-up-the-openwhisk-back-end)
   * [Setting up the React Front-end](#setting-up-the-react-front-end)
   * [Running the App](#running-the-app)
@@ -33,7 +31,7 @@ Under the hood, there are two components to this app:
 
 ## Requirements
 * IBM Bluemix account. [Sign up](https://console.bluemix.net/?cm_mmc=GitHubReadMe) for Bluemix, or use an existing account.
-* Node.js >= 7.9.0
+* Node.js >= 4
 
 ## Deploy Automatically to Bluemix
 With just a few steps, you can get this demo application up to the cloud and running in your own Bluemix account.
@@ -71,135 +69,50 @@ cf login
 ```
 5. Follow the prompts for logging in to Bluemix. You may have to use single sign-on (SSO).
 
+6. In the root directory of your repository, install the project dependencies.
+```bash
+npm install
+```
+
 ### Setting up Conversation and Discovery Services
-1. Create an instance of Watson Conversation, here named `conversation-for-demo`.
-```bash
-cf create-service conversation free conversation-for-demo
-```
-2. Create a service key for your Conversation instance, here called `my-key`.
-```bash
-cf create-service-key conversation-for-demo my-key
-```
-3. Retrieve the `username` and `password` for your Conversation instance. Save these in a note.
-```bash
-cf service-key conversation-for-demo my-key
-```
-4. Do the same for Discovery. Note the plan name is `lite`.
-```bash
-cf create-service discovery lite discovery-for-demo
-```
-> :warning: You may have to wait until Bluemix is done creating your service instance before running the other two commands. Check on the status of your service by running `cf service discovery-for-demo` and checking for a `Status` of `create succeeded`.
 
-Here we called the instance `discovery-for-demo` and the key `my-other-key`. Save the `username` and `password` in a note.
-```bash
-cf create-service-key discovery-for-demo my-other-key
-cf service-key discovery-for-demo my-other-key
+1. If you downloaded code from Watson Console and already have `credentials.json` file, then go to step 4, otherwise follow the next step.
+
+2. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery
+
+3. Create a new credentials.json file by copying the provided template
+
+``` bash
+  cp credentials-template.json credentials.json
 ```
 
-#### Training Conversation
-1. Create a new Conversation workspace using your Conversation username and password (not your Bluemix password) from the previous steps. Make sure you are in the root directory of your repository. Save the `workspace_id` in a note.
-```bash
-curl -H "Content-Type: application/json" -X POST \
--u <CONVERSATION_USERNAME>:<CONVERSATION_PASSWORD> \
--d "@workspace_blank.json" \
-"https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26"
-```
-2. Train your workspace with the data provided. Substitute in your Conversation workspace_id.
-```bash
-curl -H "Content-Type: application/json" -X POST \
--u <CONVERSATION_USERNAME>:<CONVERSATION_PASSWORD> \
--d "@workspace.json" \
-"https://gateway.watsonplatform.net/conversation/api/v1/workspaces/<CONVERSATION_WORKSPACE_ID>?version=2017-05-26"
+3. In the Watson Console navigate to Projects, click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
+
+4. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
+
+``` bash
+  cp .env.example .env
 ```
 
-#### Training Discovery
-1. Create a new Discovery environment by using your Discovery username and password (not your Bluemix credentials or your Conversation credentials). Save the `environment_id` in a note.
-```bash
-curl -H "Content-Type: application/json" -X POST \
--u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
--d '{ "name": "demoEnvironment", "description": "from Conversation with Discovery - OpenWhisk", "size": 0}' \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-07-19"
-```
-2. Get the configuration for your environment. Here, we are just using the default configuration. Substitute your `environment_id` from the last step. Save the `configuration_id` in a note.
-```bash
-curl -X GET \
--u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments/<ENVIRONMENT_ID>/configurations?version=2017-07-19"
-```
-> Your environment might still be configuring, so wait about a minute before continuing.
+5. Run following commands to train Conversation and Discovery services:
 
-3. Create a new collection by using your Discovery username, password, configuration\_id, and environment\_id.
-```bash
-curl -X POST -H "Content-Type: application/json" \
--u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
--d '{ "name": "demoCollection", "description": "from Conversation with Discovery - OpenWhisk", "configuration_id": "<CONFIGURATION_ID>" }" \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments/<ENVIRONMENT_ID>/collections?version=2017-07-19"
-```
-4. From the root directory of your repository, unzip the manual training documents.
-```bash
-unzip manualdocs.zip
-```
-5. There are >200 files, so use a for-loop to send them to Watson. Substitute your Discovery username, password, environment\_id, and collection\_id.
-```bash
-cd manualdocs
-for file in *.json
-do
-  curl -X POST -u <DISCOVERY_USERNAME>:<DISCOVERY_PASSWORD> \
-  -F "file=@$file" \
-  "https://gateway.watsonplatform.net/discovery/api/v1/environments/<ENVIRONMENT_ID>/collections/<COLLECTION_ID>/documents?version=2017-07-19"
-done
+``` bash
+  unzip ./training/manualdocs.zip
+  npm run train
 ```
 
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli)
-2. Return to the home directory. Add the two actions to OpenWhisk
-```bash
-    cd ..
-    wsk action create conversation actions/conversation.js --web true
-    wsk action create discovery actions/discovery.js --web true
-```
-3. Edit [actions/conversationParams.json](actions/conversationParams.json) and [actions/discoveryParams.json](actions/discoveryParams.json) to include your usernames, passwords, workspace\_id, environment\_id and collection\_id for the Conversation and Discovery services.
-```json
-{
-  "username": "<CONVERSATION_USERNAME>",
-  "password": "<CONVERSASTION_PASSWORD",
-  "workspace_id": "<WORKSPACE_ID>"
-}
-```
-```json
-{
-  "username": "<DISCOVERY_USERNAME>",
-  "password": "<DISCOVERY_PASSWORD",
-  "environment_id": "<ENVIRONMENT_ID>",
-  "collection_id": "<COLLECTION_ID"
-}
-```
-4. Use these documents to create default parameters from the command line:
-```bash  
-    wsk action update conversation --param-file actions/conversationParams.json
-    wsk action update discovery --param-file actions/discoveryParams.json
-```
-5. Create a sequence using the two actions:
-```bash
-    wsk action create conversation-with-discovery-sequence --sequence conversation,discovery --web true
-```
-6. Retrieve the URL for the action you just created and copy the result:
-```bash
-    wsk action get conversation-with-discovery-sequence --url
-```
-7. Link your API to your React App:  
-Create a file named `.env`. Copy the following and paste it into your `.env`, substituting your Web Action URL you just retrieved, adding ".json" at the end.
-```
-REACT_APP_API_URL="<Your Web Action URL>.json"
-```
-> We have to add REACT\_APP\_ to the name of the environment variable so React will substitute in the value during the build.
 
-### Setting up the React Front-end
-1. In the root directory of your repository, install the project dependencies.
+2. Install [jq](https://stedolan.github.io/jq/download/) as a dependency.
+
+3. Run the provided shell script `create-ow.sh` to create your OpenWhisk actions & sequence. The syntax to do so may vary by system, but for example:
+
 ```bash
-npm install
+   sh create-ow.sh
 ```
-2. Create an optimized build of your project. During this stage, your environment variable will be inserted into App.js for use by your components.
+### Setting up the React Front-end
+Create an optimized build of your project. During this stage, your environment variable will be inserted into App.js for use by your components.
 ```bash
 npm run build
 ```
