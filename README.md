@@ -30,7 +30,7 @@ Under the hood, there are two components to this app:
 
 ## Requirements
 * IBM Bluemix account. [Sign up](https://console.bluemix.net/?cm_mmc=GitHubReadMe) for Bluemix, or use an existing account.
-* Node.js >= 4
+* To develop locally, first install [Node.js](https://nodejs.org) (Versions > 6).
 
 ## Run Locally
 
