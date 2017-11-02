@@ -20,9 +20,10 @@ bx wsk action update $PACKAGE/discovery --param username $DISCOVERY_USERNAME --p
 echo 'Creating OpenWhisk Sequence...'
 bx wsk  action create $PACKAGE/conversation-with-discovery-sequence --sequence $PACKAGE/conversation,$PACKAGE/discovery --web true
 
-echo 'Connecting OpenWhisk WebAction...'
+echo 'Retrieving OpenWhisk WebAction URL...'
 API_URL=`bx wsk action get $PACKAGE/conversation-with-discovery-sequence --url | sed -n '2p'`;
 API_URL+=".json"
+
 # Write API Url to .env file
 head -n 4 .env | cat >> .env_tmp; mv .env_tmp .env
 echo "REACT_APP_API_URL=$API_URL" >> .env

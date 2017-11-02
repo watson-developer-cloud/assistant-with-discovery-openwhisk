@@ -56,18 +56,19 @@ With just a few steps, you can get this demo application up to the cloud and run
 ### Getting Started
 1. If you don't already have a Bluemix account, you can sign up [here](https://console.bluemix.net/?cm_mmc=GitHubReadMe)
 > Make sure you have at least 2 services available in your Bluemix account.
+
 2. Clone (or fork) this repository, and go to the new directory
 ```bash
 git clone https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk.git
 cd conversation-with-discovery-openwhisk
 ```
-3. Download and install the [Cloud-Foundry CLI](https://docs.cloudfoundry.org/cf-cli/install-go-cli.html). This will be used to set up your Watson Services in Bluemix.
-4. Connect the CLI to Bluemix by running the following:
+3. Download and install the [Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html). This will be used to set up your Watson Services in Bluemix.
+
+4. Login to Bluemix by running the following:
 ```bash
-cf api https://api.ng.bluemix.net
-cf login
+bx login
 ```
-5. Follow the prompts for logging in to Bluemix. You may have to use single sign-on (SSO).
+5. Select the appropriate endpoints for logging in to Bluemix. You may have to use single sign-on (SSO).
 
 6. In the root directory of your repository, install the project dependencies.
 ```bash
@@ -80,21 +81,17 @@ npm install
 
 2. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery
 
-3. Create a new credentials.json file by copying the provided template
+3. Create a new credentials.json file in your root directory.
 
-``` bash
-  cp credentials-template.json credentials.json
-```
+4. In the Watson Console navigate to Projects, click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
 
-3. In the Watson Console navigate to Projects, click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
-
-4. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
+5. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
 
 ``` bash
   cp .env.example .env
 ```
 
-5. Run following commands to train Conversation and Discovery services:
+6. Run following commands to train Conversation and Discovery services:
 
 ``` bash
   unzip ./training/manualdocs.zip
@@ -106,10 +103,10 @@ npm install
 
 2. Install [jq](https://stedolan.github.io/jq/download/) as a dependency.
 
-3. Run the provided shell script `create-ow.sh` to create your OpenWhisk actions & sequence. The syntax to do so may vary by system, but for example:
+3. Run the provided shell script `create-openwhisk-actions.sh` to create your OpenWhisk actions & sequence. The syntax to do so may vary by system, but for example:
 
 ```bash
-   sh create-ow.sh
+   sh create-openwhisk-actions.sh
 ```
 ### Setting up the React Front-end
 Create an optimized build of your project. During this stage, your environment variable will be inserted into App.js for use by your components.
