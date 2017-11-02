@@ -8,5 +8,5 @@ applications:
   buildpack: https://github.com/cloudfoundry/staticfile-buildpack.git
   disk_quota: 1024M
   services:
-  - conversation-for-demo
-  - discovery-for-demo
+  - <CONVERSATION_NAME>
+  - <DISCOVERY_NAME>
