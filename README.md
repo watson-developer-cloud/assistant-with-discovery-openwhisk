@@ -58,13 +58,13 @@ npm install
 
 ### Setting up Conversation and Discovery Services
 
-1. If you downloaded the code from Watson Console and already have `credentials.json` file, then go to step 4, otherwise follow the next step.
+1. If you downloaded the code from [Watson Console](https://console.bluemix.net/developer/watson) and already have `credentials.json` file, then go to step 4, otherwise follow the next step.
 
 2. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery services.
 
 3. Create a new `credentials.json` file in your root directory.
 
-4. In the Watson Console navigate to Projects, click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
+4. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
 
 5. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
 
@@ -103,9 +103,9 @@ npm start
 ```
 
 ## Deploy to Bluemix (Optional)
-1. If you downloaded the code from Watson Console, then go to step 3, otherwise follow the next step.
+1. If you downloaded the code from [Watson Console](https://console.bluemix.net/developer/watson), then go to step 3, otherwise follow the next step.
 
-2. Run the following command to update service names in `manifest.yml` file, you only need to run this once:
+2. Run the following command to generate the `manifest.yml` file, you only need to run this once:
 ```bash
 npm run generate-manifest
 ```
