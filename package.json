@@ -3,35 +3,38 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "async": "^2.5.0",
+    "dotenv": "^4.0.0",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
+    "path": "^0.12.7",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
+    "replace": "^0.3.0",
     "watson-react-components": "^0.6.9"
   },
   "devDependencies": {
-    "codecov": "^2.2.0",
+    "codecov": "^2.3.1",
     "eslint": "^4.3.0",
     "eslint-plugin-react": "^7.1.0",
     "istanbul": "^0.4.5",
-    "mocha": "^3.4.2",
+    "mocha": "^3.5.3",
     "nock": "^9.0.14",
     "react-scripts": "1.0.10",
-    "watson-developer-cloud": "^2.37.0"
+    "watson-developer-cloud": "^2.41.1"
   },
   "scripts": {
-    "build-css": "node-sass-chokidar src/ -o src/",
-    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive",
-    "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
-    "test": "istanbul cover ./node_modules/mocha/bin/_mocha tests/**/* -- -R spec",
-    "eject": "react-scripts eject",
-    "actions": "wsk action create conversation actions/conversation.js --web true && wsk action create discovery actions/discovery.js --web true",
-    "defaults": "wsk action update conversation --param-file actions/conversationParams.json && wsk action update discovery --param-file actions/discoveryParams.json",
-    "sequence": "wsk action create conversation-with-discovery-sequence --sequence conversation,discovery",
-    "lint": "eslint .",
     "autofix": "eslint . --fix",
-    "codecov": "npm run test && ./node_modules/.bin/codecov"
+    "build-css": "node-sass-chokidar src/ -o src/",
+    "build": "npm run build-css && react-scripts build",
+    "codecov": "npm run test && ./node_modules/.bin/codecov",
+    "eject": "react-scripts eject",
+    "generate-manifest": "cp manifest.yml.example manifest.yml && node update-manifest.js",
+    "lint": "eslint .",
+    "start-js": "react-scripts start",
+    "test": "istanbul cover ./node_modules/mocha/bin/_mocha tests/**/* -- -R spec",
+    "train": "node ./scripts/train-conversation.js && node ./scripts/train-discovery.js",
+    "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
   }
 }
