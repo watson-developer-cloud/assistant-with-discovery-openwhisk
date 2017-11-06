@@ -34,7 +34,7 @@
     "lint": "eslint .",
     "start-js": "react-scripts start",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha tests/**/* -- -R spec",
-    "train": "node ./scripts/train-conversation.js && node ./scripts/train-discovery.js",
+    "train": "node ./train-conversation.js && node ./train-discovery.js",
     "watch-css": "npm run build-css && node-sass-chokidar src/ -o src/ --watch --recursive"
   }
 }
