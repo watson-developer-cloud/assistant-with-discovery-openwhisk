@@ -7,9 +7,6 @@
 echo 'Installing dependencies...'
 sudo apt-get -qq update 1>/dev/null
 sudo apt-get -qq install jq 1>/dev/null
-sudo apt-get -qq install figlet 1>/dev/null
-
-figlet 'Node.js'
 
 echo 'Installing nvm (Node.js Version Manager)...'
 npm config delete prefix
@@ -20,120 +17,35 @@ echo 'Installing Node.js 7.9.0...'
 nvm install 7.9.0 1>/dev/null
 npm install --progress false --loglevel error 1>/dev/null
 
-figlet 'OpenWhisk CLI'
+echo 'Installing OpenWhisk CLI...'
 mkdir ~/wsk
 curl https://openwhisk.ng.bluemix.net/cli/go/download/linux/amd64/wsk > ~/wsk/wsk
 chmod +x ~/wsk/wsk
 export PATH=$PATH:~/wsk
 
 ################################################
-# Create Services
+# Train Services
 ################################################
-figlet 'Services'
 
-# Create Conversation service
-figlet -f small 'Conversation'
-cf create-service conversation free conversation-for-demo
-cf create-service-key conversation-for-demo for-demo
+cp .env.example .env
 
-set -x
-CONVERSATION_CREDENTIALS=`cf service-key conversation-for-demo for-demo | tail -n +2`
-export CONVERSATION_USERNAME=`echo $CONVERSATION_CREDENTIALS | jq -r .username`
-export CONVERSATION_PASSWORD=`echo $CONVERSATION_CREDENTIALS | jq -r .password`
-export CONVERSATION_WORKSPACE_ID=`curl -H "Content-Type: application/json" -X POST \
--u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
--d "@workspace_blank.json" \
-"https://gateway.watsonplatform.net/conversation/api/v1/workspaces?version=2017-05-26" -v | jq -r .workspace_id`
+# Retrieve Conversation Credentials
+export CONVERSATION_USERNAME=`jq .conversation[].credentials.username credentials.json`
+export CONVERSATION_PASSWORD=`jq .conversation[].credentials.password credentials.json`
 
-# Train Conversation Service
-curl -H "Content-Type: application/json" \
--X POST -u $CONVERSATION_USERNAME:$CONVERSATION_PASSWORD \
--d @workspace.json "https://gateway.watsonplatform.net/conversation/api/v1/workspaces/$CONVERSATION_WORKSPACE_ID?version=2017-05-26" -v
+# Retrieve Discovery Credentials
+export DISCOVERY_USERNAME=`jq .discovery[].credentials.username credentials.json`
+export DISCOVERY_PASSWORD=`jq .discovery[].credentials.password credentials.json`
 
-# Create Discovery service
-figlet -f small 'Discovery'
-cf create-service discovery lite discovery-for-demo
+echo 'Unzipping training documents...'
+unzip ./training/manualdocs.zip
+echo 'Training services...'
+npm run train
 
-# Wait until service is done creating
-ready="false"
-while [ $ready != "true" ];
-do
-  status=`cf service discovery-for-demo`
-  if [ `echo $status | grep "create succeeded" | wc -l` == "1" ]; then
-    ready="true"
-    echo "Service Instance is ready."
-  else
-    echo "Waiting until service is ready ..."
-    echo "Current State:"
-    echo $status
-    echo --------------------------------------
-    sleep 2
-  fi
-done
-
-# Create a service key
-cf create-service-key discovery-for-demo for-demo-2
-
-# Create service credentials
-DISCOVERY_CREDENTIALS=`cf service-key discovery-for-demo for-demo-2 | tail -n +2`
-export DISCOVERY_USERNAME=`echo $DISCOVERY_CREDENTIALS | jq -r .username`
-export DISCOVERY_PASSWORD=`echo $DISCOVERY_CREDENTIALS | jq -r .password`
-
-# Create Discovery environment
-export DISCOVERY_ENVIRONMENT_ID=`curl -X POST \
--u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
--H "Content-Type: application/json" \
--d '{ "name": "demoEnvironment", "description": "The environment made for the demo", "size": 0 }' \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments?version=2017-07-19" -v | jq -r .environment_id`
-
-# Create Discovery configuration
-DISCOVERY_CONFIGURATION_ID=`curl -X GET \
--u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/configurations?version=2017-07-19" -v | jq .configurations | jq .[0] | jq -r .configuration_id`
-
-# Create Discovery collection
-export DISCOVERY_COLLECTION_ID=`sleep 60s; curl -X POST \
--u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
--H "Content-Type: application/json" \
--d "{ \"name\": \"demoCollection\", \"description\": \"The collection made for the demo\", \"configuration_id\": \"$DISCOVERY_CONFIGURATION_ID\" }" \
-"https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections?version=2017-07-19" -v | jq -r .collection_id`
-
-# Loop through all documents in manual folder,
-MANUAL_FILES="manualdocs/*"
-for file in $MANUAL_FILES
-do
-  #Train Discovery with the manual
-  curl -X POST \
-  -u $DISCOVERY_USERNAME:$DISCOVERY_PASSWORD \
-  -F "file=@$file" \
-  "https://gateway.watsonplatform.net/discovery/api/v1/environments/$DISCOVERY_ENVIRONMENT_ID/collections/$DISCOVERY_COLLECTION_ID/documents?version=2017-07-19"
-done
 
 ###############################################
 # OpenWhisk Artifacts
 ###############################################
-figlet 'OpenWhisk'
-
-# Retrieve the OpenWhisk authorization key
-CF_ACCESS_TOKEN=`cat ~/.cf/config.json | jq -r .AccessToken | awk '{print $2}'`
-
-# Docker image should be set by the pipeline, use a default if not set
-if [ -z "$OPENWHISK_API_HOST" ]; then
-  echo 'OPENWHISK_API_HOST was not set in the pipeline. Using default value.'
-  export OPENWHISK_API_HOST=openwhisk.ng.bluemix.net
-fi
-OPENWHISK_KEYS=`curl -XPOST -k -d "{ \"accessToken\" : \"$CF_ACCESS_TOKEN\", \"refreshToken\" : \"$CF_ACCESS_TOKEN\" }" \
-  -H 'Content-Type:application/json' https://$OPENWHISK_API_HOST/bluemix/v2/authenticate`
-
-SPACE_KEY=`echo $OPENWHISK_KEYS | jq -r '.namespaces[] | select(.name == "'$CF_ORG'_'$CF_SPACE'") | .key'`
-SPACE_UUID=`echo $OPENWHISK_KEYS | jq -r '.namespaces[] | select(.name == "'$CF_ORG'_'$CF_SPACE'") | .uuid'`
-OPENWHISK_AUTH=$SPACE_UUID:$SPACE_KEY
-
-# Configure the OpenWhisk CLI
-wsk property set --apihost $OPENWHISK_API_HOST --auth $OPENWHISK_AUTH
-
-# To enable the creation of API in Bluemix, inject the CF token in the wsk properties
-echo "APIGW_ACCESS_TOKEN=${CF_ACCESS_TOKEN}" >> ~/.wskprops
 
 # Create OpenWhisk Actions
 echo 'Creating OpenWhisk Actions...'
@@ -147,13 +59,13 @@ wsk action update $PACKAGE/conversation --param username $CONVERSATION_USERNAME 
 wsk action update $PACKAGE/discovery --param username $DISCOVERY_USERNAME --param password $DISCOVERY_PASSWORD --param environment_id $DISCOVERY_ENVIRONMENT_ID --param collection_id $DISCOVERY_COLLECTION_ID
 
 echo 'Creating OpenWhisk Sequence...'
-wsk action create $PACKAGE/conversation-with-discovery --sequence $PACKAGE/conversation,$PACKAGE/discovery --web true
+wsk action create $PACKAGE/conversation-with-discovery-sequence --sequence $PACKAGE/conversation,$PACKAGE/discovery --web true
 
-echo 'Creating OpenWhisk API...'
-wsk api create /conversation-with-discovery /submit POST $PACKAGE/conversation-with-discovery --response-type json
-API_URL=`wsk api get /conversation-with-discovery -f | jq -r .gwApiUrl`
-API_URL+="/submit"
+echo 'Connecting OpenWhisk WebAction...'
+API_URL=`bx wsk action get $PACKAGE/conversation-with-discovery-sequence --url | sed -n '2p'`;
+API_URL+=".json"
 export REACT_APP_API_URL=$API_URL
 
-touch .env
-echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env
+# Write API Url to .env file
+head -n 4 .env | cat >> .env_tmp; mv .env_tmp .env
+echo "REACT_APP_API_URL=$API_URL" >> .env
