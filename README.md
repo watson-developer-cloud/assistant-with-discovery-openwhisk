@@ -91,16 +91,5 @@ All that's left is to serve your static files locally. You should see the projec
 npm start
 ```
 
-## Deploy to Bluemix (Optional)
-1. Run the following command to generate the `manifest.yml` file, you only need to run this once:
-```bash
-npm run generate-manifest
-```
-
-2. Deploy to Bluemix:
-```bash
-bx app push
-```
-
 ## License
 Licensed under [Apache 2.0](LICENSE).
