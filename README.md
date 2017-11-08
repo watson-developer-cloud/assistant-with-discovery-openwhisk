@@ -8,14 +8,14 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
 
 ## Table of Contents
 * [How it Works](#how-it-works)
-* [Requirements](#requirements)
 * [Run Locally](#run-locally)
   * [Getting Started](#getting-started)
-  * [Setting up Conversation and Discovery Services](#setting-up-conversation-and-discovery-services)
+  * [Setting up Watson Services](#setting-up-watson-services)
+  * [Train Watson Services](#train-watson-services)
   * [Setting up the OpenWhisk Back-end](#setting-up-the-openwhisk-back-end)
   * [Setting up the React Front-end](#setting-up-the-react-front-end)
   * [Running the App](#running-the-app)
-* [Contributing](#contributing)
+* [License](#license)
 
 ## How it Works
 
@@ -28,10 +28,6 @@ Under the hood, there are two components to this app:
   * The Discovery action checks for a flag from the Conversation output, and if it is present takes the original input and queries the manual with it. If there is no flag, the Conversation results pass through the function unchanged. The Sequence returns the output and updated context back to the UI.
 
 
-## Requirements
-* IBM Bluemix account. [Sign up](https://console.bluemix.net/?cm_mmc=GitHubReadMe) for Bluemix, or use an existing account.
-* To develop locally, first install [Node.js](https://nodejs.org) (Versions > 6).
-
 ## Run Locally
 
 ### Getting Started
@@ -43,48 +39,41 @@ Under the hood, there are two components to this app:
 git clone https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk.git
 cd conversation-with-discovery-openwhisk
 ```
-3. Download and install the [Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html). This will be used to set up your Watson Services in Bluemix.
 
-4. Login to Bluemix by running the following:
-```bash
-bx login
-```
-5. Select the appropriate endpoints for logging in to Bluemix. You may have to use single sign-on (SSO).
+3. Install [Node.js](https://nodejs.org) (Versions >= 6).
 
-6. In the root directory of your repository, install the project dependencies.
+4. In the root directory of your repository, install the project dependencies.
 ```bash
 npm install
 ```
 
-### Setting up Conversation and Discovery Services
+### Setting up Watson Services
+> Skip this section if you have downloaded the project from [Watson Console](https://console.ng.bluemix.net/developer/watson) and already have a `credentials.json` file
 
-1. If you downloaded the code from [Watson Console](https://console.bluemix.net/developer/watson) and already have `credentials.json` file, then go to step 4, otherwise follow the next step.
+1. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery services.
 
-2. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery services.
+2. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in to a new `credentials.json` file.
 
-3. Create a new `credentials.json` file in your root directory.
-
-4. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
-
-5. Create a `.env` file in the root directory by copying the sample `.env.example` file using the following command:
-
+### Train Watson Services
+Run following commands to train Conversation and Discovery services:
 ``` bash
-  cp .env.example .env
-```
-
-6. Run following commands to train Conversation and Discovery services:
-
-``` bash
-  unzip ./training/manualdocs.zip
   npm run train
 ```
 
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli).
 
-2. Install [jq](https://stedolan.github.io/jq/download/) as a dependency.
+2. Download and install the [Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html).
 
-3. Run the provided shell script `create-openwhisk-actions.sh` to create your OpenWhisk actions & sequence. The syntax to do so may vary by system, but for example:
+3. Login to Bluemix by running the following:
+
+```bash
+bx login
+```
+
+4. Install [jq](https://stedolan.github.io/jq/download/) as a dependency.
+
+5. Run the provided shell script `create-openwhisk-actions.sh` to create your OpenWhisk actions & sequence. The syntax to do so may vary by system, but for example:
 
 ```bash
    sh create-openwhisk-actions.sh
@@ -102,21 +91,5 @@ All that's left is to serve your static files locally. You should see the projec
 npm start
 ```
 
-## Deploy to Bluemix (Optional)
-1. If you downloaded the code from [Watson Console](https://console.bluemix.net/developer/watson), then go to step 3, otherwise follow the next step.
-
-2. Run the following command to generate the `manifest.yml` file, you only need to run this once:
-```bash
-npm run generate-manifest
-```
-
-3. Deploy to Bluemix:
-```bash
-bx app push
-```
-
-## Contributing
-See [CONTRIBUTING](CONTRIBUTING.md).
-
 ## License
-This sample code is licensed under Apache 2.0. Full license text is available in [LICENSE](LICENSE).
+Licensed under [Apache 2.0](LICENSE).

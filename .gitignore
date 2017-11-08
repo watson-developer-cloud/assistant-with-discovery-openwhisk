@@ -16,9 +16,6 @@
 # credentials
 credentials.json
 
-# unzipped folder
-/manualdocs
-
 # compiled CSS
 /src/*.css
 
