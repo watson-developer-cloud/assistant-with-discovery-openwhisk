@@ -48,11 +48,13 @@ npm install
 
 ### Setting up Conversation and Discovery Services
 
-1. If you cloned or downloaded the project from Github and you have an empty `credentials.json` file, [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery services.
+1. If you downloaded the project from Watson [Console](https://console.bluemix.net/developer/watson) and you already have a `credentials.json` file, then go to step 4. Otherwise follow next steps.
 
-2. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
+2. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery services, and create a `credentials.json` file.
 
-3. Run following commands to train Conversation and Discovery services:
+3. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
+
+4. Run following commands to train Conversation and Discovery services:
 
 ``` bash
   npm run train
