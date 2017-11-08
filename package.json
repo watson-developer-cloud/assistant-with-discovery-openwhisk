@@ -30,7 +30,6 @@
     "build": "npm run build-css && react-scripts build",
     "codecov": "npm run test && ./node_modules/.bin/codecov",
     "eject": "react-scripts eject",
-    "generate-manifest": "cp manifest.yml.example manifest.yml && node update-manifest.js",
     "lint": "eslint .",
     "start-js": "react-scripts start",
     "test": "istanbul cover ./node_modules/mocha/bin/_mocha tests/**/* -- -R spec",
