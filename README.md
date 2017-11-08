@@ -10,11 +10,12 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
 * [How it Works](#how-it-works)
 * [Run Locally](#run-locally)
   * [Getting Started](#getting-started)
-  * [Setting up Conversation and Discovery Services](#setting-up-conversation-and-discovery-services)
+  * [Setting up Watson Services](#setting-up-watson-services)
+  * [Train Watson Services](#train-watson-services)
   * [Setting up the OpenWhisk Back-end](#setting-up-the-openwhisk-back-end)
   * [Setting up the React Front-end](#setting-up-the-react-front-end)
   * [Running the App](#running-the-app)
-* [Contributing](#contributing)
+* [License](#license)
 
 ## How it Works
 
@@ -46,16 +47,15 @@ cd conversation-with-discovery-openwhisk
 npm install
 ```
 
-### Setting up Conversation and Discovery Services
+### Setting up Watson Services
+> Skip this section if you have downloaded the project from [Watson Console](https://console.ng.bluemix.net/developer/watson) and already have a `credentials.json` file
 
-1. If you downloaded the project from Watson [Console](https://console.bluemix.net/developer/watson) and you already have a `credentials.json` file, then go to step 4. Otherwise follow next steps.
+1. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery services.
 
-2. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Conversation and Discovery services, and create a `credentials.json` file.
+2. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in to a new `credentials.json` file.
 
-3. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in your `credentials.json` file.
-
-4. Run following commands to train Conversation and Discovery services:
-
+### Train Watson Services
+Run following commands to train Conversation and Discovery services:
 ``` bash
   npm run train
 ```
