@@ -10,7 +10,7 @@
   "generators": {
     "node": [
       "generator-starterkit-content-downloader",
-      "generator-git-starterkit-credentials-builder"
+      "generator-github-project"
     ]
   },
   "generatorOptions": {
