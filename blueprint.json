@@ -23,7 +23,7 @@
       "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-watson-e2e-npm-remote",
       "scope": "@watson",
       "version": "0.0.x",
-      "services": {"watsonServices": ["conversation", "discovery"]}
+      "services": "conversation,discovery"
     }
   },
   "requiredCapabilities": [
