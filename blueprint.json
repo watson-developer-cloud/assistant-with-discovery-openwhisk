@@ -24,7 +24,8 @@
       "scope": "@watson",
       "version": "0.0.x",
       "services": ["conversation", "discovery"]
-    },
+    }
+  },
   "requiredCapabilities": [
     "conversation",
     "discovery"
@@ -38,5 +39,4 @@
     "discovery": "free"
   },
   "email": "mamoon.raja@ibm.com"
-}
 }
