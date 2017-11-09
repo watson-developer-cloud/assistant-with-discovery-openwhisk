@@ -22,8 +22,7 @@
     "generator-github-project": {
       "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-watson-e2e-npm-remote",
       "scope": "@watson",
-      "version": "0.0.3",
-      "services": "conversation discovery"
+      "version": "0.0.x"
     }
   },
   "requiredCapabilities": [
