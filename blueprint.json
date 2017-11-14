@@ -10,18 +10,18 @@
   "generators": {
     "node": [
       "generator-starterkit-content-downloader",
-      "generator-git-starterkit-credentials-builder"
+      "generator-github-project"
     ]
   },
   "generatorOptions": {
-    "generator-git-starterkit-credentials-builder": {
+    "generator-starterkit-content-downloader": {
       "registry": "https://npm-registry.whitewater.ibm.com",
       "scope": "@arf",
       "version": "0.0.x"
     },
-    "generator-starterkit-content-downloader": {
-      "registry": "https://npm-registry.whitewater.ibm.com",
-      "scope": "@arf",
+    "generator-github-project": {
+      "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-watson-e2e-npm-remote",
+      "scope": "@watson",
       "version": "0.0.x"
     }
   },
