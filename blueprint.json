@@ -1,10 +1,28 @@
 {
   "name": "Watson Serverless Conversation With Discovery",
+  "checklist": [
+    {
+      "label": "Click \"Download Code\" to download a .zip file of your generated app."
+    },
+    {
+      "label": "Extract the .zip file. You can also view the contents of the Readme file to get started."
+    },
+    {
+      "label": "Launch the tool to train the Conversation and Discovery services."
+    },
+    {
+      "label": "Run starter kit locally.",
+      "link": "https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#run-locally"
+    },
+    {
+      "label": "Review the documentation and API reference to learn more about Watson Conversation and Discovery."
+    }
+  ],
   "description": "This application shows the capabilities of Watson Conversation and Discovery services to work together to find answers on a given query.",
   "thumbnailURL": "blueprint/thumbnail.svg",
   "appIconURL": "blueprint/appicon.svg",
-  "previewURLs": ["https://conversation-with-discovery-openwhisk-01.mybluemix.net/"],
-  "demoURL": "https://conversation-with-discovery-openwhisk-01.mybluemix.net",
+  "previewURLs": ["https://conversation-with-discovery-openwhisk-demo.mybluemix.net/"],
+  "demoURL": "https://conversation-with-discovery-openwhisk-demo.mybluemix.net/",
   "type": "WEB",
   "tags": ["watson"],
   "generators": {
@@ -34,8 +52,8 @@
     "discovery": "https://www.ibm.com/watson/services/discovery/"
   },
   "servicePlans": {
-    "conversation": "free",
-    "discovery": "free"
+    "conversation": "lite",
+    "discovery": "lite"
   },
   "email": "mamoon.raja@ibm.com"
 }
