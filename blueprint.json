@@ -33,7 +33,7 @@
   },
   "generatorOptions": {
     "generator-starterkit-content-downloader": {
-      "registry": "https://npm-registry.whitewater.ibm.com",
+      "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/bmd-npm",
       "scope": "@arf",
       "version": "0.0.x"
     },
