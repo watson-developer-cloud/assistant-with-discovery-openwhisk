@@ -24,7 +24,7 @@
   "previewURLs": ["https://conversation-with-discovery-openwhisk-demo.mybluemix.net/"],
   "demoURL": "https://conversation-with-discovery-openwhisk-demo.mybluemix.net/",
   "type": "WEB",
-  "tags": ["watson"],
+  "tags": ["watson", "hide-devops"],
   "generators": {
     "node": [
       "generator-starterkit-content-downloader",
@@ -33,7 +33,7 @@
   },
   "generatorOptions": {
     "generator-starterkit-content-downloader": {
-      "registry": "https://npm-registry.whitewater.ibm.com",
+      "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/bmd-npm",
       "scope": "@arf",
       "version": "0.0.x"
     },
