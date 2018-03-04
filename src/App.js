@@ -53,7 +53,7 @@ class App extends Component {
     if(responseJson.hasOwnProperty('output') && responseJson.output.hasOwnProperty('action') && responseJson.output.action.hasOwnProperty('call_discovery')) {
       this.addMessage( { label: 'Discovery Result:', message: 'Great question. Here\'s what I found:', date: (new Date()).toLocaleTimeString()});
       this.formatDiscovery(responseJson.output.discoveryResults);
-            
+
     } else {
       const outputMessage = responseJson.output.text.filter(text => text).join('\n');
       const outputIntent = responseJson.intents[0] ? responseJson.intents[0]['intent'] : '';
@@ -99,7 +99,7 @@ class App extends Component {
       const formattedResult = <DiscoveryResult key={'d' + this.state.discoveryNumber + index} title={result.title} preview={result.bodySnippet} link={result.sourceUrl} linkText={'See full manual entry'} />;
       this.addMessage({ message: formattedResult });
     }.bind(this));
-        
+
     this.setState({
       discoveryNumber: this.state.discoveryNumber + 1
     });
@@ -120,7 +120,7 @@ class App extends Component {
     return(
       <div className="app-wrapper">
         <p className="conversation__intro">
-                    This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform.
+                    This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM serverless platform.
         </p>
         <Conversation
           onSubmit={this.handleSubmit}
