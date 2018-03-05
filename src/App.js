@@ -50,6 +50,7 @@ class App extends Component {
   }
 
   handleResponse(responseJson) {
+    console.log(responseJson);
     if(responseJson.hasOwnProperty('output') && responseJson.output.hasOwnProperty('action') && responseJson.output.action.hasOwnProperty('call_discovery')) {
       this.addMessage( { label: 'Discovery Result:', message: 'Great question. Here\'s what I found:', date: (new Date()).toLocaleTimeString()});
       this.formatDiscovery(responseJson.output.discoveryResults);
@@ -96,7 +97,7 @@ class App extends Component {
 
   formatDiscovery(resultArr) {
     resultArr.map(function(result, index) {
-      const formattedResult = <DiscoveryResult key={'d' + this.state.discoveryNumber + index} title={result.title} preview={result.bodySnippet} link={result.sourceUrl} linkText={'See full manual entry'} />;
+      const formattedResult = <DiscoveryResult key={'d' + this.state.discoveryNumber + index} result={result} linkText={'See full manual entry'} />;
       this.addMessage({ message: formattedResult });
     }.bind(this));
 

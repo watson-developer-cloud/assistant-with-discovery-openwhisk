@@ -28,13 +28,14 @@ function main(params) {
 
     //Make Discovery request only if Conversation output includes a "call discovery" property
     if(params.output.hasOwnProperty('action') && params.output.action.hasOwnProperty('call_discovery')) {
+      console.log(params.output);
 
       var discovery = new DiscoveryV1({
         username: params.username,
         password: params.password,
-        version_date: '2016-12-01'
+        version_date: '2017-11-07'
       });
-            
+
       discovery.query({environment_id: params.environment_id,
         collection_id: params.collection_id,
         query: params.input.text
@@ -42,22 +43,24 @@ function main(params) {
         if (err) {
           return reject(err);
         }
-                
+
         var i = 0;
         var discoveryResults = [];
+        // var discoveryResults = data;
         while (data.results[i] && i < 3 ) {
-          let body = data.results[i].contentHtml;
-          discoveryResults[i] = {
-            body: body,
-            bodySnippet: (body.length < 144 ? body : (body.substring(0,144) + '...')).replace(/<\/?[a-zA-Z]+>/g, ''),
-            confidence: data.results[i].score,
-            id: data.results[i].id,
-            sourceUrl: data.results[i].sourceUrl,
-            title: data.results[i].title
-          };
+          // let body = data.results[i].contentHtml;
+          // discoveryResults[i] = {
+          //   body: body,
+          //   bodySnippet: (body.length < 144 ? body : (body.substring(0,144) + '...')).replace(/<\/?[a-zA-Z]+>/g, ''),
+          //   confidence: data.results[i].score,
+          //   id: data.results[i].id,
+          //   sourceUrl: data.results[i].sourceUrl,
+          //   title: data.results[i].title
+          // };
+          discoveryResults[i] = data.results[i];
           i++;
         }
-                
+
         params.output.discoveryResults = discoveryResults;
         var conversationWithData = params;
         delete conversationWithData.username;
