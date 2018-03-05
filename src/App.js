@@ -50,9 +50,8 @@ class App extends Component {
   }
 
   handleResponse(responseJson) {
-    console.log(responseJson);
     if(responseJson.hasOwnProperty('output') && responseJson.output.hasOwnProperty('action') && responseJson.output.action.hasOwnProperty('call_discovery')) {
-      this.addMessage( { label: 'Discovery Result:', message: 'Great question. Here\'s what I found:', date: (new Date()).toLocaleTimeString()});
+      this.addMessage( { label: 'Discovery Result:', message: responseJson.output.text[0], date: (new Date()).toLocaleTimeString()});
       this.formatDiscovery(responseJson.output.discoveryResults);
 
     } else {
@@ -120,9 +119,9 @@ class App extends Component {
   render() {
     return(
       <div className="app-wrapper">
-        <p className="conversation__intro">
-                    This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM serverless platform.
-        </p>
+        <h1 className="conversation__intro">
+                    ReviewInsights
+        </h1>
         <Conversation
           onSubmit={this.handleSubmit}
           messageObjectList={this.state.messageObjectList}
