@@ -1,4 +1,4 @@
-$from-left-color: rgb(175, 110, 232);
+$from-left-color: rgb(68, 92, 71);
 $from-right-color: rgb(224, 224, 224);
 $label-color: rgb(0, 180, 160);
 $date-color: rgb(119, 118, 119);
@@ -93,7 +93,7 @@ $conversation-bg-color: #fff;
             background-color: $from-right-color;
         }
     }
-    
+
     &__tail-foreground {
         height: inherit;
         width: inherit;

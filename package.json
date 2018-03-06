@@ -4,14 +4,18 @@
   "private": true,
   "dependencies": {
     "async": "^2.5.0",
+    "axios": "^0.18.0",
+    "base-64": "^0.1.0",
     "dotenv": "^4.0.0",
     "node-sass-chokidar": "0.0.3",
     "npm-run-all": "^4.0.2",
     "path": "^0.12.7",
     "react": "^15.6.1",
+    "react-audio-recorder": "^2.0.1",
     "react-dom": "^15.6.1",
     "replace": "^0.3.0",
-    "watson-react-components": "^0.6.9"
+    "watson-react-components": "^0.6.9",
+    "watson-speech": "^0.34.1"
   },
   "devDependencies": {
     "codecov": "^3.0.0",
