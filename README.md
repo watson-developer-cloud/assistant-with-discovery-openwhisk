@@ -1,8 +1,8 @@
-# Conversation with Discovery - OpenWhisk
+# Watson Assistant with Discovery - OpenWhisk
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/conversation-with-discovery-openwhisk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/conversation-with-discovery-openwhisk) [![codecov](https://codecov.io/gh/watson-developer-cloud/conversation-with-discovery-openwhisk/branch/master/graph/badge.svg)](https://codecov.io/gh/watson-developer-cloud/conversation-with-discovery-openwhisk)
 
-This application shows the capabilities of Watson Conversation and Discovery services to work together to find answers on a given query. In this sample app, the user is chatting with a virtual car dashboard, giving it commands in plain English such as "Turn on the wipers," "Play me some music," or "Let's find some food." If the user makes a request and Conversation is not confident in its answer (e.g. "How do I check my tire pressure?"), Discovery will search the car manual and return the most relevant results, if relevant materials exist.
+This application shows the capabilities of Watson Assistant and Discovery services to work together to find answers on a given query. In this sample app, the user is chatting with a virtual car dashboard, giving it commands in plain English such as "Turn on the wipers," "Play me some music," or "Let's find some food." If the user makes a request and Watson Assistant is not confident in its answer (e.g. "How do I check my tire pressure?"), Discovery will search the car manual and return the most relevant results, if relevant materials exist.
 
 This demo is a reworking of [a previous one](https://github.com/watson-developer-cloud/conversation-with-discovery) but with an OpenWhisk back-end and React front-end. OpenWhisk is IBM's "serverless" offering, allowing users to upload functions to the cloud, call them via REST API, and pay only by the millisecond of usage.
 
@@ -24,8 +24,8 @@ This demo is a reworking of [a previous one](https://github.com/watson-developer
 Under the hood, there are two components to this app:
 * One is the front-end, which is simply static assets (HTML, CSS, and React), it uses CSS with Sass for cleaner, more maintainable source code.
 * The other is the OpenWhisk actions:
-  * When the user inputs text, the UI sends the current context and input to the OpenWhisk sequence. These are processed by the Conversation service and returned, with an output and new context. The results are sent to the next action.
-  * The Discovery action checks for a flag from the Conversation output, and if it is present takes the original input and queries the manual with it. If there is no flag, the Conversation results pass through the function unchanged. The Sequence returns the output and updated context back to the UI.
+  * When the user inputs text, the UI sends the current context and input to the OpenWhisk sequence. These are processed by the Watson Assistant service and returned, with an output and new context. The results are sent to the next action.
+  * The Discovery action checks for a flag from the Watson Assistant output, and if it is present takes the original input and queries the manual with it. If there is no flag, the Watson Assistant results pass through the function unchanged. The Sequence returns the output and updated context back to the UI.
 
 
 ## Run Locally
@@ -55,7 +55,7 @@ npm install
 2. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in to a new `credentials.json` file.
 
 ### Train Watson Services
-Run following commands to train Conversation and Discovery services:
+Run following commands to train Watson Assistant and Discovery services:
 ``` bash
   npm run train
 ```
