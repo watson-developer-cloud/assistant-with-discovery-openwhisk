@@ -31,8 +31,8 @@ Under the hood, there are two components to this app:
 ## Run Locally
 
 ### Getting Started
-1. If you don't already have a Bluemix account, you can sign up [here](https://console.bluemix.net/?cm_mmc=GitHubReadMe)
-> Make sure you have at least 2 services available in your Bluemix account.
+1. If you don't already have an IBM Cloud account, you can sign up [here](https://console.bluemix.net/?cm_mmc=GitHubReadMe)
+> Make sure you have at least 2 services available in your IBM Cloud account.
 
 2. Clone (or fork) this repository, and go to the new directory
 ```bash
@@ -65,7 +65,7 @@ Run following commands to train Conversation and Discovery services:
 
 2. Download and install the [Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html).
 
-3. Login to Bluemix by running the following:
+3. Login by running the following:
 
 ```bash
 bx login
