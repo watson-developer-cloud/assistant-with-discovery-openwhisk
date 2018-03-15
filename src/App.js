@@ -120,7 +120,7 @@ class App extends Component {
     return(
       <div className="app-wrapper">
         <p className="conversation__intro">
-                    This demo shows how the Conversation service calls the Discovery service when it does not know how to respond. The calls to Conversation and Discovery are made in OpenWhisk, IBM's serverless platform.
+                    This demo shows how the Watson Assistant service calls the Discovery service when it does not know how to respond. The calls to Watson Assistant and Discovery are made in OpenWhisk, IBM's serverless platform.
         </p>
         <Conversation
           onSubmit={this.handleSubmit}

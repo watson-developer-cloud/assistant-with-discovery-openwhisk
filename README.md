@@ -1,10 +1,11 @@
 # Watson Assistant (formerly Conversation) with Discovery - OpenWhisk
 
-[![Build Status](https://travis-ci.org/watson-developer-cloud/conversation-with-discovery-openwhisk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/conversation-with-discovery-openwhisk) [![codecov](https://codecov.io/gh/watson-developer-cloud/conversation-with-discovery-openwhisk/branch/master/graph/badge.svg)](https://codecov.io/gh/watson-developer-cloud/conversation-with-discovery-openwhisk)
+
+[![Build Status](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk) [![codecov](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk/branch/master/graph/badge.svg)](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk)
 
 This application shows the capabilities of Watson Assistant and Discovery services to work together to find answers on a given query. In this sample app, the user is chatting with a virtual car dashboard, giving it commands in plain English such as "Turn on the wipers," "Play me some music," or "Let's find some food." If the user makes a request and Watson Assistant is not confident in its answer (e.g. "How do I check my tire pressure?"), Discovery will search the car manual and return the most relevant results, if relevant materials exist.
 
-This demo is a reworking of [a previous one](https://github.com/watson-developer-cloud/conversation-with-discovery) but with an OpenWhisk back-end and React front-end. OpenWhisk is IBM's "serverless" offering, allowing users to upload functions to the cloud, call them via REST API, and pay only by the millisecond of usage.
+This demo is a reworking of [a previous one](https://github.com/watson-developer-cloud/assistant-with-discovery) but with an OpenWhisk back-end and React front-end. OpenWhisk is IBM's "serverless" offering, allowing users to upload functions to the cloud, call them via REST API, and pay only by the millisecond of usage.
 
 ## Table of Contents
 * [How it Works](#how-it-works)
@@ -36,8 +37,8 @@ Under the hood, there are two components to this app:
 
 2. Clone (or fork) this repository, and go to the new directory
 ```bash
-git clone https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk.git
-cd conversation-with-discovery-openwhisk
+git clone https://github.com/watson-developer-cloud/assistant-with-discovery-openwhisk.git
+cd assistant-with-discovery-openwhisk
 ```
 
 3. Install [Node.js](https://nodejs.org) (Versions >= 6).
