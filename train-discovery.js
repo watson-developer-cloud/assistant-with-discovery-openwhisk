@@ -6,19 +6,19 @@ require('dotenv');
 
 var fs = require('fs');
 var replace = require('replace');
-var watson = require('watson-developer-cloud');
+var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 var async = require('async');
 var path = require('path');
 
 process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials.json', 'utf-8');
 
-var discoveryV1 = new watson.discovery({ version: 'v1', version_date: '2017-04-27' });
+var discoveryV1 = new DiscoveryV1({ version: 'v1', version_date: '2017-04-27' });
 var retryOptions = { times: 3, interval: 200 };
 var defaultConfigName = 'Default Configuration'; // Use default configuration
 var collectionName = 'demoCollection';
-var collectionDescription = 'Collection for Conversation with Discovery - OpenWhisk';
+var collectionDescription = 'Collection for Watson Assistant with Discovery - OpenWhisk';
 var environmentName = 'demoEnvironment';
-var environmentDescription = 'Environment for Conversation with Discovery - OpenWhisk';
+var environmentDescription = 'Environment for Watson Assistant with Discovery - OpenWhisk';
 
 
 /**
@@ -40,7 +40,7 @@ var getEnvironmentAsync = function(params, cb) {
  * @return {Object}
  */
 var getEnvironmentsAsync = function(cb) {
-  return async.retry(retryOptions, discoveryV1.getEnvironments.bind(discoveryV1, null), cb);
+  return async.retry(retryOptions, discoveryV1.listEnvironments.bind(discoveryV1, null), cb);
 };
 
 /**
@@ -64,7 +64,7 @@ var createEnvironmentAsync = function(cb) {
  * @return {Object}
  */
 var getConfigurationsAsync = function(params, cb) {
-  return async.retry(retryOptions, discoveryV1.getConfigurations.bind(discoveryV1, {
+  return async.retry(retryOptions, discoveryV1.listConfigurations.bind(discoveryV1, {
     environment_id: params.env_id
   }), cb);
 };
@@ -93,7 +93,7 @@ var createConfigurationAsync = function(params, cb) {
  * @return {Object}
  */
 var getCollectionsAsync = function(params, cb) {
-  return async.retry(retryOptions, discoveryV1.getCollections.bind(discoveryV1, {
+  return async.retry(retryOptions, discoveryV1.listCollections.bind(discoveryV1, {
     environment_id: `${params.env_id}`
   }), cb);
 };
