@@ -1,5 +1,5 @@
 {
-  "name": "Watson Serverless Conversation With Discovery",
+  "name": "Watson Assistant With Discovery - Serverless",
   "checklist": [
     {
       "label": "Click \"Download Code\" to download a .zip file of your generated app."
@@ -8,17 +8,17 @@
       "label": "Extract the .zip file. You can also view the contents of the Readme file to get started."
     },
     {
-      "label": "Launch the tool to train the Conversation and Discovery services."
+      "label": "Launch the tool to train the Wastson Assistant and Discovery services."
     },
     {
       "label": "Run starter kit locally.",
-      "link": "https://github.com/watson-developer-cloud/conversation-with-discovery-openwhisk#run-locally"
+      "link": "https://github.com/watson-developer-cloud/assistant-with-discovery-openwhisk#run-locally"
     },
     {
-      "label": "Review the documentation and API reference to learn more about Watson Conversation and Discovery."
+      "label": "Review the documentation and API reference to learn more about Watson Assistant and Discovery."
     }
   ],
-  "description": "This application shows the capabilities of Watson Conversation and Discovery services to work together to find answers on a given query.",
+  "description": "This application shows the capabilities of Watson Assistant and Discovery services to work together to find answers on a given query.",
   "thumbnailURL": "blueprint/thumbnail.svg",
   "appIconURL": "blueprint/appicon.svg",
   "previewURLs": ["https://conversation-with-discovery-openwhisk-demo.mybluemix.net/"],
