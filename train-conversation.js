@@ -5,7 +5,7 @@
 require('dotenv');
 const fs = require('fs');
 const replace = require('replace');
-const watson = require('watson-developer-cloud');
+var ConversationV1 = require('watson-developer-cloud/conversation/v1');
 const async = require('async');
 
 /**
@@ -26,7 +26,7 @@ var updateEnvProperties= function(params) {
 
 process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials.json', 'utf-8');
 
-const conversation = new watson.conversation({ version: 'v1', version_date: '2017-04-21' });
+const conversation = new ConversationV1({ version: 'v1', version_date: '2017-04-21' });
 
 conversation.listWorkspaces(function(err, response) {
   if (err) {
