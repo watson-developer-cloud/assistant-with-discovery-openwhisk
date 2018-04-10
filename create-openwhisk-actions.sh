@@ -1,4 +1,4 @@
-source .env; 
+source ./.env; 
 
 # Retrieve credentials from file
 CONVERSATION_USERNAME=`jq .conversation[].credentials.username credentials.json`;
