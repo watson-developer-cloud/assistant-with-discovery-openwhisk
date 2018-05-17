@@ -11328,7 +11328,7 @@
             "output": {
                 "text": {
                     "values": [
-                        "That question is out of scope for this application, take a look at the Conversation Enhanced application to handle questions like these."
+                        "That question is out of scope for this application, take a look at the Watson Assistant Enhanced application to handle questions like these."
                     ]
                 },
                 "action": {
