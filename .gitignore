@@ -21,3 +21,7 @@ credentials.json
 
 # Code coverage
 coverage
+
+.idea
+npm-debug.log
+.idea/

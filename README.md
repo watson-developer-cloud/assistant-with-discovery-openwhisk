@@ -1,4 +1,5 @@
-# Watson Assistant with Discovery - OpenWhisk
+# Watson Assistant (formerly Conversation) with Discovery - OpenWhisk
+
 
 [![Build Status](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk) [![codecov](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk/branch/master/graph/badge.svg)](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk)
 
