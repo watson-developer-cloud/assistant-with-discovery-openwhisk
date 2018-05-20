@@ -32,7 +32,7 @@ Under the hood, there are two components to this app:
 ## Run Locally
 
 ### Getting Started
-1. If you don't already have an IBM Cloud account, you can sign up [here](https://console.bluemix.net/?cm_mmc=GitHubReadMe)
+1. If you don't already have an IBM Cloud account, you can sign up [here](https://console.bluemix.net/registration/?cm_mmc=GitHubReadMe)
 > Make sure you have at least 2 services available in your IBM Cloud account.
 
 2. Clone (or fork) this repository, and go to the new directory
