@@ -21,8 +21,8 @@
   "description": "This application shows the capabilities of Watson Assistant and Discovery services to work together to find answers on a given query.",
   "thumbnailURL": "blueprint/thumbnail.svg",
   "appIconURL": "blueprint/appicon.svg",
-  "previewURLs": ["https://conversation-with-discovery-openwhisk-demo.mybluemix.net/"],
-  "demoURL": "https://conversation-with-discovery-openwhisk-demo.mybluemix.net/",
+  "previewURLs": ["https://assistant-with-discovery-openwhisk-demo.mybluemix.net/"],
+  "demoURL": "https://assistant-with-discovery-openwhisk-demo.mybluemix.net/",
   "type": "WEB",
   "tags": ["watson", "hide-devops"],
   "generators": {

@@ -6,8 +6,8 @@ import Message from './Message.js';
 function Conversation(props) {
 
   function makeMessage(msgObj, index) {
-        
-    if( typeof msgObj.message === 'string') {
+
+    if (typeof msgObj.message === 'string') {
       return(
         <Message key={index} position={msgObj.position || false} label={msgObj.label || false} date={msgObj.date || false} message={msgObj.message} hasTail={msgObj.hasTail || false}/>
       );

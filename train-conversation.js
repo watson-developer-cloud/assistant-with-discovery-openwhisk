@@ -34,7 +34,7 @@ conversation.listWorkspaces(function(err, response) {
   } else if (response.workspaces.length > 0 && response.workspaces[0].name === 'Car_Dashboard_New') {
     console.log('Workspace exists');
     updateEnvProperties({
-      regexText: 'REPLACE WITH YOUR WORKSPACE ID', 
+      regexText: 'REPLACE WITH YOUR WORKSPACE ID',
       replacement: response.workspaces[0].workspace_id,
     });
   } else {
@@ -42,7 +42,7 @@ conversation.listWorkspaces(function(err, response) {
     conversation.createWorkspace(require('./training/workspace.json'), function(err, response) {
       if (!err) {
         updateEnvProperties({
-          regexText: 'REPLACE WITH YOUR WORKSPACE ID', 
+          regexText: 'REPLACE WITH YOUR WORKSPACE ID',
           replacement: response.workspace_id,
         });
       }

@@ -2,9 +2,6 @@ import React from 'react';
 import './Message.css';
 
 function Message(props) {
-
-
-
   return(
     <div className={props.position === 'right' ? 'message message--from-right' : 'message message--from-left'}>
       {props.label ? <div className="message__label">{props.label}</div> : false}
@@ -18,7 +15,6 @@ function Message(props) {
       {props.date ? <div className="message__date">{props.date}</div> : false}
     </div>
   );
-
 }
 
 export default Message;
