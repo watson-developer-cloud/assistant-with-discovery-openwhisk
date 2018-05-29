@@ -12,7 +12,7 @@ var path = require('path');
 
 process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials.json', 'utf-8');
 
-var apiVersionDate = "2018-03-05"
+var apiVersionDate = '2018-03-05';
 var discoveryV1 = new DiscoveryV1({ version: 'v1', version_date: apiVersionDate });
 var retryOptions = { times: 3, interval: 200 };
 var defaultConfigName = 'Default Configuration with NLU'; // Use default configuration
