@@ -12,9 +12,10 @@ var path = require('path');
 
 process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials.json', 'utf-8');
 
-var discoveryV1 = new DiscoveryV1({ version: 'v1', version_date: '2017-04-27' });
+var apiVersionDate = '2018-03-05';
+var discoveryV1 = new DiscoveryV1({ version: 'v1', version_date: apiVersionDate });
 var retryOptions = { times: 3, interval: 200 };
-var defaultConfigName = 'Default Configuration'; // Use default configuration
+var defaultConfigName = 'Default Configuration with NLU'; // Use default configuration
 var collectionName = 'demoCollection';
 var collectionDescription = 'Collection for Watson Assistant with Discovery - OpenWhisk';
 var environmentName = 'demoEnvironment';
@@ -112,7 +113,7 @@ var createCollectionAsync = function(params, cb) {
     name: collectionName,
     description: collectionDescription,
     configuration_id: `${params.config_id}`,
-    version: '2017-04-27'
+    version: apiVersionDate
   }), cb);
 };
 
