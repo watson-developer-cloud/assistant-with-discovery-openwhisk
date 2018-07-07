@@ -24,7 +24,7 @@
   "previewURLs": ["https://assistant-with-discovery-openwhisk-demo.ng.bluemix.net/"],
   "demoURL": "https://assistant-with-discovery-openwhisk-demo.ng.bluemix.net/",
   "type": "WEB",
-  "tags": ["watson", "hide-devops"],
+  "tags": ["devex", "hide-devops"],
   "generators": {
     "node": [
       "generator-starterkit-content-downloader",
