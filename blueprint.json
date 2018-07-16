@@ -38,9 +38,9 @@
       "version": "0.0.x"
     },
     "generator-github-project": {
-      "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/wcp-watson-e2e-npm-remote",
+      "registry": "https://na.artifactory.swg-devops.com/artifactory/api/npm/bmd-npm/",
       "scope": "@watson",
-      "version": "0.0.x"
+      "version": "1.0.x"
     }
   },
   "requiredCapabilities": [
