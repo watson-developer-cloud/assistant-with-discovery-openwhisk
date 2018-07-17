@@ -8,17 +8,17 @@ function Conversation(props) {
   function makeMessage(msgObj, index) {
 
     if (typeof msgObj.message === 'string') {
-      return(
+      return (
         <Message key={index} position={msgObj.position || false} label={msgObj.label || false} date={msgObj.date || false} message={msgObj.message} hasTail={msgObj.hasTail || false}/>
       );
-    } else if( React.isValidElement(msgObj.message)) {
-      return( msgObj.message );
+    } else if ( React.isValidElement(msgObj.message)) {
+      return ( msgObj.message );
     } else {
       return false;
     }
   }
 
-  return(
+  return (
     <div className="conversation">
       <div className="conversation__messages">
         <div>

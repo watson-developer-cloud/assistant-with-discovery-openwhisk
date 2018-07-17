@@ -4,22 +4,21 @@
 
 require('dotenv');
 
-var fs = require('fs');
-var replace = require('replace');
-var DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
-var async = require('async');
-var path = require('path');
+const fs = require('fs');
+const replace = require('replace');
+const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
+const async = require('async');
+const path = require('path');
 
 process.env.VCAP_SERVICES = process.env.VCAP_SERVICES || fs.readFileSync('./credentials.json', 'utf-8');
 
-var apiVersionDate = '2018-03-05';
-var discoveryV1 = new DiscoveryV1({ version: 'v1', version_date: apiVersionDate });
-var retryOptions = { times: 3, interval: 200 };
-var defaultConfigName = 'Default Configuration with NLU'; // Use default configuration
-var collectionName = 'demoCollection';
-var collectionDescription = 'Collection for Watson Assistant with Discovery - OpenWhisk';
-var environmentName = 'demoEnvironment';
-var environmentDescription = 'Environment for Watson Assistant with Discovery - OpenWhisk';
+const discoveryV1 = new DiscoveryV1({ version: '2018-03-05' });
+const retryOptions = { times: 3, interval: 200 };
+const defaultConfigName = 'Default Configuration'; // Use default configuration
+const collectionName = 'demoCollection';
+const collectionDescription = 'Collection for Watson Assistant with Discovery - OpenWhisk';
+const environmentName = 'demoEnvironment';
+const environmentDescription = 'Environment for Watson Assistant with Discovery - OpenWhisk';
 
 
 /**
@@ -29,7 +28,7 @@ var environmentDescription = 'Environment for Watson Assistant with Discovery - 
  * @param  {Function} cb
  * @return {Object}
  */
-var getEnvironmentAsync = function(params, cb) {
+const getEnvironmentAsync = function(params, cb) {
   return async.retry(retryOptions, discoveryV1.getEnvironment.bind(discoveryV1, {
     environment_id: params.env_id
   }), cb);
@@ -40,7 +39,7 @@ var getEnvironmentAsync = function(params, cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var getEnvironmentsAsync = function(cb) {
+const getEnvironmentsAsync = function(cb) {
   return async.retry(retryOptions, discoveryV1.listEnvironments.bind(discoveryV1, null), cb);
 };
 
@@ -49,7 +48,7 @@ var getEnvironmentsAsync = function(cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var createEnvironmentAsync = function(cb) {
+const createEnvironmentAsync = function(cb) {
   return async.retry(retryOptions, discoveryV1.createEnvironment.bind(discoveryV1, {
     name: environmentName,
     description: environmentDescription,
@@ -64,7 +63,7 @@ var createEnvironmentAsync = function(cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var getConfigurationsAsync = function(params, cb) {
+const getConfigurationsAsync = function(params, cb) {
   return async.retry(retryOptions, discoveryV1.listConfigurations.bind(discoveryV1, {
     environment_id: params.env_id
   }), cb);
@@ -78,8 +77,8 @@ var getConfigurationsAsync = function(params, cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var createConfigurationAsync = function(params, cb) {
-  var configFile = fs.readFileSync('./training/discovery_config.json', 'utf-8'); // If you are not using default configuration, add your configuration to ./training/discovery_config.json
+const createConfigurationAsync = function(params, cb) {
+  const configFile = fs.readFileSync('./training/discovery_config.json', 'utf-8'); // If you are not using default configuration, add your configuration to ./training/discovery_config.json
   return async.retry(retryOptions, discoveryV1.createConfiguration.bind(discoveryV1, {
     environment_id: `${params.env_id}`,
     file: configFile
@@ -93,7 +92,7 @@ var createConfigurationAsync = function(params, cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var getCollectionsAsync = function(params, cb) {
+const getCollectionsAsync = function(params, cb) {
   return async.retry(retryOptions, discoveryV1.listCollections.bind(discoveryV1, {
     environment_id: `${params.env_id}`
   }), cb);
@@ -107,13 +106,12 @@ var getCollectionsAsync = function(params, cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var createCollectionAsync = function(params, cb) {
+const createCollectionAsync = function(params, cb) {
   return async.retry(retryOptions, discoveryV1.createCollection.bind(discoveryV1, {
     environment_id: `${params.env_id}`,
     name: collectionName,
     description: collectionDescription,
     configuration_id: `${params.config_id}`,
-    version: apiVersionDate
   }), cb);
 };
 
@@ -127,7 +125,7 @@ var createCollectionAsync = function(params, cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var uploadDocumentAsync = function(params, cb) {
+const uploadDocumentAsync = function(params, cb) {
   return async.retry(retryOptions, discoveryV1.addDocument.bind(discoveryV1, {
     environment_id: `${params.env_id}`,
     collection_id: `${params.collection_id}`,
@@ -147,8 +145,8 @@ var uploadDocumentAsync = function(params, cb) {
  * @param  {Function} cb
  * @return {Object}
  */
-var uploadDocument = function(params, cb) {
-  var wrapped = async.timeout(uploadDocumentAsync, 2000);
+const uploadDocument = function(params, cb) {
+  const wrapped = async.timeout(uploadDocumentAsync, 2000);
   wrapped(params, function(err, res) {
     if (err) {
       console.log(params.file.path, err);
@@ -163,13 +161,13 @@ var uploadDocument = function(params, cb) {
  * @param  {Function} callback
  * @return {Object}
  */
-var getOrCreateEnvironment = function(callback) {
+const getOrCreateEnvironment = function(callback) {
   console.log('Creating environment');
   getEnvironmentsAsync(function(listError, listResponse) {
     if (listError) {
       return callback(listError);
     }
-    var environments = listResponse.environments
+    const environments = listResponse.environments
       .filter(function(environment) { return environment.name === environmentName; });
     if (environments.length === 1) {
       console.log(`Environment already exists, Using Environment ${environments[0].name}`);
@@ -179,7 +177,7 @@ var getOrCreateEnvironment = function(callback) {
         if (createError) {
           return callback(createError);
         }
-        var timer = setInterval(function() {
+        const timer = setInterval(function() {
           getEnvironmentAsync({ env_id: createResponse.environment_id }, function(getError, getResponse) {
             if (getError) {
               return callback(getError);
@@ -204,8 +202,8 @@ var getOrCreateEnvironment = function(callback) {
  * @param  {Function} callback
  * @return {[type]}
  */
-var getOrCreateConfiguration = function(params, callback) {
-  console.log('Creating configuration');
+const getOrCreateConfiguration = function(params, callback) {
+  console.log('Creating a configuration');
   getConfigurationsAsync({
     env_id: params.env_id
   },
@@ -213,8 +211,10 @@ var getOrCreateConfiguration = function(params, callback) {
     if (listError) {
       return callback(listError);
     }
-    var configurations = listResponse.configurations
-      .filter(function(configuration) { return configuration.name === defaultConfigName; });
+    const configurations = listResponse.configurations
+      .filter(function(configuration) {
+        return configuration.name === defaultConfigName;
+      });
     if (configurations.length === 1) {
       console.log(`Configuration already exists, Using configuration ${configurations[0].name}`);
       callback(null, configurations[0]);
@@ -240,7 +240,7 @@ var getOrCreateConfiguration = function(params, callback) {
  * @param  {Function} callback
  * @return {[type]}
  */
-var getOrCreateCollection = function(params, callback) {
+const getOrCreateCollection = function(params, callback) {
   console.log('Creating a collection');
   getCollectionsAsync({
     env_id: params.env_id
@@ -249,7 +249,7 @@ var getOrCreateCollection = function(params, callback) {
     if (listError) {
       return callback(listError);
     }
-    var collections = listResponse.collections
+    const collections = listResponse.collections
       .filter(function(collection) { return collection.name === collectionName; });
     if (collections.length === 1) {
       console.log(`Collection already exists, Using collection ${collections[0].name}`);
@@ -279,9 +279,9 @@ var getOrCreateCollection = function(params, callback) {
  * @param  {Function} callback
  * @return {Object}
  */
-var uploadDocuments = function(params, callback) {
+const uploadDocuments = function(params, callback) {
   console.log('Uploading documents');
-  var asyncTasks = [];
+  const asyncTasks = [];
   fs.readdir('./manualdocs/', function (err, files) {
     if (err) {
       throw err;
@@ -313,7 +313,7 @@ var uploadDocuments = function(params, callback) {
  * @param  {String} params.regexText
  * @param  {String} params.replacement
  */
-var updateEnvProperties= function(params) {
+const updateEnvProperties= function(params) {
   replace({
     regex: params.regexText,
     replacement: params.replacement,

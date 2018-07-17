@@ -11,7 +11,7 @@ describe('[action] Discovery', function() {
     nock('https://gateway.watsonplatform.net:443')
       .get(`/discovery/api/v1/environments/${environment_id}/collections/${collection_id}/query`)
       .query({
-        'version': '2016-12-01'
+        'version': '2018-03-05'
       })
       .reply(200, {
         results: [
@@ -36,7 +36,7 @@ describe('[action] Discovery', function() {
     return action.main(params).then(function() {
       assert.fail('Missing credentials error was not found');
     }).catch(function(error) {
-      assert(error.message === 'params.username cannot be null');
+      assert(error.message === 'params.username and params.iam_apikey cannot be null');
     });
   });
 

@@ -5,12 +5,11 @@ const nock = require('nock');
 const workspace_id = 'fake-id';
 
 describe('[action] Conversation', function() {
-    
   beforeEach(function() {
     nock('https://gateway.watsonplatform.net:443')
-      .post(`/conversation/api/v1/workspaces/${workspace_id}/message`)
+      .post(`/assistant/api/v1/workspaces/${workspace_id}/message`)
       .query({
-        'version': '2017-05-26'
+        'version': '2018-07-10'
       })
       .reply(200, {
         'fake-key': 'fake-value'
@@ -26,7 +25,7 @@ describe('[action] Conversation', function() {
     return action.main(params).then(function() {
       assert.fail('Missing credentials error was not found');
     }).catch(function(error) {
-      assert(error.message === 'params.username cannot be null');
+      assert(error.message === 'params.username and params.iam_apikey cannot be null');
     });
   });
 

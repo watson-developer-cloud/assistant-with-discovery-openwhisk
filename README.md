@@ -60,15 +60,12 @@ Install Python 2.7.x and set npm to use. e.g.
 ### Setting up Watson Services
 > Skip this section if you have downloaded the project from [Watson Console](https://console.ng.bluemix.net/developer/watson) and already have a `credentials.json` file
 
-> If you don't have any instances of Watson Assistant or Watson Discovery
-1. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Watson Assistant and Discovery services.
-
-2. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in to a new `credentials.json` file.
-
 > If you have instances of Watson Assistant and Watson Discovery that you wish to re-use
 1. Create a `credentials.json` in the top-level directory.
 
-2. Copy the following credentials into the file, amending for the instance name, url, username, and password; which can be found on each instance in the IBM Cloud console
+1. Copy the following credentials into the file, amending for the instance name, url, apikey, and username/password; which can be found on each instance in the IBM Cloud console
+
+> Example `credentials.json` file that configures the apikey and url for a Assitant and Discovery service instances
 ```
 {
   "discovery": [
@@ -76,9 +73,8 @@ Install Python 2.7.x and set npm to use. e.g.
       "name": "Discovery-inst",
       "plan": "lite",
       "credentials": {
-        "url": "https://gateway.watsonplatform.net/discovery/api",
-        "username": "enterUserName",
-        "password": "enterPassword"
+        "url": "enterUrl",
+        "apikey": "enterApiKey",
       }
     }
   ],
@@ -87,14 +83,19 @@ Install Python 2.7.x and set npm to use. e.g.
       "name": "Assistant-inst",
       "plan": "free",
       "credentials": {
-        "url": "https://gateway.watsonplatform.net/assistant/api",
-        "username": "enterUserName",
-        "password": "enterPassword"
+        "url": "enterUrl",
+        "apikey": "enterApiKey",
       }
     }
   ]
 }
 ```
+
+> If you don't have any instances of Watson Assistant or Watson Discovery
+1. [Create  an app](https://console.bluemix.net/developer/watson/create-app?languages=node&starterKit=98d3f084-d93c-31f1-a5ba-f6034786250b) using the Watson Console using Watson Assistant with Discovery starter kit.
+
+2. In the Watson Console navigate to [Apps](https://console.bluemix.net/developer/watson/apps), click your newly created project, copy credentials from the App View page and paste them in to a new `credentials.json` file.
+
 
 ### Train Watson Services
 Run following commands to train Watson Assistant and Discovery services:
@@ -105,13 +106,13 @@ Run following commands to train Watson Assistant and Discovery services:
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli).
 
-2. Download and install the [Bluemix CLI](https://console.bluemix.net/docs/cli/reference/bluemix_cli/get_started.html).
+2. Download and install the [IBM Cloud CLI](https://console.bluemix.net/docs/cli/index.html#overview).
 
 3. Login by running the following:
 
 ```bash
-bx login
-bx target --cf
+ ibmcloud login
+ ibmcloud target --cf
 ```
 
 4. Install [jq](https://stedolan.github.io/jq/download/) as a dependency.
