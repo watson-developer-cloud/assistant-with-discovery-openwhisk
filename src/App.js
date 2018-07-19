@@ -36,10 +36,10 @@ class App extends Component {
         body: requestJson
       }
     ).then((response) => {
-      if(!response.ok) {
+      if (!response.ok) {
         throw response;
       }
-      return(response.json());
+      return (response.json());
     })
       .then((responseJson) => {
         responseJson.date = new Date();
@@ -50,7 +50,7 @@ class App extends Component {
   }
 
   handleResponse(responseJson) {
-    if(responseJson.hasOwnProperty('output') && responseJson.output.hasOwnProperty('action') && responseJson.output.action.hasOwnProperty('call_discovery')) {
+    if (responseJson.hasOwnProperty('output') && responseJson.output.hasOwnProperty('action') && responseJson.output.action.hasOwnProperty('call_discovery')) {
       this.addMessage( { label: 'Discovery Result:', message: 'Great question. Here\'s what I found:', date: (new Date()).toLocaleTimeString()});
       this.formatDiscovery(responseJson.output.discoveryResults);
 
@@ -103,7 +103,7 @@ class App extends Component {
     this.setState({
       discoveryNumber: this.state.discoveryNumber + 1
     });
-    return(true);
+    return (true);
   }
 
   scrollToBottom() {
@@ -117,7 +117,7 @@ class App extends Component {
 
 
   render() {
-    return(
+    return (
       <div className="app-wrapper">
         <p className="conversation__intro">
                     This demo shows how the Watson Assistant service calls the Discovery service when it does not know how to respond. The calls to Watson Assistant and Discovery are made in OpenWhisk, IBM's serverless platform.

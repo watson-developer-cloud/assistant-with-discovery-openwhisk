@@ -3,6 +3,8 @@
   * Format and send request to Watson Discovery service if marked as necessary.
   *
   * @param {object} params - the parameters.
+  * @param {string} params.iam_apikey - default parameter, must be set. The IAM apikey for Discovery service.
+  * @param {string} params.url - default parameter, must be set. The url for Discovery service.
   * @param {string} params.username - default parameter, must be set. The username for Discovery service.
   * @param {string} params.password - default parameter, must be set. The password for Discovery service.
   * @param {string} params.environment_id - default parameter, must be set. The environment_id for Discovery service.
@@ -19,22 +21,35 @@ const DiscoveryV1 = require('watson-developer-cloud/discovery/v1');
 function main(params) {
   return new Promise(function (resolve, reject) {
     assert(params, 'params cannot be null');
-    assert(params.username, 'params.username cannot be null');
-    assert(params.password, 'params.password cannot be null');
+    assert(params.username || params.iam_apikey, 'params.username and params.iam_apikey cannot be null');
+    assert(params.password || params.iam_apikey, 'params.password and params.iam_apikey cannot be null');
     assert(params.environment_id, 'params.environment_id cannot be null');
     assert(params.collection_id, 'params.collection_id cannot be null');
     assert(params.input, 'params.input cannot be null');
     assert(params.output, 'params.output cannot be null');
+    assert(params.input, 'params.input cannot be null');
 
-    //Make Discovery request only if Conversation output includes a "call discovery" property
-    if(params.output.hasOwnProperty('action') && params.output.action.hasOwnProperty('call_discovery')) {
+    // Make Discovery request only if Conversation output includes a "call discovery" property
+    if (params.output.hasOwnProperty('action') && params.output.action.hasOwnProperty('call_discovery')) {
 
-      var discovery = new DiscoveryV1({
-        username: params.username,
-        password: params.password,
-        version_date: '2016-12-01'
-      });
-            
+      let discovery;
+      const { iam_apikey, username, password, url } = params;
+      if (iam_apikey) {
+        discovery = new DiscoveryV1({
+          iam_apikey,
+          url,
+          version: '2018-03-05',
+        });
+      }
+      else {
+        discovery = new DiscoveryV1({
+          username,
+          password,
+          url,
+          version: '2018-03-05',
+        });
+      }
+
       discovery.query({environment_id: params.environment_id,
         collection_id: params.collection_id,
         query: params.input.text
@@ -42,7 +57,6 @@ function main(params) {
         if (err) {
           return reject(err);
         }
-                
         var i = 0;
         var discoveryResults = [];
         while (data.results[i] && i < 3 ) {
@@ -57,7 +71,7 @@ function main(params) {
           };
           i++;
         }
-                
+
         params.output.discoveryResults = discoveryResults;
         var conversationWithData = params;
         delete conversationWithData.username;

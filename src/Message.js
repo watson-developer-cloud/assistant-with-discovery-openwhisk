@@ -2,7 +2,7 @@ import React from 'react';
 import './Message.css';
 
 function Message(props) {
-  return(
+  return (
     <div className={props.position === 'right' ? 'message message--from-right' : 'message message--from-left'}>
       {props.label ? <div className="message__label">{props.label}</div> : false}
       <div className="message__content">{props.message}</div>
