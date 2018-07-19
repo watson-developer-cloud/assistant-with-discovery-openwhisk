@@ -12,8 +12,10 @@ parserOptions:
 plugins:
   - react
 rules:
+  no-trailing-spaces: 2
   no-console: 1
   no-unused-vars: 0
+  keyword-spacing: 2
   indent:
     - error
     - 2

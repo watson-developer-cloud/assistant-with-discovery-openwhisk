@@ -60,25 +60,37 @@ Install Python 2.7.x and set npm to use. e.g.
 ### Setting up Watson Services
 > Skip this section if you have downloaded the project from [Watson Console](https://console.ng.bluemix.net/developer/watson) and already have a `credentials.json` file
 
-> If you don't have any instances of Watson Assistant or Watson Discovery
-1. [Create  a project](https://console.bluemix.net/developer/watson/create-project?services=conversation%2Cdiscovery) using the Watson Console using Watson Assistant and Discovery services.
+1. Create an instance of the Assistant service and get your credentials:
+    - Go to the [Assistant](https://console.bluemix.net/catalog/services/conversation) page in the IBM Cloud Catalog.
+    - Log in to your IBM Cloud account.
+    - Click **Create**.
+    - Click **Show** to view the service credentials.
+    - Copy the `apikey` and `iam_apikey_name` value, or copy the `username` and `password` values if your service instance doesn't provide an `apikey`.
+    - Copy the `url` value.
 
-2. In the Watson Console navigate to [Projects](https://console.bluemix.net/developer/watson/projects), click your newly created project, copy credentials from Project View page and paste them in to a new `credentials.json` file.
+1. Create an instance of the Discovery service and get your credentials:
+    - Go to the [Discovery](https://console.bluemix.net/catalog/services/discovery) page in the IBM Cloud Catalog.
+    - Log in to your IBM Cloud account.
+    - Click **Create**.
+    - Click **Show** to view the service credentials.
+    - Copy the `apikey` and `iam_apikey_name` value, or copy the `username` and `password` values if your service instance doesn't provide an `apikey`.
+    - Copy the `url` value.
 
-> If you have instances of Watson Assistant and Watson Discovery that you wish to re-use
 1. Create a `credentials.json` in the top-level directory.
 
-2. Copy the following credentials into the file, amending for the instance name, url, username, and password; which can be found on each instance in the IBM Cloud console
-```
+1. Copy the following credentials into the file, amending for the instance name, url, apikey, and username/password; which can be found on each instance in the IBM Cloud console
+
+> Example `credentials.json` file that configures the apikey and url for a Assitant and Discovery service instances
+```json
 {
   "discovery": [
     {
       "name": "Discovery-inst",
       "plan": "lite",
       "credentials": {
-        "url": "https://gateway.watsonplatform.net/discovery/api",
-        "username": "enterUserName",
-        "password": "enterPassword"
+        "url": "enterUrl",
+        "apikey": "enterApiKey",
+        "iam_apikey_name": "enterApiKeyName"
       }
     }
   ],
@@ -87,21 +99,21 @@ Install Python 2.7.x and set npm to use. e.g.
       "name": "Assistant-inst",
       "plan": "free",
       "credentials": {
-        "url": "https://gateway.watsonplatform.net/assistant/api",
-        "username": "enterUserName",
-        "password": "enterPassword"
+        "url": "enterUrl",
+        "apikey": "enterApiKey",
+        "iam_apikey_name": "enterApiKeyName"
       }
     }
   ]
 }
 ```
 
+
 ### Train Watson Services
 Run following commands to train Watson Assistant and Discovery services:
 ``` bash
   npm run train
-```
-
+`
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli).
 
