@@ -43,7 +43,7 @@ cd assistant-with-discovery-openwhisk
 
 3. Install [Node.js](https://nodejs.org) (Versions >= 6).
 
-4. In the root directory of your repository, install the project dependencies.
+4. In the root directory of your repository, install the dependencies.
 ```bash
 npm install
 ```
@@ -58,7 +58,7 @@ Install Python 2.7.x and set npm to use. e.g.
 ```npm config set python /path/to/python```  
 
 ### Setting up Watson Services
-> Skip this section if you have downloaded the project from [Watson Console](https://console.ng.bluemix.net/developer/watson) and already have a `credentials.json` file
+> Skip this section if you have downloaded the app from [Watson Console](https://console.ng.bluemix.net/developer/watson) and already have a `credentials.json` file
 
 1. Create an instance of the Assistant service and get your credentials:
     - Go to the [Assistant](https://console.bluemix.net/catalog/services/conversation) page in the IBM Cloud Catalog.
@@ -135,13 +135,13 @@ ibmcloud target --cf
 ```
 
 ### Setting up the React Front-end
-Create an optimized build of your project. During this stage, your environment variable will be inserted into App.js for use by your components.
+Create an optimized build of your app. During this stage, your environment variable will be inserted into App.js for use by your components.
 ```bash
 npm run build
 ```
 
 ### Running the App
-All that's left is to serve your static files locally. You should see the project running in a new tab!
+All that's left is to serve your static files locally. You should see the app running in a new tab!
 ```bash
 npm start
 ```
