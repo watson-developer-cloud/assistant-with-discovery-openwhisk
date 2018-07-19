@@ -113,8 +113,7 @@ Install Python 2.7.x and set npm to use. e.g.
 Run following commands to train Watson Assistant and Discovery services:
 ``` bash
   npm run train
-```
-
+`
 ### Setting up the OpenWhisk Back-end
 1. Install the Openwhisk [Command Line Interface](https://console.bluemix.net/openwhisk/learn/cli).
 
@@ -123,8 +122,8 @@ Run following commands to train Watson Assistant and Discovery services:
 3. Login by running the following:
 
 ```bash
- ibmcloud login
- ibmcloud target --cf
+ibmcloud login
+ibmcloud target --cf
 ```
 
 4. Install [jq](https://stedolan.github.io/jq/download/) as a dependency.
