@@ -1,7 +1,7 @@
 # Watson Assistant (formerly Conversation) with Discovery - OpenWhisk
 
 
-[![Build Status](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk) [![codecov](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk/branch/master/graph/badge.svg)](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk)
+[![Build Status](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk.svg?branch=master)](https://travis-ci.org/watson-developer-cloud/assistant-with-discovery-openwhisk) [![codecov](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk/branch/master/graph/badge.svg)](https://codecov.io/gh/watson-developer-cloud/assistant-with-discovery-openwhisk) [![Greenkeeper badge](https://badges.greenkeeper.io/watson-developer-cloud/assistant-with-discovery-openwhisk.svg)](https://greenkeeper.io/)
 
 This application shows the capabilities of Watson Assistant and Discovery services to work together to find answers on a given query. In this sample app, the user is chatting with a virtual car dashboard, giving it commands in plain English such as "Turn on the wipers," "Play me some music," or "Let's find some food." If the user makes a request and Watson Assistant is not confident in its answer (e.g. "How do I check my tire pressure?"), Discovery will search the car manual and return the most relevant results, if relevant materials exist.
 
