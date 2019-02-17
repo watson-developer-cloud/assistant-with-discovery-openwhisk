@@ -20,8 +20,8 @@
     "eslint-plugin-react": "^7.10.0",
     "istanbul": "^0.4.5",
     "mocha": "^5.2.0",
-    "nock": "^9.4.2",
-    "react-scripts": "^1.1.4"
+    "nock": "^10.0.6",
+    "react-scripts": "^2.1.5"
   },
   "scripts": {
     "start": "npm-run-all -p watch-css start-js",
